@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="accountMapper">
+	<select id="accountList" parameterType="com.vo.AccountVO" resultType="map">
+		select acc_num, acc_bank, acc_name from account where mem_id = #{mem_id}
+	</select>
+	<insert id="accountAdd" parameterType="com.vo.AccountVO">
+		insert into account(mem_id, acc_num, acc_bank, acc_name) values(#{mem_id},#{acc_num},#{acc_bank},#{acc_name})
+	</insert>
+	
+
+</mapper>

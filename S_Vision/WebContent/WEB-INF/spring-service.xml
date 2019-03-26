@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context" 
+	   xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						   http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+						   http://www.springframework.org/schema/mvc
+						   http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+						   http://www.springframework.org/schema/context
+						   http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	<bean id="accountLogic" class="com.account.AccountLogic">
+		<property name="accountDao" ref="accountDao"/>
+	</bean>
+	<bean id="cardLogic" class="com.card.CardLogic">
+		<property name="cardDao" ref="cardDao"/>
+	</bean>
+	<bean id="memberLogic" class="com.member.MemberLogic">
+		<property name="memberDao" ref="memberDao"/>
+	</bean>
+	<bean id="rewardsLogic" class="com.rewards.RewardsLogic">
+		<property name="rewardsDao" ref="rewardsDao"/>
+	</bean>	
+	<bean id="recommendLogic" class="com.recommend.RecommendLogic">
+		<property name="recommendDao" ref="recommendDao"/>
+	</bean>	
+	<bean id="membershipLogic" class="com.membership.MembershipLogic">
+		<property name="membershipDao" ref="membershipDao"/>
+	</bean>
+	<bean id="planLogic" class="com.plan.PlanLogic">
+		<property name="planDao" ref="planDao"/>
+	</bean>										
+</beans>
