@@ -5,11 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
+<%-- <%@ include file="../common/UI_common.jsp" %> --%>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script type="text/javascript">
+
+</script>
 <style type="text/css">
       body {
          display: table-cell;
@@ -78,14 +82,14 @@
           <div class="input-field col s12">
             <i class="material-icons prefix">account_circle</i>
             <input id="id" name="id" type="text" style=" cursor: auto;"/>
-            <label for="id" data-error="경고" class="center-align" data-success="성공">아이디</label>            
+            <label for="id" class="center-align" >아이디</label>            
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s12">
             <i class="material-icons prefix">vpn_key</i>
             <input id="password" name="password" type="password" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=&quot;);"/>
-            <label for="password" data-error="경고" class="center-align" data-success="성공">비밀번호</label>
+            <label for="password"  class="center-align" >비밀번호</label>
           </div>
         </div>
         <div class="row">          
@@ -141,6 +145,24 @@
             error.insertAfter(element);
           }
         }
+//         buttons: [{
+//             text:'저장',
+//             iconCls:'icon-ok',
+//             handler:function(){
+//                 alert('저장');
+// //                 $("#f_boardIns").attr("method","post");
+// //                 $("#f_boardIns").attr("action","./boardINS");
+// //                 $("#f_boardIns").submit();
+//             }
+//         },{
+//             text:'닫기',
+//             iconCls:'icon-no',
+//             handler:function(){
+// //                 alert('닫기');;
+//                 $("#dlg_boardIns").dialog('close');
+//             }
+//         }]
+//   });
       });
   </script>
 </body>

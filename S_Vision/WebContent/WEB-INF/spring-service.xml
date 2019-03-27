@@ -9,25 +9,11 @@
 						   http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
 						   http://www.springframework.org/schema/context
 						   http://www.springframework.org/schema/context/spring-context-4.0.xsd">
-	<bean id="accountLogic" class="com.account.AccountLogic">
-		<property name="accountDao" ref="accountDao"/>
-	</bean>
-	<bean id="cardLogic" class="com.card.CardLogic">
-		<property name="cardDao" ref="cardDao"/>
-	</bean>
-	<bean id="memberLogic" class="com.member.MemberLogic">
-		<property name="memberDao" ref="memberDao"/>
-	</bean>
-	<bean id="rewardsLogic" class="com.rewards.RewardsLogic">
-		<property name="rewardsDao" ref="rewardsDao"/>
-	</bean>	
-	<bean id="recommendLogic" class="com.recommend.RecommendLogic">
-		<property name="recommendDao" ref="recommendDao"/>
-	</bean>	
-	<bean id="membershipLogic" class="com.membership.MembershipLogic">
-		<property name="membershipDao" ref="membershipDao"/>
-	</bean>
-	<bean id="planLogic" class="com.plan.PlanLogic">
-		<property name="planDao" ref="planDao"/>
-	</bean>										
+	<bean id="accountLogic" class="com.account.AccountLogic"/>
+	<bean id="cardLogic" class="com.card.CardLogic"/>
+	<bean id="memberLogic" class="com.member.MemberLogic"/>
+	<bean id="membershipLogic" class="com.membership.MembershipLogic"/>
+	<bean id="planLogic" class="com.plan.PlanLogic"/>
+	<bean id="recommendLogic" class="com.recommend.RecommendLogic"/>
+	<bean id="rewardsLogic" class="com.rewards.RewardsLogic"/>
 </beans>

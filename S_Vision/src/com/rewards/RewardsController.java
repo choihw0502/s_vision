@@ -30,9 +30,7 @@ public class RewardsController {
 	Logger logger = Logger.getLogger(RewardsController.class);
 	@Autowired
 	RewardsLogic rewardsLogic = null;
-	public void setRewardsLogic(RewardsLogic rewardsLogic) {
-		this.rewardsLogic = rewardsLogic;
-	}
+	
 	@GetMapping("myPoint")
 	public ModelAndView myPoint(@ModelAttribute RewardsVO rewardsVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		//insert here

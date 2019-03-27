@@ -17,7 +17,7 @@ import com.vo.AccountVO;
 
 public class AccountDao {
 	Logger logger = Logger.getLogger(AccountDao.class);
-	@Autowired
+
 	private SqlSessionTemplate sqlSessionTemplate = null;
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;

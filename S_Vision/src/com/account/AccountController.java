@@ -28,9 +28,7 @@ public class AccountController {
 	Logger logger = Logger.getLogger(AccountController.class);
 	@Autowired
 	AccountLogic accountLogic = null;
-	public void setAccountLogic(AccountLogic accountLogic) {
-		this.accountLogic = accountLogic;
-	}
+
 	
 	@GetMapping("accountList")
 	public ModelAndView accountList(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req) throws ServletException, IOException {
