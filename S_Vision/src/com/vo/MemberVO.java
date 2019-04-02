@@ -7,10 +7,12 @@ public class MemberVO {
 	private String mem_birthday  = "";
 	private String mem_addr      = "";
 	private String mem_phone     = "";
-	private String mem_mail      = "";
+	private String mem_email      = "";
 	private String mem_gen       = "";
 	private String mem_name      = "";
 	private String mem_pay_pw    = "";
+	private String check_id 	 = "";
+	private int    r_result      = 0;
 	public String getMem_id() {
 		return mem_id;
 	}
@@ -47,11 +49,11 @@ public class MemberVO {
 	public void setMem_phone(String mem_phone) {
 		this.mem_phone = mem_phone;
 	}
-	public String getMem_mail() {
-		return mem_mail;
+	public String getMem_email() {
+		return mem_email;
 	}
-	public void setMem_mail(String mem_mail) {
-		this.mem_mail = mem_mail;
+	public void setMem_email(String mem_email) {
+		this.mem_email = mem_email;
 	}
 	public String getMem_gen() {
 		return mem_gen;
@@ -70,5 +72,17 @@ public class MemberVO {
 	}
 	public void setMem_pay_pw(String mem_pay_pw) {
 		this.mem_pay_pw = mem_pay_pw;
+	}
+	public String getCheck_id() {
+		return check_id;
+	}
+	public void setCheck_id(String check_id) {
+		this.check_id = check_id;
+	}
+	public int getR_result() {
+		return r_result;
+	}
+	public void setR_result(int r_result) {
+		this.r_result = r_result;
 	}
 }

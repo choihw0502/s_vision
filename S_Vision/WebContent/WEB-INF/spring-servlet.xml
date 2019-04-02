@@ -15,10 +15,18 @@
 	<bean id="default-handler-mapping" class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
 	<mvc:annotation-driven/>
 	<mybatis:scan base-package="com.mybatis.mapper"/>
-	<mvc:resources location="/UI/js/" mapping="/UI/js/**"/>
-	<mvc:resources location="/UI/fonts/" mapping="/UI/fonts/**"/>
-	<mvc:resources location="/UI/css/" mapping="/UI/css/**"/>
-	<mvc:resources location="/UI/images/" mapping="/UI/images/**"/>
+	<mvc:resources location="/WEB-INF/view/js/" mapping="/js/**"/>
+	<mvc:resources location="/WEB-INF/view/fonts/" mapping="/fonts/**"/>
+	<mvc:resources location="/WEB-INF/view/css/" mapping="/css/**"/>
+	<mvc:resources location="/WEB-INF/view/images/" mapping="/images/**"/>
+	<mvc:resources location="/WEB-INF/view/common/" mapping="/common/**"/>
+	<mvc:resources location="/WEB-INF/view/common/" mapping="../common/**"/>
+	<mvc:resources location="/WEB-INF/view/images/" mapping="/member/images/**"/>
+	<mvc:resources location="/WEB-INF/view/js/" mapping="/UI/js/**"/>
+	<mvc:resources location="/WEB-INF/view/fonts/" mapping="/UI/fonts/**"/>
+	<mvc:resources location="/WEB-INF/view/css/" mapping="/UI/css/**"/>
+	<mvc:resources location="/WEB-INF/view/images/" mapping="/UI/images/**"/>
+
 	<context:component-scan base-package="com.web"/>	
 	<!-- 첨부파일 관련 설정 추가 -->
 	<!-- 파일 사이즈에대한 예외 설정 저것보다 크면 파일이 전송되지 않는다. 1024*1024 ==> 10의 6승 1kByte 는 1024 -->
@@ -40,6 +48,7 @@
 	<bean id="planController" class="com.plan.PlanController"/>
 	<bean id="recommendController" class="com.recommend.RecommendController"/>
 	<bean id="rewardsController" class="com.rewards.RewardsController"/>
+	
 	
 	<!-- 컨트롤계층의 클래스를 url로 요청하기 위해서는 반드시 component-scan태그에 패키지 등록할수 있다. 등록된 패키지만 찾아준다.-->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
