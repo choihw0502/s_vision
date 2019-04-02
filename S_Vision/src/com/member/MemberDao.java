@@ -23,10 +23,12 @@ public class MemberDao {
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
-	public List<Map<String, Object>> login(MemberVO memberVO) {
+	public Map<String, Object> login(MemberVO memberVO) {
 		logger.info("다오호출성공");
-		List<Map<String, Object>> login = new ArrayList<Map<String,Object>>();
-		login = sqlSessionTemplate.selectList("login",memberVO);
+		Map<String, Object> login = new HashMap<String,Object>();
+		Map<String,Object> pMap = new HashMap<String,Object>();
+		login = sqlSessionTemplate.selectOne("login",memberVO);
+		
 		logger.info(login);
 		return login;
 	}

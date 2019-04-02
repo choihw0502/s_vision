@@ -2,7 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
 	<select id="login" parameterType="com.vo.MemberVO" resultType="map">
-		select mem_id, mem_name from member where mem_id=#{mem_id} and mem_pw=#{mem_pw}
+		select mem_id, mem_name, mem_gen, mem_pay_pw, 
+		(select count(rownum) from account where mem_id = #{mem_id}) as r_account,
+		((select count(rownum) from creditcard where mem_id = #{mem_id})+
+		(select count(rownum) from visioncard where acc_num in (select acc_num from account where mem_id = #{mem_id}))) as r_card, 
+		(select vi_point from vision_point where mem_id = #{mem_id}) as r_point,
+		(select count(rownum) from mshipcard where mem_id = #{mem_id}) as r_mship 
+		from member 
+		where mem_id=#{mem_id}
+		and mem_pw=#{mem_pw}
 	</select>
 	<insert id="proc_register" parameterType="map" statementType="CALLABLE">
 		{call proc_register(#{P_MEM_ID,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
@@ -18,6 +26,13 @@
 	</insert>
 	<select id="check_id" parameterType="java.lang.String" resultType="java.lang.Integer">
 		select count(*) from member where mem_id=#{id}
+	</select>
+	<select id="main_count" parameterType="map" statementType="CALLABLE">
+		{call proc_main_count(#{P_MEM_ID,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{R_CARD,mode=OUT,jdbcType=INTEGER,javaType=java.lang.Integer}
+						 ,#{R_ACCOUNT,mode=OUT,jdbcType=INTEGER,javaType=java.lang.Integer}
+						 ,#{R_POINT,mode=OUT,jdbcType=INTEGER,javaType=java.lang.Integer}
+						)}
 	</select>	
 	
 

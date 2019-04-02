@@ -24,25 +24,11 @@ public class MemberLogic {
 	MemberDao memberDao = null;
 	String path = "";
 	
-	public String login(MemberVO memberVO) {
+	public Map<String, Object> login (MemberVO memberVO) {
 		logger.info("memberLogic 호출성공");
 		logger.info("로그인폼호출성공");
-		if(memberVO.getMem_id()==null) {
-			path = "member/login";
-		}
-		else if(memberVO.getMem_id()!=null) {
-			logger.info("로그인시도");
-			List<Map<String, Object>> login = memberDao.login(memberVO);
-			if(login.get(0).get("MEM_ID")==null) {
-				logger.info("로그인실패");
-				path = "member/login";
-			}
-			else if(login.get(0).get("MEM_ID")!=null) {
-				logger.info("로그인성공");
-				path = "member/main";
-			}
-		}
-		return path;
+		Map<String, Object> login = memberDao.login(memberVO);
+		return login;
 	}
 
 	public int check_id(String id) {
