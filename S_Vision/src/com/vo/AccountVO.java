@@ -5,6 +5,7 @@ public class AccountVO {
 	private String acc_num = "";
 	private String acc_bank = "";
 	private String acc_name = "";
+	private String mem_pw = "";
 	public String getMem_id() {
 		return mem_id;
 	}
@@ -28,5 +29,11 @@ public class AccountVO {
 	}
 	public void setAcc_name(String acc_name) {
 		this.acc_name = acc_name;
+	}
+	public String getMem_pw() {
+		return mem_pw;
+	}
+	public void setMem_pw(String mem_pw) {
+		this.mem_pw = mem_pw;
 	}
 }
