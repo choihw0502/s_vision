@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ include file="/common/UI_common.jsp" %>
+<%@ include file="../common/UI_common.jsp" %>
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
