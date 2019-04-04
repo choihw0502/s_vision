@@ -1111,8 +1111,8 @@ img {
 .img-responsive,
 .thumbnail > img,
 .thumbnail a > img,
-.carousel-inner > .item > img,
-.carousel-inner > .item > a > img {
+.carousel-inner > .item active
+.carousel-inner > .item active > a > img {
   display: block;
   max-width: 100%;
   height: auto;
@@ -6048,6 +6048,7 @@ button.close {
 }
 .carousel {
   position: relative;
+  width: 100%;
 }
 .carousel-inner {
   position: relative;
@@ -6057,6 +6058,7 @@ button.close {
 .carousel-inner > .item {
   position: relative;
   display: none;
+  width: 100%;
   -webkit-transition: .6s ease-in-out left;
        -o-transition: .6s ease-in-out left;
           transition: .6s ease-in-out left;
@@ -6070,7 +6072,7 @@ button.close {
     -webkit-transition: -webkit-transform .6s ease-in-out;
          -o-transition:      -o-transform .6s ease-in-out;
             transition:         transform .6s ease-in-out;
-
+width: 100%;
     -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
     -webkit-perspective: 1000;
@@ -6092,6 +6094,7 @@ button.close {
   .carousel-inner > .item.prev.right,
   .carousel-inner > .item.active {
     left: 0;
+    width: 100%;
     -webkit-transform: translate3d(0, 0, 0);
             transform: translate3d(0, 0, 0);
   }
