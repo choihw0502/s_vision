@@ -25,18 +25,19 @@ public class AccountDao {
 	public List<Map<String, Object>> accountList(AccountVO accountVO) {
 		logger.info("accountDao accountList 호출성공");
 		List<Map<String,Object>> accountList = new ArrayList<Map<String,Object>>();
-		accountList = sqlSessionTemplate.selectList("accountList",accountVO);
+		accountList = sqlSessionTemplate.selectList("accountList2",accountVO);
 		// TODO Auto-generated method stub
 		return accountList;
 	}
 	public int accountAdd(AccountVO accountVO) {
 		logger.info("accountDao accountAdd 호출성공");
 		Map<String, Object> pMap = new HashMap<String,Object>();
-		pMap.put("mem_id", accountVO.getMem_id());
-		pMap.put("acc_num", accountVO.getAcc_num());
-		pMap.put("acc_bank", accountVO.getAcc_bank());
-		pMap.put("acc_name", accountVO.getAcc_name());
-		int accountAdd = sqlSessionTemplate.insert("accountAdd",accountVO);
+		pMap.put("P_MEM_ID", accountVO.getMem_id());
+		pMap.put("P_ACC_NUM", accountVO.getAcc_num());
+		pMap.put("P_ACC_BANK", accountVO.getAcc_bank());
+		pMap.put("P_ACC_NAME", accountVO.getAcc_name());
+		logger.info(pMap.get("P_MEM_ID"));
+		int accountAdd = sqlSessionTemplate.insert("proc_accountAdd",pMap);
 		// TODO Auto-generated method stub
 		return accountAdd;
 	}

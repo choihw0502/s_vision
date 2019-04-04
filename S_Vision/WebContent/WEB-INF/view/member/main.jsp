@@ -29,8 +29,16 @@
 <%
 //로그인시 mem_id라는 변수에 해당 아이디가 담기고 그렇지 않으면 null값
 String mem_id = null;
+String r_card = null;
+String r_account = null;
+String r_point = null;
+String r_mship = null;
 if (session.getAttribute("mem_id") != null) {
 	mem_id = (String)session.getAttribute("mem_id");
+	r_card = (String)session.getAttribute("r_card");
+	r_account = (String)session.getAttribute("r_account");
+	r_point = (String)session.getAttribute("r_point");
+	r_mship = (String)session.getAttribute("r_mship");
 }
 
 int pageNumber = 1; //기본 페이지 넘버
@@ -207,11 +215,11 @@ if (mem_id == null) {
 			<div class="col-md-4">
 				<h2>지갑</h2>
 				<p>
-					<a class="btn btn-default btn-lg"  style="border-color: white;" href="card" >2<br>카드</a>
+					<a class="btn btn-default btn-lg"  style="border-color: white;" href="card" ><%=r_card %><br>카드</a>
 					<a>|</a>  
-					<a class="btn btn-default btn-lg" style="border-color: white;" href="account">1<br>계좌</a>
+					<a class="btn btn-default btn-lg" style="border-color: white;" href="account"><%=r_account %><br>계좌</a>
 					<a>|</a>  
-					<a class="btn btn-default btn-lg" style="border-color: white;" href="membership">1<br>멤버쉽</a> 
+					<a class="btn btn-default btn-lg" style="border-color: white;" href="membership"><%=r_mship %><br>멤버쉽</a> 
 					<a>|</a> 
 					<a class="btn btn-default btn-lg" style="border-color: white;" href="myCoupon">+<br>쿠폰</a>
 				</p>
@@ -219,7 +227,7 @@ if (mem_id == null) {
 			<div class="col-md-4">
 				<h2>리워즈</h2>				 
 				<p>
-					<h1>40point</h1><br>
+					<h1><%=r_point %>point</h1><br>
 					<a class="btn btn-default btn-lg" href="pointUse.jsp">사용하기</a> 
 					<a>|</a> 
 					<a class="btn btn-default btn-lg" href="pointSave.jsp">적립하기</a>

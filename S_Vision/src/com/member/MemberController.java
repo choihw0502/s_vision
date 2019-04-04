@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,11 @@ public class MemberController {
 							HttpServletRequest req,
 							Model model) {
 		path = "member/main";
-		model.addAttribute("mem_id",null);
+		session = req.getSession();
+		if(session.getAttribute("mem_id")!=null) {
+			session.invalidate();
+			
+		}
 		return path;
 		
 	}
@@ -40,26 +45,37 @@ public class MemberController {
 	public String login(@ModelAttribute MemberVO memberVO,
 							HttpServletRequest req,
 							Model model) {
-		this.session = req.getSession();
-		if(session.getAttribute("mem_id")==null) {
-			logger.info(req.getParameter("id"));
-			logger.info(req.getParameter("password"));
-			memberVO.setMem_id(req.getParameter("id"));
-			memberVO.setMem_pw(req.getParameter("password"));
-			path = memberLogic.login(memberVO);
-			
-			if(path.equals("member/main")) {
-				this.session.setAttribute("mem_id", memberVO.getMem_id());
+		session = req.getSession();
+		memberVO.setMem_id(req.getParameter("id"));
+		memberVO.setMem_pw(req.getParameter("password"));
+		if(memberVO.getMem_id()==null) {
+			path = "member/login";
+		}
+		else if(memberVO.getMem_id()!=null) {
+			logger.info("로그인시도");
+			Map<String, Object> login = memberLogic.login(memberVO);
+			if(login.get("MEM_ID")==null) {
+				logger.info("로그인실패");
+				path = "member/login";
+			}
+			else if(login.get("MEM_ID")!=null) {
+				logger.info("로그인성공");
+				logger.info(login.get("R_CARD"));
+				String r_card = String.valueOf(login.get("R_CARD"));
+				String r_account = String.valueOf(login.get("R_ACCOUNT"));
+				String r_point = String.valueOf(login.get("R_POINT"));
+				String r_mship = String.valueOf(login.get("R_MSHIP"));
+				path = "member/main";
+				session.setAttribute("mem_id", login.get("MEM_ID"));
+				session.setAttribute("r_card", r_card);
+				session.setAttribute("r_account", r_account);
+				session.setAttribute("r_point", r_point);
+				session.setAttribute("r_mship", r_mship);
 			}
 		}
-		else if(session.getAttribute("mem_id")!=null) {
-			logger.info("이미 로그인중");
-			String status = "1";
-			this.session.setAttribute("status", status);
-		}
+			
 		return path;
-		
-	}
+	}		
 	@GetMapping("register")
 	public String register(@ModelAttribute MemberVO memberVO,
 							HttpServletRequest req,

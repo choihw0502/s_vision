@@ -7,6 +7,8 @@ import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,10 +31,11 @@ public class AccountController {
 	Logger logger = Logger.getLogger(AccountController.class);
 	@Autowired
 	AccountLogic accountLogic = null;
+	String path = "";
 
 	
 	@GetMapping("accountList")
-	public ModelAndView accountList(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+	public String accountList(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		logger.info("accountList 호출 성공");
 		List<Map<String,Object>> accountList = null;
 		String path = "";
@@ -45,18 +49,17 @@ public class AccountController {
 		//WebContent이면 반환타입은 String
 		//WEB-INF이면 반환타입은 void, ModelAndView 이겠지.....
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("accountList", accountList);
-		mav.setViewName("account/accountList");
+		path = "account/accountList";
 		//path = "forward:./accountList.jsp";
-		return mav;
+		return path;
 		//return path;
 	}
-	@GetMapping("accountAdd")
-	public ModelAndView accountAdd(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+	@ResponseBody
+    @RequestMapping(value = "accountAdd", method = RequestMethod.POST)
+	public int accountAdd(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		logger.info("accountAdd 호출 성공");
-		int accountAdd = 0;
-		String mem_id = req.getParameter("mem_id");
+		int result = 0;
+		String mem_id = req.getParameter("mem_id"); 
 		String acc_num = req.getParameter("acc_num");
 		String acc_bank = req.getParameter("acc_bank");
 		String acc_name = req.getParameter("acc_name");
@@ -69,18 +72,14 @@ public class AccountController {
 		accountVO.setAcc_bank(acc_bank);
 		accountVO.setAcc_name(acc_name);
 		//accountVO.set//조회버튼을 눌렀을 때|입력처리 후 결과 처리페이지인지
-		accountAdd = accountLogic.accountAdd(accountVO);
-		model.addAttribute("accountAdd", accountAdd);
+		result = accountLogic.accountAdd(accountVO);
 		//insert here - 응답페이지 호출 하기
 		//jsonBoardList.jsp페이지의 생성 위치는 어디인가요?
 		//WebContent이면 반환타입은 String
 		//WEB-INF이면 반환타입은 void, ModelAndView 이겠지.....
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("accountAdd", accountAdd);
-		mav.setViewName("account/accountAdd");
 		//path = "forward:./accountList.jsp";
-		return mav;
+		return result;
 	}
 		
 

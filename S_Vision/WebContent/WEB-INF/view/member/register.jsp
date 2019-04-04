@@ -53,7 +53,7 @@ html, body {
 }
 
 .login-form {
-	width: 100%;
+	width: 300px;
 }
 
 .login-form-text {

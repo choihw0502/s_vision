@@ -23,11 +23,11 @@
 <link rel="stylesheet" type="text/css" href="../UI/fonts/glyphicons-halflings-regular.woff">
 <link rel="stylesheet" type="text/css" href="../UI/fonts/glyphicons-halflings-regular.woff2">
 <link rel="stylesheet" type="text/css" href="../UI/images/**">
-<script type="text/javascript" src="../UI/js/bootstrap.js"></script>
-<script type="text/javascript" src="../UI/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="../UI/js/jquery-3.1.1.js"></script>
 <script type="text/javascript" src="../UI/js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="../UI/js/jquery-3.3.1.js"></script>
-<script type="text/javascript" src="../UI/js/npm.js"></script>
 <script type="text/javascript" src="../UI/js/jquery.min.js"></script>
 <script type="text/javascript" src="../UI/js/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="../UI/js/bootstrap.js"></script>
+<script type="text/javascript" src="../UI/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../UI/js/npm.js"></script>
