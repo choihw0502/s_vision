@@ -33,11 +33,7 @@ public class MemberController {
 							HttpServletRequest req,
 							Model model) {
 		path = "member/main";
-		session = req.getSession();
-		if(session.getAttribute("mem_id")!=null) {
-			session.invalidate();
-			
-		}
+	
 		return path;
 		
 	}
@@ -91,7 +87,10 @@ public class MemberController {
 	}
 	@GetMapping("logout")
 	public String logout(@ModelAttribute MemberVO memberVO, HttpServletRequest req, Model model) {
-		session.invalidate();
+		if(session.getAttribute("mem_id")!=null) {
+			session.invalidate();
+			
+		}
 		path = "member/main";
 		return path;
 		
@@ -161,7 +160,8 @@ public class MemberController {
 	public String rewards(@ModelAttribute MemberVO memberVO, HttpServletRequest req, Model model) {
 		path = "rewards/rewards";
 		return path;
-	}	
+	}
+		
 
 
 }

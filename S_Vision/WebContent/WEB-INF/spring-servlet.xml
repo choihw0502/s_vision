@@ -20,12 +20,6 @@
 	<mvc:resources location="/WEB-INF/view/css/" mapping="/css/**"/>
 	<mvc:resources location="/WEB-INF/view/images/" mapping="/images/**"/>
 	<mvc:resources location="/WEB-INF/view/common/" mapping="/common/**"/>
-	<mvc:resources location="/WEB-INF/view/common/" mapping="../common/**"/>
-	<mvc:resources location="/WEB-INF/view/images/" mapping="/member/images/**"/>
-	<mvc:resources location="/WEB-INF/view/js/" mapping="/UI/js/**"/>
-	<mvc:resources location="/WEB-INF/view/fonts/" mapping="/UI/fonts/**"/>
-	<mvc:resources location="/WEB-INF/view/css/" mapping="/UI/css/**"/>
-	<mvc:resources location="/WEB-INF/view/images/" mapping="/UI/images/**"/>
 
 	<context:component-scan base-package="com.web"/>	
 	<!-- 첨부파일 관련 설정 추가 -->

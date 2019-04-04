@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vo.AccountVO;
+import com.vo.MemberVO;
 
 @Controller
 @RequestMapping(value="/account/")
@@ -80,6 +81,13 @@ public class AccountController {
 		
 		//path = "forward:./accountList.jsp";
 		return result;
+	}
+	@GetMapping("nav")
+	public String card_nav(@ModelAttribute MemberVO memberVO, HttpServletRequest req, Model model) {
+		if(req.getParameter("nav").equals("account")) {
+			path = "account/account_nav";
+		}
+		return path;
 	}
 		
 
