@@ -22,94 +22,86 @@ public class RecommendController {
 	Logger logger = Logger.getLogger(RecommendController.class);
 	@Autowired
 	RecommendLogic recommendLogic = null;
-	
+	String path = "";
 	@GetMapping("allCards")
-	public ModelAndView otherUsersSpending(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+	public String otherUsersSpending(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		//insert here
 		//메소드이름으로 알맞게 타입정하고		
 		//메소드이름=로직.같은이름메소드(VO);
 		
-		ModelAndView mav = new ModelAndView();
+		
 		//mav.addObject("allCards", allCards);
-		mav.setViewName("recommend/allCards");
-		return mav;
+		return path;
 	}
 	@GetMapping("eatCard")
-	public ModelAndView eatCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+	public String eatCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		//insert here
 		//메소드이름으로 알맞게 타입정하고		
 		//메소드이름=로직.같은이름메소드(VO);
 		
-		ModelAndView mav = new ModelAndView();
-		//mav.addObject("eatCard", eatCard);
-		mav.setViewName("recommend/eatCard");
-		return mav;
+		
+		//mav.addObject("allCards", allCards);
+		return path;
 	}
 	@GetMapping("communityCard")
-	public ModelAndView communityCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+	public String communityCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		//insert here
 		//메소드이름으로 알맞게 타입정하고		
 		//메소드이름=로직.같은이름메소드(VO);
 		
-		ModelAndView mav = new ModelAndView();
-		//mav.addObject("communityCard", communityCard);
-		mav.setViewName("recommend/communityCard");
-		return mav;
+		
+		//mav.addObject("allCards", allCards);
+		return path;
 	}
 	@GetMapping("cultureCard")
-	public ModelAndView cultureCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+	public String cultureCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		//insert here
 		//메소드이름으로 알맞게 타입정하고		
 		//메소드이름=로직.같은이름메소드(VO);
 		
-		ModelAndView mav = new ModelAndView();
-		//mav.addObject("cultureCard", cultureCard);
-		mav.setViewName("recommend/cultureCard");
-		return mav;
+		
+		//mav.addObject("allCards", allCards);
+		return path;
 	}
 	@GetMapping("tripCard")
-	public ModelAndView tripCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+	public String tripCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		//insert here
 		//메소드이름으로 알맞게 타입정하고		
 		//메소드이름=로직.같은이름메소드(VO);
 		
-		ModelAndView mav = new ModelAndView();
-		//mav.addObject("tripCard", tripCard);
-		mav.setViewName("recommend/tripCard");
-		return mav;
+		
+		//mav.addObject("allCards", allCards);
+		return path;
 	}
 	@GetMapping("convenCard")
-	public ModelAndView convenCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+	public String convenCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		//insert here
 		//메소드이름으로 알맞게 타입정하고		
 		//메소드이름=로직.같은이름메소드(VO);
 		
-		ModelAndView mav = new ModelAndView();
-		//mav.addObject("convenCard", convenCard);
-		mav.setViewName("recommend/convenCard");
-		return mav;
+		
+		//mav.addObject("allCards", allCards);
+		return path;
 	}
 	@GetMapping("oilCard")
-	public ModelAndView oilCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+	public String oilCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		//insert here
 		//메소드이름으로 알맞게 타입정하고		
 		//메소드이름=로직.같은이름메소드(VO);
 		
-		ModelAndView mav = new ModelAndView();
-		//mav.addObject("oilCard", oilCard);
-		mav.setViewName("recommend/oilCard");
-		return mav;
+		
+		//mav.addObject("allCards", allCards);
+		return path;
 	}
 	@GetMapping("myRecommendCard")
-	public ModelAndView myRecommendCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+	public String myRecommendCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		//insert here
 		//메소드이름으로 알맞게 타입정하고		
 		//메소드이름=로직.같은이름메소드(VO);
 		
-		ModelAndView mav = new ModelAndView();
-		//mav.addObject("myRecommendCard", myRecommendCard);
-		mav.setViewName("recommend/myRecommendCard");
-		return mav;
+		
+		//mav.addObject("allCards", allCards);
+		return path;
 	}
 
 }
