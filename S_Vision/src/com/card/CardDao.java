@@ -25,5 +25,18 @@ public class CardDao {
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
+	public List<Map<String,String>> cardList(CardVO cardVO){
+		  String p_mem_id = cardVO.getP_mem_id();	
+		  List<Map<String,String>> cardList = new ArrayList<Map<String,String>>();
+		  System.out.println(cardVO.getR_list());
+		  sqlSessionTemplate.selectList("cardList",cardVO);
+		  System.out.println(cardVO.getR_list());
+		  cardList.add(cardVO.getR_list().get(0));
+		  return cardList;
+	}
+	public int cardAdd(Map<String, Object> pMap) {
+		int result=sqlSessionTemplate.insert("cardAdd",pMap);
+		return result;
+	}
 
 }
