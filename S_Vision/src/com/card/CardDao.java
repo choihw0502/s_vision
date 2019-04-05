@@ -38,5 +38,11 @@ public class CardDao {
 		int result=sqlSessionTemplate.insert("cardAdd",pMap);
 		return result;
 	}
+	public List<Map<String, Object>> cardAllList(CardVO cardVO) {
+		logger.info("cardAllList 나옴");
+		List<Map<String,Object>> cardAllList = new ArrayList<Map<String,Object>>();
+		cardAllList = sqlSessionTemplate.selectList("cardAllList",cardVO);
+		return cardAllList;
+	}
 
 }
