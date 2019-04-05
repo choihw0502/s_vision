@@ -14,10 +14,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 <style type="text/css">
-.font-size-5{
-	font-family:'Nanum Pen Script', cursive;
-	font-size: 30pt;
-}
+s1 {
+  color: orange;
+  font-size: 110%;
+} 
+s2 {
+  color: black;
+} 
+s3 {
+  text-align: right;	
+} 
 </style>
 </head>
 <body>
@@ -25,17 +31,85 @@
 	if(accountList!=null){
 		for(int i=0;i<accountList.size();i++){
 %>
-<div class="card border-success mb-3" style="max-width: 20rem;">
-  <div class="card-header bg-transparent border-success"><%=accountList.get(i).get("ACC_NAME") %></div>
-  <div class="card-body text-success">
-    <h4 class="card-title"><%=accountList.get(i).get("ACC_BANK") %></h4>
-    <p class="card-text"><%=accountList.get(i).get("ACC_NUM") %></p>
-  </div>
-  <div class="card-footer bg-transparent border-success"><%=accountList.get(i).get("ACC_BALANCE") %></div>
+
+
+<div class="media">
+<div class="media-left">
+<a href="#"> <img class="media-object" src="/images/형원.jpg" style="width: 200px; height: 200px">
+</a>
 </div>
+<div class="media-body">
+<h4 class="media-heading"></h4>
+	<table style="width:300px">
+	<tr>
+		<td colspan="2" style="color:orange; font-size:120%; background-color:grey"><%=accountList.get(i).get("ACC_NUM") %></td>
+	</tr>
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;<%=accountList.get(i).get("ACC_BANK") %></td>
+	</tr>
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;<%=accountList.get(i).get("ACC_NAME") %></td>
+	</tr>
+	<tr>
+		<td>&nbsp;&nbsp;최종거래일</td>
+		<td style="text-align:right"><%=accountList.get(i).get("ACC_DATE") %></td>
+	</tr>
+	<tr>
+		<td>&nbsp;&nbsp;잔액</td>
+		<td style="text-align:right; color:blue;"><%=accountList.get(i).get("ACC_BALANCE") %><s2>원</s2></td>
+	</tr>
+	<tr>
+		<td><button id="btn_acc_history" name="btn_acc_history" type="button" class="btn" style="width:150px">거래내역</button></td>
+		<td><button id="btn_sendMoney" name="btn_sendMoney" type="button" class="btn" style="width:150px">이체</button></td>
+	<tr>	
+</table>
+</div>
+</div>
+
 <%			
 		}
 	}
 %>
+
+<div class="modal fade" id="m_accountAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">계좌 추가하기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <div class="group row"><div class="col-md-6 form-group"> <label for="foo">계좌이름</label> <input type="text" class="form-control" id="acc_name" name="acc_name"> </div>
+ 	  </div><br>
+ 	   <div class="group row">
+ 	   <div class="col-md-4">
+            <select class="combobox form-control" id="acc_bank" name="acc_bank">
+              <option value="은행선택" selected="selected">은행선택</option>
+              <option value="농협">농협</option>
+              <option value="신한은행">신한은행</option>
+              <option value="국민은행">국민은행</option>
+              <option value="우리은행">우리은행</option>
+              <option value="하나은행">하나은행</option>
+              <option value="기업은행">IBK기업은행</option>
+              <option value="우체국">우체국</option>
+              <option value="새마을금고">새마을금고</option>
+              <option value="축협">축협</option>
+              <option value="수협">수협</option>
+            </select>
+          </div>
+       </div><br>   
+       <div class="group row"><div class="col-md-6 form-group"><label for="foo">계좌번호</label> <input type="text" class="form-control" id="acc_num" name="acc_num"></div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn_accountAdd" name="btn_accountAdd" type="button" class="btn btn-primary">추가</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
