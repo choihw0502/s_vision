@@ -21,6 +21,10 @@ public class AccountLogic {
 		int accountAdd = accountDao.accountAdd(accountVO);
 		return accountAdd;
 	}
+	public Map<String, List<Map<String, Object>>> accHistory(Map<String, Object> pMap) {
+		Map<String, List<Map<String, Object>>> accHistory = accountDao.accHistory(pMap);
+		return accHistory;
+	}
 	
 
 }

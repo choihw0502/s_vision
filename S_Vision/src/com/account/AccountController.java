@@ -55,6 +55,23 @@ public class AccountController {
 		return path;
 		//return path;
 	}
+	@GetMapping("accHistory")
+	public String accHistory(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req, @RequestParam Map<String,Object> pMap) throws ServletException, IOException {
+		logger.info("accHistory 호출 성공");
+		Map<String,List<Map<String,Object>>> accHistory = null;
+		String path = "";
+		accHistory = accountLogic.accHistory(pMap);
+		model.addAttribute("accHistory", accHistory);
+		//insert here - 응답페이지 호출 하기
+		//jsonBoardList.jsp페이지의 생성 위치는 어디인가요?
+		//WebContent이면 반환타입은 String
+		//WEB-INF이면 반환타입은 void, ModelAndView 이겠지.....
+		
+		path = "account/accHistory";
+		//path = "forward:./accountList.jsp";
+		return path;
+		//return path;
+	}
 	@ResponseBody
     @RequestMapping(value = "accountAdd", method = RequestMethod.POST)
 	public int accountAdd(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req) throws ServletException, IOException {
