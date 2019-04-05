@@ -13,7 +13,7 @@
 						)}
 	</insert>
 	<select id="accountList2" parameterType="com.vo.AccountVO" resultType="map">
-	select ah.acc_balance, ah.acc_num, a.acc_bank, a.acc_name from acc_history2 ah, account a where ah.acc_rownum in (select max(acc_rownum) from acc_history2 group by acc_num) and ah.acc_num in(select acc_num from account where mem_id=#{mem_id}) and ah.acc_num = a.acc_num 
+	select ah.acc_balance, ah.acc_num, a.acc_bank, a.acc_name, ah.acc_date from acc_history2 ah, account a where ah.acc_rownum in (select max(acc_rownum) from acc_history2 group by acc_num) and ah.acc_num in(select acc_num from account where mem_id=#{mem_id}) and ah.acc_num = a.acc_num 
 	order by ah.acc_balance desc
 	</select>
 	

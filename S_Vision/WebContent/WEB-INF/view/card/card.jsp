@@ -35,8 +35,14 @@ $(document).ready(function(){
                 }
             }
         });    //end ajax    
-    });    //end on    
+    });    //end on
+
+    $("#exampleModal").on('shown.bs.modal', function(){
+        $(this).find('#cardnum1').focus();
+    });
+        
 });
+
   
 </script>
 	<!-- 네비게이션 바 시작 -->
@@ -141,10 +147,23 @@ $(document).ready(function(){
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-       <div class="form-group"> <label for="foo">계좌번호</label> <input type="text" class="form-control" id="cardnum" name="cardnum"> </div>
-
-      </div>
+	<div class="modal-body">
+       <div class="form-group"> <label for="foo">카드번호</label></div>
+        <div class="form-group row">
+            <div class="col-md-3">
+                <input type="text" class="form-control focusedInput" id="cardnum1" placeholder="">
+            </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="cardnum2" placeholder="">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="cardnum3" placeholder="">
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control" id="cardnum4" placeholder="">
+                </div>                                
+        </div>
+	</div>
       <div class="modal-footer">
          <button id="btn_cardAdd" name="btn_cardAdd" type="button" class="btn btn-primary">추가</button>
       </div>
