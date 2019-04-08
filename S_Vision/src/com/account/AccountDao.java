@@ -22,10 +22,10 @@ public class AccountDao {
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
-	public List<Map<String, Object>> accountList(AccountVO accountVO) {
+	public List<Map<String, Object>> accountList(Map<String, Object> pMap) {
 		logger.info("accountDao accountList 호출성공");
 		List<Map<String,Object>> accountList = new ArrayList<Map<String,Object>>();
-		accountList = sqlSessionTemplate.selectList("accountList2",accountVO);
+		accountList = sqlSessionTemplate.selectList("accountList2",pMap);
 		// TODO Auto-generated method stub
 		return accountList;
 	}

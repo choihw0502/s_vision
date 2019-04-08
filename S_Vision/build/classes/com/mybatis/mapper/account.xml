@@ -12,36 +12,36 @@
 						 ,#{RESULT,mode=OUT,jdbcType=INTEGER,javaType=java.lang.Integer}
 						)}
 	</insert>
-	<select id="accountList2" parameterType="com.vo.AccountVO" resultType="map">
+	<select id="accountList2" parameterType="map" resultType="map">
 	select ah.acc_balance, ah.acc_num, a.acc_bank, a.acc_name, ah.acc_date from acc_history2 ah, account a where ah.acc_rownum in (select max(acc_rownum) from acc_history2 group by acc_num) and ah.acc_num in(select acc_num from account where mem_id=#{mem_id}) and ah.acc_num = a.acc_num 
 	order by ah.acc_balance desc
 	</select>
 	<select id="acchistory12" parameterType="map" resultType="map">
-	select * from acc_history2 
+	select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2
 	where to_date(acc_date,'yyyy/mm/dd') > (select to_char(add_months(sysdate,-12),'yyyy/mm/dd') from dual) 
 	and acc_num= #{acc_num}
 	order by to_number(acc_rownum) desc
 	</select>
 	<select id="acchistory6" parameterType="map" resultType="map">
-	select * from acc_history2 
+	select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2
 	where to_date(acc_date,'yyyy/mm/dd') > (select to_char(add_months(sysdate,-6),'yyyy/mm/dd') from dual) 
 	and acc_num= #{acc_num}
 	order by to_number(acc_rownum) desc
 	</select>
 	<select id="acchistory3" parameterType="map" resultType="map">
-	select * from acc_history2 
+	select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2 
 	where to_date(acc_date,'yyyy/mm/dd') > (select to_char(add_months(sysdate,-3),'yyyy/mm/dd') from dual) 
 	and acc_num= #{acc_num}
 	order by to_number(acc_rownum) desc
 	</select>
 	<select id="acchistory1" parameterType="map" resultType="map">
-	select * from acc_history2 
+	select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2
 	where to_date(acc_date,'yyyy/mm/dd') > (select to_char(add_months(sysdate,-1),'yyyy/mm/dd') from dual) 
 	and acc_num= #{acc_num}
 	order by to_number(acc_rownum) desc
 	</select>
 	<select id="acchistoryToday" parameterType="map" resultType="map">
-	select * from acc_history2 
+	select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2
 	where to_date(acc_date,'yyyy/mm/dd') = (select to_char(sysdate,'yyyy/mm/dd') from dual) 
 	and acc_num= #{acc_num}
 	order by to_number(acc_rownum) desc

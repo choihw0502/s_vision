@@ -217,7 +217,7 @@ if (mem_id == null) {
 				<p>
 					<a class="btn btn-default btn-lg"  style="border-color: white;" href="card" ><%=r_card %><br>카드</a>
 					<a>|</a>  
-					<a class="btn btn-default btn-lg" style="border-color: white;" href="account"><%=r_account %><br>계좌</a>
+					<a class="btn btn-default btn-lg" style="border-color: white;" href="../account/account?mem_id=<%=mem_id %>"><%=r_account %><br>계좌</a>
 					<a>|</a>  
 					<a class="btn btn-default btn-lg" style="border-color: white;" href="membership"><%=r_mship %><br>멤버쉽</a> 
 					<a>|</a> 

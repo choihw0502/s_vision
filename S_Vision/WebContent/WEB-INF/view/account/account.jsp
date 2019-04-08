@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.Map, java.util.List" %>        
+<%
+String mem_id = (String)session.getAttribute("mem_id");
+List<Map<String,Object>> accountList = (List<Map<String,Object>>)request.getAttribute("accountList");
+%>
 <!DOCTYPE html>
 <html>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -11,34 +15,17 @@
 <title>계좌 페이지</title>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bin.css">
-<script type="text/javascript">
-var frame; //iframe을 담아둘 변수
-        function SetElements() {
-            frame = document.getElementById("Contents"); //iframe 가져오기
-            SetHeight(); //SetHeight 함수 실행
-        }
-
-        function SetHeight() {
-            var fBody = frame.contentWindow || frame.contentDocument;
-            if (fBody.document) fBody = fBody.document.body; //iframe의 body 가져오기
-            frame.height = fBody.scrollHeight + (fBody.offsetHeight - fBody.clientHeight); //iframe 높이 크기 조절
-            frame.width = fBody.scrollWidth + (fBody.offsetWidth - fBody.clientWidth); //iframe 너비 크기 조절
-            scrollTo(0,0); //최상단으로 스크롤 이동
-
-        }
-</script>        
 </head>
 
 <body>
-<%
-String mem_id = (String)session.getAttribute("mem_id");
-%>
+<!-- 네비게이션 바 시작 -->
 <script type="text/javascript">
 $(document).ready(function(){
+
     $('#btn_accountAdd').on('click', function(){
         $.ajax({
             type: 'POST',
-            url: '../account/accountAdd',
+            url: 'accountAdd',
             data: {
                 "mem_id" : "<%=mem_id%>",
                 "acc_num" : document.getElementById("acc_num").value,
@@ -51,7 +38,7 @@ $(document).ready(function(){
                 }
                 else{
                    alert("계좌 추가 성공");
-                   location.href="account";
+                   location.href="account?mem_id=<%=mem_id%>";
                 }
             }
         });    //end ajax    
@@ -63,45 +50,20 @@ $(document).ready(function(){
 });
   
 </script>
-<!-- 네비게이션 바 시작 -->
-<%@ include file="account_nav.jsp" %>
-<%-- <%
-RequestDispatcher dispather2 = request.getRequestDispatcher("/account/nav?nav=account");
-dispather2.include(request, response);
-%> --%>
-<!-- <table class="dg_accountList" style="width:400px;height:250px"
-        data-options="url:'account/accountList?mem_id=elesex',fitColumns:true,singleSelect:true">
-    <thead>
-        <tr>
-            <th data-options="field:'ACC_BANK',width:100">Code</th>
-            <th data-options="field:'ACC_NAME',width:100">Name</th>
-            <th data-options="field:'ACC_NUM',width:100,align:'right'">Price</th>
-        </tr>
-    </thead>
-</table> -->
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<div class="col-md-1"></div>
-				<div class="col-md-11">
-					<h3>
-						<p>
-						<br>
-						<br>
-						<h3>
-						<p>
-							<br>계좌리스트
-						</p>
-					</h3>
-<iframe id="Contents" src="../account/accountList?mem_id=<%=mem_id %>" scrolling="no" frameborder="0" onload="SetElements()"></iframe>
-						</p>
-					</h3>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<br>
+			<h4>
+				<div class="navbar-header">
+					<a style="color: #ffffff; height: 25px" href="../member/index"><</a>
+					<a href="account" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;계좌</a>
+					<span style="margin-left: 150px;"><button type="button" data-toggle="modal" data-target="#m_accountAdd"style="background-color: #000000; color: #ffffff; border-color: #000000"><img src="/images/account.png">추가</a></span>
 				</div>
-			</div>
+			</h4>
+			<br>
 		</div>
-		<hr>
-	</div>
-<!-- Modal -->
+	</nav>
+
 <div class="modal fade" id="m_accountAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -140,7 +102,76 @@ dispather2.include(request, response);
       </div>
     </div>
   </div>
+</div>	
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="col-md-1"></div>
+				<div class="col-md-11">
+					<h3>
+						<p>
+						<br>
+						<br>
+							<h3>
+						<p>
+							<br>계좌리스트
+						</p>
+					</h3>
+					
+<%
+	if(accountList!=null){
+		for(int i=0;i<accountList.size();i++){
+%>
+
+<div class="media">
+<div class="media-left">
+<a href="#"> <img class="media-object" src="/images/형원.jpg" style="width: 200px; height: 200px">
+</a>
 </div>
+<div class="media-body">
+<h4 class="media-heading"></h4>
+<form id="accList" name="accList" method="post" action="accHistory?mem_id=<%=mem_id%>&acc_num=<%=accountList.get(i).get("ACC_NUM") %>">
+	<table style="width:300px">
+	<tr>
+		<td colspan="2" style="color:orange; font-size:120%; background-color:grey"><%=accountList.get(i).get("ACC_NUM") %></td>
+	</tr>
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;<%=accountList.get(i).get("ACC_BANK") %></td>
+	</tr>
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;<%=accountList.get(i).get("ACC_NAME") %></td>
+	</tr>
+	<tr>
+		<td>&nbsp;&nbsp;최종거래일</td>
+		<td style="text-align:right"><%=accountList.get(i).get("ACC_DATE") %></td>
+	</tr>
+	<tr>
+		<td>&nbsp;&nbsp;잔액</td>
+		<td style="text-align:right; color:blue;"><%=accountList.get(i).get("ACC_BALANCE") %><s2>원</s2></td>
+	</tr>
+	<tr>
+		<td><button id="btn_acc_history" name="btn_acc_history" type="submit" class="btn" style="width:150px">거래내역</button></td>
+		<td><button id="btn_sendMoney" name="btn_sendMoney" type="button" class="btn" style="width:150px">이체</button></td>
+	<tr>	
+	</table>
+</form>
+</div>
+</div>
+
+<%			
+		}
+	}
+%>
+
+						</p>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<hr>
+	</div>
+<!-- Modal -->
+
 
 			
 

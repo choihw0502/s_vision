@@ -33,20 +33,7 @@ public class MemberController {
 							HttpServletRequest req,
 							Model model) {
 		path = "member/main";
-		session = req.getSession();
-		if(session.getAttribute("mem_id")!=null) {
-			Map<String, Object> login = memberLogic.login(memberVO);
-			String r_card = String.valueOf(login.get("R_CARD"));
-			String r_account = String.valueOf(login.get("R_ACCOUNT"));
-			String r_point = String.valueOf(login.get("R_POINT"));
-			String r_mship = String.valueOf(login.get("R_MSHIP"));
-			session.setAttribute("mem_id", login.get("MEM_ID"));
-			session.setAttribute("r_card", r_card);
-			session.setAttribute("r_account", r_account);
-			session.setAttribute("r_point", r_point);
-			session.setAttribute("r_mship", r_mship);
-			
-		}
+	
 	
 		return path;
 		
@@ -76,6 +63,7 @@ public class MemberController {
 				String r_point = String.valueOf(login.get("R_POINT"));
 				String r_mship = String.valueOf(login.get("R_MSHIP"));
 				path = "member/main";
+				logger.info(login.get("MEM_ID"));
 				session.setAttribute("mem_id", login.get("MEM_ID"));
 				session.setAttribute("r_card", r_card);
 				session.setAttribute("r_account", r_account);
