@@ -12,14 +12,18 @@ public class AccountLogic {
 	@Autowired
 	AccountDao accountDao = null;
 
-	public List<Map<String, Object>> accountList(AccountVO accountVO) {//계좌리스트
+	public List<Map<String, Object>> accountList(Map<String, Object> pMap) {//계좌리스트
 		List<Map<String,Object>> accountList = null;
-		accountList = accountDao.accountList(accountVO);
+		accountList = accountDao.accountList(pMap);
 		return accountList;
 	}
 	public int accountAdd(AccountVO accountVO) {
 		int accountAdd = accountDao.accountAdd(accountVO);
 		return accountAdd;
+	}
+	public Map<String, List<Map<String, Object>>> accHistory(Map<String, Object> pMap) {
+		Map<String, List<Map<String, Object>>> accHistory = accountDao.accHistory(pMap);
+		return accHistory;
 	}
 	
 

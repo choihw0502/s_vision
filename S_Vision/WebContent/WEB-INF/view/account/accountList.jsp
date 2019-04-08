@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <%
 	List<Map<String,Object>> accountList = (List<Map<String,Object>>)request.getAttribute("accountList");
-%>
+	String mem_id = (String)session.getAttribute("mem_id");
+%>    
 <html>
 <head>
 <meta charset="UTF-8">
@@ -27,6 +28,16 @@ s3 {
 </style>
 </head>
 <body>
+	<h3>
+						<p>
+							<br>계좌리스트
+						</p>
+					</h3>
+<script type="text/javascript">
+$("#m_accountAdd").on('shown.bs.modal', function(){
+    $(this).find('#acc_name').focus();
+});
+</script>
 <%
 	if(accountList!=null){
 		for(int i=0;i<accountList.size();i++){
@@ -40,6 +51,7 @@ s3 {
 </div>
 <div class="media-body">
 <h4 class="media-heading"></h4>
+<form id="accList" name="accList" method="post" action="accHistory?mem_id=<%=mem_id%>&acc_num=<%=accountList.get(i).get("ACC_NUM") %>">
 	<table style="width:300px">
 	<tr>
 		<td colspan="2" style="color:orange; font-size:120%; background-color:grey"><%=accountList.get(i).get("ACC_NUM") %></td>
@@ -59,10 +71,11 @@ s3 {
 		<td style="text-align:right; color:blue;"><%=accountList.get(i).get("ACC_BALANCE") %><s2>원</s2></td>
 	</tr>
 	<tr>
-		<td><button id="btn_acc_history" name="btn_acc_history" type="button" class="btn" style="width:150px">거래내역</button></td>
+		<td><button id="btn_acc_history" name="btn_acc_history" type="submit" class="btn" style="width:150px">거래내역</button></td>
 		<td><button id="btn_sendMoney" name="btn_sendMoney" type="button" class="btn" style="width:150px">이체</button></td>
 	<tr>	
-</table>
+	</table>
+</form>
 </div>
 </div>
 
@@ -71,45 +84,6 @@ s3 {
 	}
 %>
 
-<div class="modal fade" id="m_accountAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">계좌 추가하기</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       <div class="group row"><div class="col-md-6 form-group"> <label for="foo">계좌이름</label> <input type="text" class="form-control" id="acc_name" name="acc_name"> </div>
- 	  </div><br>
- 	   <div class="group row">
- 	   <div class="col-md-4">
-            <select class="combobox form-control" id="acc_bank" name="acc_bank">
-              <option value="은행선택" selected="selected">은행선택</option>
-              <option value="농협">농협</option>
-              <option value="신한은행">신한은행</option>
-              <option value="국민은행">국민은행</option>
-              <option value="우리은행">우리은행</option>
-              <option value="하나은행">하나은행</option>
-              <option value="기업은행">IBK기업은행</option>
-              <option value="우체국">우체국</option>
-              <option value="새마을금고">새마을금고</option>
-              <option value="축협">축협</option>
-              <option value="수협">수협</option>
-            </select>
-          </div>
-       </div><br>   
-       <div class="group row"><div class="col-md-6 form-group"><label for="foo">계좌번호</label> <input type="text" class="form-control" id="acc_num" name="acc_num"></div>
-      </div>
-      </div>
-      <div class="modal-footer">
-        <button id="btn_accountAdd" name="btn_accountAdd" type="button" class="btn btn-primary">추가</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
 
 </body>
 </html>
