@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+<%@ page import="java.util.List, java.util.Map" %>
 <!DOCTYPE html>
+<%
+	List<Map<String,Object>> cardAllList = (List<Map<String,Object>>)request.getAttribute("accountList");
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -10,6 +14,24 @@
 <script src="/js/bootstrap.js"></script>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bin.css">
+
+
+<script type="text/javascript">
+var frame; //iframe을 담아둘 변수
+        function SetElements() {
+            frame = document.getElementById("Contents"); //iframe 가져오기
+            SetHeight(); //SetHeight 함수 실행
+        }
+
+        function SetHeight() {
+            var fBody = frame.contentWindow || frame.contentDocument;
+            if (fBody.document) fBody = fBody.document.body; //iframe의 body 가져오기
+            frame.height = fBody.scrollHeight + (fBody.offsetHeight - fBody.clientHeight); //iframe 높이 크기 조절
+            frame.width = fBody.scrollWidth + (fBody.offsetWidth - fBody.clientWidth); //iframe 너비 크기 조절
+            scrollTo(0,0); //최상단으로 스크롤 이동
+
+        }
+</script>     
 </head>
 <body>
 <%
@@ -22,8 +44,9 @@ $(document).ready(function(){
             type: 'POST',
             url: '../card/cardAdd',
             data: {
-                "mem_id" : "<%=mem_id%>",
-                "cardnum" : document.getElementById("cardnum").value
+            	"mem_id" : "<%=mem_id%>",
+                "cardnum" : document.getElementById("cardnum1").value+document.getElementById("cardnum2").value+
+                document.getElementById("cardnum3").value+document.getElementById("cardnum4").value
             },
             success: function(data){
                 if(data == 0){
@@ -45,7 +68,6 @@ $(document).ready(function(){
 
   
 </script>
-	<!-- 네비게이션 바 시작 -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<br>
@@ -59,6 +81,32 @@ $(document).ready(function(){
 			<br>
 		</div>
 	</nav>
+<!--카드리스트 시작 ^^!!  -->
+		<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="col-md-1"></div>
+				<div class="col-md-11">
+					<h3>
+						<p>
+						<br>
+						<br>
+						<h3>
+						<p>
+							<br>보유한 카드리스트
+						</p>
+					</h3>
+<iframe id="Contents" src="../card/cardAllList?mem_id=<%=mem_id %>" scrolling="no" frameborder="0" onload="SetElements()"></iframe>
+						</p>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<hr>
+	</div>
+			
+<!--카드리스트 끗!!  -->
+	<!-- 네비게이션 바 시작 -->
 	<!-- 네비게이션 바 끝 -->
 	<!-- 카드 화면 시작 -->
 	<div class="container">

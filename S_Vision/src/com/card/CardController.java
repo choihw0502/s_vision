@@ -31,10 +31,10 @@ public class CardController {
 	@GetMapping("cardAllList")
 	public String cardAllList(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		List<Map<String,Object>> cardAllList = cardLogic.cardAllList(cardVO);
-		//HttpSession session = req.getSession();
+		HttpSession session = req.getSession();
 		String path ="";
-//		String mem_id = (String)session.getAttribute("mem_id");
-		String mem_id = req.getParameter("mem_id");
+		String mem_id = (String)session.getAttribute("mem_id");
+		//String mem_id = req.getParameter("mem_id");
 		cardVO.setMem_id(mem_id);
 		model.addAttribute("cardAllList", cardAllList);
 		path = "card/cardAllList";

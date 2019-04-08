@@ -31,26 +31,33 @@ s3 {
 	if(cardAllList!=null){
 		for(int i=0;i<cardAllList.size();i++){
 %>
+<div class="media">
+<div class="media-left">
+</div>
+<div class="media-body">
+<h4 class="media-heading"></h4>
 <table style="width:300px">
 	<tr>
-		<td rowspan="3"><img src="/images/행복드림카드.PNG">
-		<td colspan="2" style="color:orange; font-size:120%; background-color:grey"><%=cardAllList.get(i).get("BIN_NAME") %></td>
+	 <td rowspan="3"><img src="/images/행복드림카드.PNG">
+	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
+	 <%=cardAllList.get(i).get("BIN_NAME") %></td>
 	</tr>
-	<tr><td></td>
+	<tr>
 		<td colspan="2">&nbsp;&nbsp;<%=cardAllList.get(i).get("BIN_COMPANY") %></td>
 	</tr>
-	<tr><td></td>
+	<tr>
 		<td colspan="2">&nbsp;&nbsp;<%=cardAllList.get(i).get("CARD_NUM") %></td>
 	</tr>
 	<tr>
-		<td>
-		</td>
+		<td colspan="2">&nbsp;&nbsp;</td>
 	</tr>
 	<!-- <tr>
 		<td><button id="btn_accountAdd" name="btn_accountAdd" type="button" class="btn" style="width:150px">거래내역</button></td>
 		<td><button id="btn_accountAdd" name="btn_accountAdd" type="button" class="btn" style="width:150px">이체</button></td>
 	<tr>	 -->
 </table>
+</div>
+</div>
 
 <%			
 		}
