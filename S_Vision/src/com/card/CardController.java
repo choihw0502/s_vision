@@ -28,13 +28,31 @@ public class CardController {
 	Logger logger = Logger.getLogger(CardController.class);
 	@Autowired
 	CardLogic cardLogic = null;
+	@GetMapping("cardAllList")
+	public String cardAllList(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+		List<Map<String,Object>> cardAllList = cardLogic.cardAllList(cardVO);
+		HttpSession session = req.getSession();
+		String path ="";
+		String mem_id = (String)session.getAttribute("mem_id");
+		//String mem_id = req.getParameter("mem_id");
+		cardVO.setMem_id(mem_id);
+		model.addAttribute("cardAllList", cardAllList);
+		path = "card/cardAllList";
+		
+		return path;
+		
+		
+	}
+	
+	
+	
 	@GetMapping("cardList")
 	public ModelAndView cardList(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		cardVO.setP_mem_id(req.getParameter("mem_id"));
 		//insert here
 		//메소드이름으로 알맞게 타입정하고		
 		//메소드이름=로직.같은이름메소드(VO);
-		List<Map<String,String>> cardList = cardLogic.cardList(cardVO);
+	List<Map<String,String>> cardList = cardLogic.cardList(cardVO);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("cardList", cardList);

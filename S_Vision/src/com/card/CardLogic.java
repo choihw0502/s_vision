@@ -14,6 +14,13 @@ public class CardLogic {
 	Logger logger = Logger.getLogger(CardLogic.class);
 	@Autowired
 	CardDao cardDao = null;
+	public List<Map<String,Object>> cardAllList(CardVO cardVO){
+		List<Map<String,Object>>cardAllList = null;
+				cardAllList =cardDao.cardAllList(cardVO);
+				return cardAllList;
+		
+	}
+	
 	public List<Map<String, String>> cardList(CardVO cardVO) {
 		List<Map<String, String>> cardList = null; 
 				cardList = cardDao.cardList(cardVO);
@@ -23,7 +30,5 @@ public class CardLogic {
 		int result=cardDao.cardAdd(pMap);
 		return result;
 	}
-	
-	
 
 }

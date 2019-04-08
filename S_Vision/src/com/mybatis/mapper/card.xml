@@ -19,5 +19,11 @@
 {call proc_cardList(#{p_mem_id, mode=IN }, 
 #{r_list, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=r_list})} 
 </select>
+<select id="cardAllList" parameterType="com.vo.CardVO" resultType="map">
+select mem_id ,card_num, bin_company, bin_name 
+from creditcard, cardbin 
+where mem_id = #{mem_id}   
+and CREDITCARD.bin=cardbin.bin
+</select>
 
 </mapper>
