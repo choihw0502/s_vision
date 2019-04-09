@@ -125,7 +125,7 @@ $(document).ready(function(){
 
 <div class="media">
 <div class="media-left">
-<a href="#"> <img class="media-object" src="/images/형원.jpg" style="width: 200px; height: 200px">
+<a href="#"> <img class="media-object" src="/images/<%=accountList.get(i).get("ACC_BANK") %>.PNG" style="width: 230px; height: 140px">
 </a>
 </div>
 <div class="media-body">
@@ -133,7 +133,7 @@ $(document).ready(function(){
 <form id="accList" name="accList" method="post" action="accHistory?mem_id=<%=mem_id%>&acc_num=<%=accountList.get(i).get("ACC_NUM") %>">
 	<table style="width:300px">
 	<tr>
-		<td colspan="2" style="color:orange; font-size:120%; background-color:grey"><%=accountList.get(i).get("ACC_NUM") %></td>
+		<td colspan="2" style="color:orange; font-size:120%; background-color:#D8D8D8"><%=accountList.get(i).get("ACC_NUM") %></td>
 	</tr>
 	<tr>
 		<td colspan="2">&nbsp;&nbsp;<%=accountList.get(i).get("ACC_BANK") %></td>

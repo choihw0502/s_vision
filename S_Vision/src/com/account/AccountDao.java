@@ -42,23 +42,26 @@ public class AccountDao {
 		return accountAdd;
 	}
 	public Map<String, List<Map<String, Object>>> accHistory(Map<String, Object> pMap) {
+		logger.info("Account-accHistory 호출성공");
 		Map<String, List<Map<String, Object>>> accHistory = new HashMap<String,List<Map<String,Object>>>();
 		List<Map<String,Object>> acchistoryToday = new ArrayList<Map<String,Object>>();
 		List<Map<String,Object>> acchistory1 = new ArrayList<Map<String,Object>>();
 		List<Map<String,Object>> acchistory3 = new ArrayList<Map<String,Object>>();
 		List<Map<String,Object>> acchistory6 = new ArrayList<Map<String,Object>>();
 		List<Map<String,Object>> acchistory12 = new ArrayList<Map<String,Object>>();
+		List<Map<String,Object>> acchistory3day = new ArrayList<Map<String,Object>>();
 		acchistoryToday = sqlSessionTemplate.selectList("acchistoryToday",pMap);
 		acchistory1 = sqlSessionTemplate.selectList("acchistory1",pMap);
 		acchistory3 = sqlSessionTemplate.selectList("acchistory3",pMap);
 		acchistory6 = sqlSessionTemplate.selectList("acchistory6",pMap);
 		acchistory12 = sqlSessionTemplate.selectList("acchistory12",pMap);
+		acchistory3day = sqlSessionTemplate.selectList("acchistory3day",pMap);
 		accHistory.put("today", acchistoryToday);
 		accHistory.put("1", acchistory1);
 		accHistory.put("3", acchistory3);
 		accHistory.put("6", acchistory6);
 		accHistory.put("12", acchistory12);
-		logger.info(accHistory.get("1").get(0).get("ACC_DATE"));
+		accHistory.put("3day", acchistory3day);
 		return accHistory;
 	}
 

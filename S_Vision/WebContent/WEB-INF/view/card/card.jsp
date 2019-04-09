@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List, java.util.Map" %>
 <!DOCTYPE html>
 <%
@@ -9,26 +9,27 @@
 <head>
 <meta charset="UTF-8">
 <mata name="viewport" content="width=device-width" , inital-scale="1">
-<title>Ä«µå ÆäÀÌÁö</title>
+<title>ì¹´ë“œ í˜ì´ì§€</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bin.css">
-
-
 <script type="text/javascript">
-var frame; //iframeÀ» ´ã¾ÆµÑ º¯¼ö
+var card1 = $("#cardnum1").length();
+</script>  
+<script type="text/javascript">
+var frame; //iframeì„ ë‹´ì•„ë‘˜ ë³€ìˆ˜
         function SetElements() {
-            frame = document.getElementById("Contents"); //iframe °¡Á®¿À±â
-            SetHeight(); //SetHeight ÇÔ¼ö ½ÇÇà
+            frame = document.getElementById("Contents"); //iframe ê°€ì ¸ì˜¤ê¸°
+            SetHeight(); //SetHeight í•¨ìˆ˜ ì‹¤í–‰
         }
 
         function SetHeight() {
             var fBody = frame.contentWindow || frame.contentDocument;
-            if (fBody.document) fBody = fBody.document.body; //iframeÀÇ body °¡Á®¿À±â
-            frame.height = fBody.scrollHeight + (fBody.offsetHeight - fBody.clientHeight); //iframe ³ôÀÌ Å©±â Á¶Àı
-            frame.width = fBody.scrollWidth + (fBody.offsetWidth - fBody.clientWidth); //iframe ³Êºñ Å©±â Á¶Àı
-            scrollTo(0,0); //ÃÖ»ó´ÜÀ¸·Î ½ºÅ©·Ñ ÀÌµ¿
+            if (fBody.document) fBody = fBody.document.body; //iframeì˜ body ê°€ì ¸ì˜¤ê¸°
+            frame.height = fBody.scrollHeight + (fBody.offsetHeight - fBody.clientHeight); //iframe ë†’ì´ í¬ê¸° ì¡°ì ˆ
+            frame.width = fBody.scrollWidth + (fBody.offsetWidth - fBody.clientWidth); //iframe ë„ˆë¹„ í¬ê¸° ì¡°ì ˆ
+            scrollTo(0,0); //ìµœìƒë‹¨ìœ¼ë¡œ ìŠ¤í¬ë¡¤ ì´ë™
 
         }
 </script>     
@@ -39,6 +40,7 @@ var frame; //iframeÀ» ´ã¾ÆµÑ º¯¼ö
 %>
 <script type="text/javascript">
 $(document).ready(function(){
+	$(this).find('#acc_name').focus();
     $('#btn_cardAdd').on('click', function(){
         $.ajax({
             type: 'POST',
@@ -50,10 +52,10 @@ $(document).ready(function(){
             },
             success: function(data){
                 if(data == 0){
-                   alert("Ä«µå Ãß°¡ ½ÇÆĞ");
+                   alert("ì¹´ë“œ ì¶”ê°€ ì‹¤íŒ¨");
                 }
                 else{
-                   alert("Ä«µå Ãß°¡ ¼º°ø");
+                   alert("ì¹´ë“œ ì¶”ê°€ ì„±ê³µ");
                    location.href="card";
                 }
             }
@@ -74,14 +76,14 @@ $(document).ready(function(){
 			<h4>
 				<div class="navbar-header">
 					<a style="color: #ffffff; height: 25px" href="index"><</a>
-					<a href="card" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;Ä«µå</a>
-					<span style="margin-left: 150px;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" img src="/images/card.png">&nbsp;Ãß°¡</a></span>
+					<a href="card" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;ì¹´ë“œ</a>
+					<span style="margin-left: 150px;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" img src="/images/card.png">&nbsp;ì¶”ê°€</a></span>
 				</div>
 			</h4>
 			<br>
 		</div>
 	</nav>
-<!--Ä«µå¸®½ºÆ® ½ÃÀÛ ^^!!  -->
+<!--ì¹´ë“œë¦¬ìŠ¤íŠ¸ ì‹œì‘ ^^!!  -->
 		<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -93,7 +95,7 @@ $(document).ready(function(){
 						<br>
 						<h3>
 						<p>
-							<br>º¸À¯ÇÑ Ä«µå¸®½ºÆ®
+							<br>ë³´ìœ í•œ ì¹´ë“œë¦¬ìŠ¤íŠ¸
 						</p>
 					</h3>
 <iframe id="Contents" src="../card/cardAllList?mem_id=<%=mem_id %>" scrolling="no" frameborder="0" onload="SetElements()"></iframe>
@@ -105,10 +107,10 @@ $(document).ready(function(){
 		<hr>
 	</div>
 			
-<!--Ä«µå¸®½ºÆ® ²ı!!  -->
-	<!-- ³×ºñ°ÔÀÌ¼Ç ¹Ù ½ÃÀÛ -->
-	<!-- ³×ºñ°ÔÀÌ¼Ç ¹Ù ³¡ -->
-	<!-- Ä«µå È­¸é ½ÃÀÛ -->
+<!--ì¹´ë“œë¦¬ìŠ¤íŠ¸ ë—!!  -->
+	<!-- ë„¤ë¹„ê²Œì´ì…˜ ë°” ì‹œì‘ -->
+	<!-- ë„¤ë¹„ê²Œì´ì…˜ ë°” ë -->
+	<!-- ì¹´ë“œ í™”ë©´ ì‹œì‘ -->
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -117,8 +119,8 @@ $(document).ready(function(){
 					<h3>
 						<p>
 							<img src="/images/AAP1266.png" style="width: 250px; height: 150px; margin-right: 20px" align="left"> 
-							<br>»ï¼ºÄ«µå 
-							<br>3¿ù ÁöÃâ 
+							<br>ì‚¼ì„±ì¹´ë“œ 
+							<br>3ì›” ì§€ì¶œ 
 							<br>3,000
 						</p>
 					</h3>
@@ -128,75 +130,22 @@ $(document).ready(function(){
 		<hr>
 	</div>
 
-	<!-- Ä«µå È­¸é ³¡ -->
-	<!-- ÇªÅÍ ½ÃÀÛ -->
-	<footer style="background-color: #000000;">
-		<div class="container">
-			<br>
-			<div class="row">
-				<div class="col-sm-3">
-					<h4 style="text-align: left;">»çÀÌÆ®¸Ê</h4>
-					<div class="list-group">
-						<a href="index" class="list-group-item">VISIONÆÀ Á¤º¸</a> <a
-							href="crew" class="list-group-item">VISIONÆÀ¿ø Á¤º¸</a> <a
-							href="notice.jsp" class="list-group-item">°øÁö»çÇ×</a> <a
-							href="FAQ.jsp" class="list-group-item">FAQ</a>
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<h4 style="text-align: left;">°í°´ ¹®ÀÇ</h4>
-					<a href="email.jsp" class="list-group-item">ÀÌ¸ŞÀÏ ¹®ÀÇ</a>
-				</div>
-				<div class="col-sm-4"></div>
-				<div class="col-sm-3">
-					<h4 style="text-align: left;">sns</h4>
-					<div class="list-group">
-						<a href="https://www.kakaocorp.com/service/KakaoTalk"
-							class="list-group-item">Ä«Ä«¿ÀÅå</a> <a
-							href="https://ko-kr.facebook.com/" class="list-group-item">ÆäÀÌ½ººÏ</a>
-					</div>
-					<h5 style="text-align: left;">Çù·Â ¾÷Ã¼</h5>
-					<div class="list-group">
-						<a href="http://www.ikosmo.co.kr/" class="list-group-item"
-							style="width: 190px; background-color: #ffffff;"> <img
-							src="/images/top_logo.gif"></a> <a
-							href="http://www.moel.go.kr/index.do" class="list-group-item"
-							style="width: 190px; background-color: #ffffff;"> <img
-							src="/images/logo.png"></a>
-					</div>
-				</div>
-				<div class="col-sm-12" style="height: 30px;">
-					<h5 style="text-align: left;">Copyright &copy; 2018-2019
-						HEESANG All Rights Reserved.</h5>
-				</div>
-
-				<div class="col-sm-12">
-					<hr>
-				</div>
-				<div class="col-sm-12">
-					<h4 style="text-align: centar;">
-						<img src="/images/VISION4.png" id="imagepreview"
-							style="width: 150px; height: 80px; margin-right: 10px" align="left">
-						(ÁÖ)ºñÀü¼ÒÇÁÆ®¿ş¾î(123-456) ¼­¿ï½Ã ±İÃµ±¸ °¡»êµ¿ 426-5 ¿ùµå¸Ş¸£µğ¾Ó 2Â÷ 311È£ 5°­ÀÇ½Ç
-						<br> ºñÀüÁÖ½ÄÈ¸»ç ´ëÇ¥ÀÌ»ç È²Èñ»ó »ç¾÷ÀÚµî·Ï¹øÈ£ 123-456-78910 ´ëÇ¥¹øÈ£:010-423-9948
-					</h4>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- ÇªÅÍ ³¡ -->
+	<!-- ì¹´ë“œ í™”ë©´ ë -->
+	<!-- í‘¸í„° ì‹œì‘ -->
+	<%@ include file="../include/footer.jsp" %>	
+	<!-- í‘¸í„° ë -->
 	<!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Ä«µå Ãß°¡ÇÏ±â</h5>
+        <h5 class="modal-title" id="exampleModalLabel">ì¹´ë“œ ì¶”ê°€í•˜ê¸°</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
 	<div class="modal-body">
-       <div class="form-group"> <label for="foo">Ä«µå¹øÈ£</label></div>
+       <div class="form-group"> <label for="foo">ì¹´ë“œë²ˆí˜¸</label></div>
         <div class="form-group row">
             <div class="col-md-3">
                 <input type="text" class="form-control focusedInput" id="cardnum1" placeholder="">
@@ -213,7 +162,7 @@ $(document).ready(function(){
         </div>
 	</div>
       <div class="modal-footer">
-         <button id="btn_cardAdd" name="btn_cardAdd" type="button" class="btn btn-primary">Ãß°¡</button>
+         <button id="btn_cardAdd" name="btn_cardAdd" type="button" class="btn btn-primary">ì¶”ê°€</button>
       </div>
     </div>
   </div>

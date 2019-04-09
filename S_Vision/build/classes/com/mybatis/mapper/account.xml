@@ -13,8 +13,9 @@
 						)}
 	</insert>
 	<select id="accountList2" parameterType="map" resultType="map">
-	select ah.acc_balance, ah.acc_num, a.acc_bank, a.acc_name, ah.acc_date from acc_history2 ah, account a where ah.acc_rownum in (select max(acc_rownum) from acc_history2 group by acc_num) and ah.acc_num in(select acc_num from account where mem_id=#{mem_id}) and ah.acc_num = a.acc_num 
-	order by ah.acc_balance desc
+	select ah.acc_balance, ah.acc_num, ah.acc_rownum, ah.acc_date, a.acc_name, a.acc_bank from acc_history2 ah, account a 
+	where ah.acc_rownum in(select max(to_number(acc_rownum)) from acc_history2 group by acc_num) 
+	and a.mem_id=#{mem_id} and ah.acc_num = a.acc_num order by ah.acc_balance desc
 	</select>
 	<select id="acchistory12" parameterType="map" resultType="map">
 	select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2
@@ -45,6 +46,12 @@
 	where to_date(acc_date,'yyyy/mm/dd') = (select to_char(sysdate,'yyyy/mm/dd') from dual) 
 	and acc_num= #{acc_num}
 	order by to_number(acc_rownum) desc
+	</select>
+	<select id="acchistory3day" parameterType="map" resultType="map">
+    select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2
+    where to_date(acc_date,'yyyy/mm/dd') >= (select to_char(sysdate-3,'yyyy/mm/dd') from dual) 
+    and acc_num= #{acc_num}
+    order by to_number(acc_rownum) desc
 	</select>
 	
 

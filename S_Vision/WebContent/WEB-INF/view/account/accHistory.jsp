@@ -1,12 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.Map, java.util.List" %>
+<%@ page import="java.util.*" %>
+<%@page import="java.text.SimpleDateFormat" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%
 	Map<String, List<Map<String, Object>>> accHistory = (Map<String, List<Map<String, Object>>>)request.getAttribute("accHistory");
 	String mem_id = (String)session.getAttribute("mem_id");
 
-%>    
+%>
+<%
+Date today = new Date();         
+SimpleDateFormat date = new SimpleDateFormat("yyyy년 MM월 dd일"); 
+String toDay = date.format(today);
+Calendar threeDay = Calendar.getInstance();
+threeDay.add(Calendar.DATE , -3);
+String threeDayago = new java.text.SimpleDateFormat("yyyy년 MM월 dd일").format(threeDay.getTime());
+Calendar oneMon = Calendar.getInstance();
+oneMon.add(Calendar.MONTH , -1);
+String oneMonth = new java.text.SimpleDateFormat("yyyy년 MM월 dd일").format(oneMon.getTime());
+Calendar threeMon = Calendar.getInstance();
+threeMon.add(Calendar.MONTH , -3);
+String threeMonth = new java.text.SimpleDateFormat("yyyy년 MM월 dd일").format(threeMon.getTime());
+Calendar sixMon = Calendar.getInstance();
+sixMon.add(Calendar.MONTH , -6);
+String sixMonth = new java.text.SimpleDateFormat("yyyy년 MM월 dd일").format(sixMon.getTime());
+Calendar oneYear = Calendar.getInstance();
+oneYear.add(Calendar.MONTH , -12);
+String oneYearago = new java.text.SimpleDateFormat("yyyy년 MM월 dd일").format(oneYear.getTime());
+%>
+
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
@@ -68,13 +90,13 @@ $(document).ready(function(){
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<br>
-			<h4>
+			<h5>
 				<div class="navbar-header">
 					<a style="color: #ffffff; height: 25px" href="../member/index"><</a>
 					<a href="account" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;계좌</a>
 					<span style="margin-left: 150px;"><button type="button" data-toggle="modal" data-target="#m_accountAdd"style="background-color: #000000; color: #ffffff; border-color: #000000"><img src="/images/account.png">추가</a></span>
 				</div>
-			</h4>
+			</h5>
 			<br>
 		</div>
 	</nav>
@@ -125,14 +147,17 @@ var v_3month = document.getElementById("d_3month");
 var v_6month = document.getElementById("d_6month");
 var v_12month = document.getElementById("d_12month");
 var v_today = document.getElementById("d_today");
+var v_3day = document.getElementById("d_3day");
 
 v_12month.style.display = 'none';
 v_6month.style.display = 'none';
 v_3month.style.display = 'none';
 v_today.style.display = 'none';
-v_1month.style.display = 'block';
+v_1month.style.display = 'none';
+v_3day.style.display = 'block';
 
 	$("#btn_1month").click(function(){
+		v_3day.style.display = 'none';
 		v_12month.style.display = 'none';
 		v_6month.style.display = 'none';
 		v_3month.style.display = 'none';
@@ -140,6 +165,7 @@ v_1month.style.display = 'block';
 		v_1month.style.display = 'block';
 	  });
 	  $("#btn_3month").click(function(){
+		  v_3day.style.display = 'none';
 		  v_1month.style.display = 'none';
 		  v_12month.style.display = 'none';
 		  v_6month.style.display = 'none';
@@ -147,6 +173,7 @@ v_1month.style.display = 'block';
 		  v_3month.style.display = 'block';
 	  });
 	  $("#btn_6month").click(function(){
+		  v_3day.style.display = 'none';
 		  v_1month.style.display = 'none';
 		  v_12month.style.display = 'none';
 		  v_3month.style.display = 'none';
@@ -154,6 +181,7 @@ v_1month.style.display = 'block';
 		  v_6month.style.display = 'block';
 	  });
 	  $("#btn_12month").click(function(){
+		  v_3day.style.display = 'none';
 		  v_1month.style.display = 'none';
 		  v_6month.style.display = 'none';
 		  v_3month.style.display = 'none';
@@ -161,6 +189,7 @@ v_1month.style.display = 'block';
 		  v_12month.style.display = 'block';
 	  });
 	  $("#btn_today").click(function(){
+		  v_3day.style.display = 'none';
 		  v_1month.style.display = 'none';
 		  v_12month.style.display = 'none';
 		  v_6month.style.display = 'none';
@@ -180,21 +209,59 @@ v_1month.style.display = 'block';
 						<br>
 	<h3>
 						<p>
-							<br><%=accHistory.get("12").get(0).get("ACC_NUM") %>&nbsp;거래내역
+							<br><%=accHistory.get("12").get(0).get("ACC_NUM") %>&nbsp;거래내역<br>
 						</p>
 					</h3>
 
-	<button type="button" class="btn btn-primary" id="btn_today" name="btn_today">당일</button>		
+	<button type="button" class="btn btn-primary" id="btn_today" name="btn_today">&nbsp;당일&nbsp;</button>		
 	<button type="button" class="btn btn-primary" id="btn_1month" name="btn_1month">1개월</button>		
 	<button type="button" class="btn btn-primary" id="btn_3month" name="btn_3month">3개월</button>		
 	<button type="button" class="btn btn-primary" id="btn_6month" name="btn_6month">6개월</button>		
-	<button type="button" class="btn btn-primary" id="btn_12month" name="btn_12month">12개월</button>		
-    <div id="d_12month"><table id="t_12month" name="t_12month" style="font-size:120%; " width="325px" >
+	<button type="button" class="btn btn-primary" id="btn_12month" name="btn_12month">&nbsp;1년&nbsp;</button>
+    <div id="d_3day"><table id="t_3day" name="t_3day" style="font-size:120%; " width="325px" >
+    <h5><%=threeDayago %>~<%=toDay %></h5>
 <%
+if(accHistory.get("3day").size()>0){
+	for(int i=0;i<accHistory.get("3day").size();i++){
+%>      
+      	<tr>
+      		<td style="color:orange; background-color:#D8D8D8" height="40px">&nbsp;<%=accHistory.get("3day").get(i).get("ACC_DATE") %>&nbsp;<%=accHistory.get("3day").get(i).get("ACC_TIME") %></td>
+      		<td></td>
+      	</tr>
+      	<tr>
+      		<td colspan="2"><%=accHistory.get("12").get(i).get("ACC_CONTENT") %></td>
+      	<tr>
+<%
+	if(accHistory.get("3day").get(i).get("ACC_INOUT").equals("입금")){
+%>		
+      		<td style="text-align:right; color:blue;" colspan="2"><%=accHistory.get("3day").get(i).get("ACC_INOUT") %>&nbsp;<%=accHistory.get("3day").get(i).get("ACC_PRICE") %><s2>원</s2></td>
+<%	
+	}else if(accHistory.get("3day").get(i).get("ACC_INOUT").equals("출금")){
+%>
+      		<td style="text-align:right; color:red;" colspan="2"><%=accHistory.get("3day").get(i).get("ACC_INOUT") %>&nbsp;<%=accHistory.get("3day").get(i).get("ACC_PRICE") %><s2>원</s2></td>
+<%		
+	}
+%>      	
+      	</tr>
+      	<tr>
+      		<td style="text-align:right; colspan="2">잔액&nbsp;<%=accHistory.get("12").get(i).get("ACC_BALANCE") %>원</td>
+      	</tr>
+<% 
+	}
+}
+%>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+      </table></div>			
+    <div id="d_12month"><table id="t_12month" name="t_12month" style="font-size:120%; " width="325px" >
+    <h5><%=oneYearago %>~<%=toDay %></h5>
+<%
+if(accHistory.get("12").size()>0){
 	for(int i=0;i<accHistory.get("12").size();i++){
 %>      
       	<tr>
-      		<td style="color:orange; background-color:grey" height="40px">&nbsp;<%=accHistory.get("12").get(i).get("ACC_DATE") %>&nbsp;<%=accHistory.get("12").get(i).get("ACC_TIME") %></td>
+      		<td style="color:orange; background-color:#D8D8D8" height="40px">&nbsp;<%=accHistory.get("12").get(i).get("ACC_DATE") %>&nbsp;<%=accHistory.get("12").get(i).get("ACC_TIME") %></td>
       		<td></td>
       	</tr>
       	<tr>
@@ -213,21 +280,24 @@ v_1month.style.display = 'block';
 %>      	
       	</tr>
       	<tr>
-      		<td style="text-align:right; colspan="2">잔액<%=accHistory.get("12").get(i).get("ACC_BALANCE") %>원</td>
+      		<td style="text-align:right; colspan="2">잔액&nbsp;<%=accHistory.get("12").get(i).get("ACC_BALANCE") %>원</td>
       	</tr>
 <% 
 	}
+}	
 %>
 		<tr>
 			<td>&nbsp;</td>
 		</tr>
       </table></div>
       <div id="d_1month"><table id="t_1month" name="t_1month" style="font-size:120%" width="325px">
+      <h5><%=oneMonth %>~<%=toDay %></h5>
 <%
+if(accHistory.get("1").size()>0){
 	for(int i=0;i<accHistory.get("1").size();i++){
 %>      
       	<tr>
-      		<td style="color:orange; background-color:grey" height="40px">&nbsp;<%=accHistory.get("1").get(i).get("ACC_DATE") %>&nbsp;<%=accHistory.get("1").get(i).get("ACC_TIME") %></td>
+      		<td style="color:orange; background-color:#D8D8D8" height="40px">&nbsp;<%=accHistory.get("1").get(i).get("ACC_DATE") %>&nbsp;<%=accHistory.get("1").get(i).get("ACC_TIME") %></td>
       		<td></td>
       	</tr>
       	<tr>
@@ -246,21 +316,24 @@ v_1month.style.display = 'block';
 %>      	
       	</tr>
       	<tr>
-      		<td style="text-align:right; colspan="2">잔액<%=accHistory.get("1").get(i).get("ACC_BALANCE") %>원</td>
+      		<td style="text-align:right; colspan="2">잔액&nbsp;<%=accHistory.get("1").get(i).get("ACC_BALANCE") %>원</td>
       	</tr>
 <% 
 	}
+}	
 %>
 		<tr>
 			<td>&nbsp;</td>
 		</tr>
       </table></div>
       <div id="d_3month"><table id="t_3month" name="t_3month" style="font-size:120%" width="325px">
+      <h5><%=threeMonth %>~<%=toDay %></h5>
 <%
+if(accHistory.get("3").size()>0){
 	for(int i=0;i<accHistory.get("3").size();i++){
 %>      
      	<tr>
-      		<td style="color:orange; background-color:grey" height="40px">&nbsp;<%=accHistory.get("3").get(i).get("ACC_DATE") %>&nbsp;<%=accHistory.get("3").get(i).get("ACC_TIME") %></td>
+      		<td style="color:orange; background-color:#D8D8D8" height="40px">&nbsp;<%=accHistory.get("3").get(i).get("ACC_DATE") %>&nbsp;<%=accHistory.get("3").get(i).get("ACC_TIME") %></td>
       		<td></td>
       	</tr>
       	<tr>
@@ -279,21 +352,24 @@ v_1month.style.display = 'block';
 %>         	
       	</tr>
       	<tr>
-      		<td style="text-align:right; colspan="2">잔액<%=accHistory.get("3").get(i).get("ACC_BALANCE") %>원</td>
+      		<td style="text-align:right; colspan="2">잔액&nbsp;<%=accHistory.get("3").get(i).get("ACC_BALANCE") %>원</td>
       	</tr>
 <% 
 	}
+}	
 %>
 		<tr>
 			<td>&nbsp;</td>
 		</tr>
       </table></div>
       <div id="d_6month"><table id="t_6month" name="t_6month" style="font-size:120%" width="325px" >
+      <h5><%=sixMonth %>~<%=toDay %></h5>
 <%
+if(accHistory.get("6").size()>0){
 	for(int i=0;i<accHistory.get("6").size();i++){
 %>      
      	<tr>
-      		<td style="color:orange; background-color:grey" height="40px">&nbsp;<%=accHistory.get("6").get(i).get("ACC_DATE") %>&nbsp;<%=accHistory.get("12").get(i).get("ACC_TIME") %></td>
+      		<td style="color:orange; background-color:#D8D8D8" height="40px">&nbsp;<%=accHistory.get("6").get(i).get("ACC_DATE") %>&nbsp;<%=accHistory.get("12").get(i).get("ACC_TIME") %></td>
       		<td></td>
       	</tr>
       	<tr>
@@ -312,21 +388,24 @@ v_1month.style.display = 'block';
 %>         	
       	</tr>
       	<tr>
-      		<td style="text-align:right; colspan="2">잔액<%=accHistory.get("6").get(i).get("ACC_BALANCE") %>원</td>
+      		<td style="text-align:right; colspan="2">잔액&nbsp;<%=accHistory.get("6").get(i).get("ACC_BALANCE") %>원</td>
       	</tr>
 <% 
 	}
+}	
 %>
 		<tr>
 			<td>&nbsp;</td>
 		</tr>
       </table></div>
       <div id="d_today"><table id="t_today" name="t_today" style="font-size:120%" width="325px">
+      <h5><%=toDay %>~<%=toDay %></h5>
 <%
+if(accHistory.get("today").size()>0){
 	for(int i=0;i<accHistory.get("today").size();i++){
 %>      
      	<tr>
-      		<td style="color:orange; background-color:grey"  height="40px">&nbsp;<%=accHistory.get("today").get(i).get("ACC_DATE") %>&nbsp;<%=accHistory.get("today").get(i).get("ACC_TIME") %></td>
+      		<td style="color:orange; background-color:#D8D8D8"  height="40px">&nbsp;<%=accHistory.get("today").get(i).get("ACC_DATE") %>&nbsp;<%=accHistory.get("today").get(i).get("ACC_TIME") %></td>
       		<td></td>
       	</tr>
       	<tr>
@@ -345,10 +424,11 @@ v_1month.style.display = 'block';
 %>         	
       	</tr>
       	<tr>
-      		<td style="text-align:right; colspan="2">잔액<%=accHistory.get("today").get(i).get("ACC_BALANCE") %>원</td>
+      		<td style="text-align:right; colspan="2">잔액&nbsp;<%=accHistory.get("today").get(i).get("ACC_BALANCE") %>원</td>
       	</tr>
 <% 
 	}
+}	
 %>
 		<tr>
 			<td>&nbsp;</td>
