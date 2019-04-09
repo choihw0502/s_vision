@@ -33,11 +33,8 @@ public class MemberController {
 							HttpServletRequest req,
 							Model model) {
 		path = "member/main";
-		session = req.getSession();
-		if(session.getAttribute("mem_id")!=null) {
-			session.invalidate();
-			
-		}
+	
+	
 		return path;
 		
 	}
@@ -66,6 +63,7 @@ public class MemberController {
 				String r_point = String.valueOf(login.get("R_POINT"));
 				String r_mship = String.valueOf(login.get("R_MSHIP"));
 				path = "member/main";
+				logger.info(login.get("MEM_ID"));
 				session.setAttribute("mem_id", login.get("MEM_ID"));
 				session.setAttribute("r_card", r_card);
 				session.setAttribute("r_account", r_account);
@@ -91,7 +89,10 @@ public class MemberController {
 	}
 	@GetMapping("logout")
 	public String logout(@ModelAttribute MemberVO memberVO, HttpServletRequest req, Model model) {
-		session.invalidate();
+		if(session.getAttribute("mem_id")!=null) {
+			session.invalidate();
+			
+		}
 		path = "member/main";
 		return path;
 		
@@ -161,7 +162,8 @@ public class MemberController {
 	public String rewards(@ModelAttribute MemberVO memberVO, HttpServletRequest req, Model model) {
 		path = "rewards/rewards";
 		return path;
-	}	
+	}
+		
 
 
 }

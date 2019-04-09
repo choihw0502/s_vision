@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.vo.AccountVO;
+import com.vo.MemberVO;
 
 @Controller
 @RequestMapping(value="/account/")
@@ -34,29 +35,43 @@ public class AccountController {
 	String path = "";
 
 	
-	@GetMapping("accountList")
-	public String accountList(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+	@GetMapping("account")
+	public String accountList(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req, @RequestParam Map<String,Object> pMap) throws ServletException, IOException {
 		logger.info("accountList 호출 성공");
 		List<Map<String,Object>> accountList = null;
 		String path = "";
-		String mem_id = req.getParameter("mem_id");//조회버튼을 눌렀을 때|입력처리 후 결과 처리페이지인지
-		logger.info("mem_id:"+mem_id);
-		accountVO.setMem_id(mem_id);
-		accountList = accountLogic.accountList(accountVO);
+		logger.info("mem_id:"+pMap.get("mem_id"));
+		accountList = accountLogic.accountList(pMap);
 		model.addAttribute("accountList", accountList);
 		//insert here - 응답페이지 호출 하기
 		//jsonBoardList.jsp페이지의 생성 위치는 어디인가요?
 		//WebContent이면 반환타입은 String
 		//WEB-INF이면 반환타입은 void, ModelAndView 이겠지.....
 		
-		path = "account/accountList";
+		path = "account/account";
+		//path = "forward:./accountList.jsp";
+		return path;
+		//return path;
+	}
+	@RequestMapping(value = "accHistory", method = RequestMethod.POST)
+	public String accHistory(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req, @RequestParam Map<String,Object> pMap) throws ServletException, IOException {
+		logger.info("accHistory 호출 성공");
+		Map<String,List<Map<String,Object>>> accHistory = null;
+		String path = "";
+		accHistory = accountLogic.accHistory(pMap);
+		model.addAttribute("accHistory", accHistory);
+		//insert here - 응답페이지 호출 하기
+		//jsonBoardList.jsp페이지의 생성 위치는 어디인가요?
+		//WebContent이면 반환타입은 String
+		//WEB-INF이면 반환타입은 void, ModelAndView 이겠지.....
+		path = "account/accHistory";
 		//path = "forward:./accountList.jsp";
 		return path;
 		//return path;
 	}
 	@ResponseBody
     @RequestMapping(value = "accountAdd", method = RequestMethod.POST)
-	public int accountAdd(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+	public int accountAdd(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req, @RequestParam Map<String,Object> pMap) throws ServletException, IOException {
 		logger.info("accountAdd 호출 성공");
 		int result = 0;
 		String mem_id = req.getParameter("mem_id"); 
