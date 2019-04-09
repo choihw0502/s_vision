@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,23 @@ import org.springframework.web.servlet.ModelAndView;
 import com.vo.PlanVO;
 
 @Controller
-@RequestMapping(value="/plan/")
+@RequestMapping(value="/UI/")
 public class PlanController {
 	Logger logger = Logger.getLogger(PlanController.class);
 	@Autowired
 	PlanLogic planLogic = null;
+	@GetMapping("planList")
+	public String planList(@ModelAttribute PlanVO planVO,HttpServletRequest req) throws ServletException, IOException{
+		logger.info("planList 호출 성공");
+		//ModelAndView mav = new ModelAndView();
+		planVO.setMem_id("Pascale Mcfadden");
+		planVO = planLogic.planList(planVO);
+		//mav.addObject("planVO",planVO);
+		HttpSession session = req.getSession();
+		session.setAttribute("planVO", planVO);
+		session.setMaxInactiveInterval(60*60);
+		return "redirect:planner.jsp";
+	}
 	
 	@GetMapping("spendingMonth")//URL예시 : http://localhost:9000/plan/spendingMonth?mem_id=Piper Rich&month=20190101
 	public ModelAndView spendingMonth(@ModelAttribute PlanVO planVO) throws ServletException, IOException {
@@ -47,14 +60,15 @@ public class PlanController {
 			HashMap<Object,Object>(); map.put("x", y); map.put("y",
 			Integer.parseInt(r_ever[i])); list.add(map); y = y+2; 
 		}
-		mav.addObject("r_ever", list); String [] r1 = r_result.get(0).get("R1").toString().split("/");
+		mav.addObject("r_ever", list); String [] r1 = r_result.get(0).get("R_SUM1").toString().split("/");
 		logger.info("r_ever.length : "+r1.length); list = new
 		ArrayList<Map<Object,Object>>(); y = 1; for(int i=1;i<r1.length;i++) {
 		
 		map = new HashMap<Object,Object>(); map.put("x", y); map.put("y",
 		Integer.parseInt(r1[i])); list.add(map); y = y+2;
 		
-		} mav.addObject("r1", list); mav.setViewName("plan/spendingMonth");
+		} 
+		mav.addObject("r1", list); mav.setViewName("plan/spendingMonth");
 		
 		return mav;
 	}
@@ -62,9 +76,8 @@ public class PlanController {
 	@GetMapping("spendingCategory")
 	public ModelAndView spendingCategory(@ModelAttribute PlanVO planVO) throws ServletException, IOException {
 		//카테고리별 지출 리스트
-		//원하는 달과 아이디 값을 받는다.
-		//R1~R6 : 건수
-		//R7~R12 : 합계금액
+		//R_cnt1~R_cnt6 : 건수
+		//R_sum1~R_sum6 : 합계금액
 		// 교통 01 09 10
 		// 편의점 및 마트 08 14
 		// 건강 및 의료 16 17
@@ -139,27 +152,21 @@ public class PlanController {
 		mav.addObject("r1", list);
 		mav.setViewName("plan/spendingCategory");
 		return mav;
+
 	}
+	
 	@GetMapping("spendingStore")
-	public ModelAndView spendingStore(@ModelAttribute PlanVO planVO) throws ServletException, IOException {
+	public String spendingStore(@ModelAttribute PlanVO planVO, Model model) throws ServletException, IOException {
+		
 		//매장별 지출 (결제 많은순(건 기준) | 지출순(지출합계기준))
 		//이것도 6개월치를 뽑아야 한다.
-		planVO.setMem_id("Xander Livingston");
-		planVO.setP_date("20190305");
+		logger.info("memid : "+planVO.getMem_id()+" , month :"+planVO.getP_date());
 		planVO = planLogic.spendingStore(planVO);
-		List<Map<String,Object>> r_result = planVO.getR_result();
-		List<Map<String,Object>> r_result1 = planVO.getR_result();
-		Object[] keys =  r_result.get(0).keySet().toArray();
-		for(Object key: keys) {
-			
-			logger.info("합계순 : key값 : "+key+" , value 값 : "+r_result.get(0).get(key) );
-			logger.info("건수순 : key값 : "+key+" , value 값 : "+r_result1.get(0).get(key) );
-		}
+		model.addAttribute("planVO", planVO);
+		logger.info(planVO.getR_store_cnt().size());
+		return "forward:spendingStore.jsp";
+
 		
-		ModelAndView mav = new ModelAndView();
-		//mav.addObject("spendingStore", spendingStore);
-		mav.setViewName("plan/spendingStore");
-		return mav;
 	}
 	@GetMapping("payMethod")
 	public ModelAndView payMethod(@ModelAttribute PlanVO planVO, Model model, HttpServletRequest req) throws ServletException, IOException {

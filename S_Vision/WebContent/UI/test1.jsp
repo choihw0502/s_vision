@@ -2,18 +2,20 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
- 
+ <jsp:include page="../WEB-INF/view/common/UI_common.jsp"></jsp:include>
 <%
 List<Map<String, Object>> boardList = (List<Map<String, Object>>)request.getAttribute("boardList");
 int size = 0;
 if(boardList!=null){
 	size = boardList.size();
 }
-
+String name = (String)request.getParameter("name");
+String grade = (String)request.getParameter("grade");
+out.print(name);
+out.print(grade);
 Gson gsonObj = new Gson();
 Map<Object,Object> map = null;
 List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
- 
 map = new HashMap<Object,Object>(); map.put("x", 1); map.put("y", 1100); list.add(map);
 map = new HashMap<Object,Object>(); map.put("x", 3); map.put("y", 6000); list.add(map);
 map = new HashMap<Object,Object>(); map.put("x", 5); map.put("y", 6000); list.add(map);
@@ -60,9 +62,9 @@ String dataPoints2 = gsonObj.toJson(list);
 <head>
 <meta charset=UTF-8">
 <script type="text/javascript">
-$(document).ready(function(){
+$(document).ready(function (){
  
-var chart = new CanvasJS.Chart("chartContainer", { 
+var chart = new CanvasJS.Chart("chartContainer1", { 
 	animationEnabled: true, 
 	theme: "light",
 	title: {
@@ -120,7 +122,6 @@ function toggleDataSeries(e){
 </script>
 </head>
 <body>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<div id="chartContainer1" style="height: 300px; width: 100%;"></div>
 </body>
 </html>

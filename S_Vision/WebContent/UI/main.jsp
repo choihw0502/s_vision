@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<jsp:include page="../WEB-INF/view/common/UI_common.jsp"></jsp:include>
 <%@ page import="com.vo.MemberVO"%>
 
 
 <!DOCTYPE html>
 <html>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="js/bootstrap.js"></script>
 <meta charset="UTF-8">
 <mata name="viewport" content="width=device-width" , inital-scale="1">
 <head>
