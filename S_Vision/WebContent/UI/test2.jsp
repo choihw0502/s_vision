@@ -62,15 +62,16 @@ String dataPoints2 = gsonObj.toJson(list);
 <script type="text/javascript">
 $(document).ready(function(){
  
-var chart = new CanvasJS.Chart("chartContainer", { 
+var chart = new CanvasJS.Chart("chartContainer2", 
+	{ 
 	animationEnabled: true, 
 	theme: "light",
 	title: {
 		text: "지출 내역"
 	},
 	subtitles: [{
-		text: "지출 총액:"
-	}],
+					text: "지출 총액:"
+				}],
 	axisX: {
 		includeZero: false
 	},
@@ -86,23 +87,23 @@ var chart = new CanvasJS.Chart("chartContainer", {
 		itemclick: toggleDataSeries
 	},
 	data: [{
-		type: "stepArea",
-		name: "평균 지출액",
-		color: "#BDBDBD",
-		showInLegend: true,
-		yValueFormatString: "￦#,##0",
-		dataPoints: <%out.print(dataPoints);%>
-	},
-	{
-		type: "stepArea",
-		name: "이번달 지출액",
-		color: "#6799FF",
-		showInLegend: true,
-		indexLabel: "{y}",
-		yValueFormatString: "￦#,##0",
-		dataPoints: <%out.print(dataPoints2);%>
-	}]
-});
+			type: "stepArea",
+			name: "평균 지출액",
+			color: "#BDBDBD",
+			showInLegend: true,
+			yValueFormatString: "￦#,##0",
+			dataPoints: <%out.print(dataPoints);%>
+			},
+			{
+			type: "stepArea",
+			name: "이번달 지출액",
+			color: "#6799FF",
+			showInLegend: true,
+			indexLabel: "{y}",
+			yValueFormatString: "￦#,##0",
+			dataPoints: <%out.print(dataPoints2);%>
+		 }]
+	});
  
 chart.render();
  
@@ -114,13 +115,13 @@ function toggleDataSeries(e){
 		e.dataSeries.visible = true;
 	}
 	chart.render();
-}
+	}
  
-});
+	});
 </script>
 </head>
 <body>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<div id="chartContainer2" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
 </html>

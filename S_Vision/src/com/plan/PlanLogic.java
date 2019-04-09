@@ -14,6 +14,11 @@ public class PlanLogic {
 	@Autowired
 	PlanDao planDao = new PlanDao();
 	
+	public PlanVO planList(PlanVO planVO) {
+		logger.info("planVO 호출 성공");
+		return planDao.planList(planVO);
+	}
+
 	public List<Map<String, Object>> spendingMonth(PlanVO planVO) {
 		logger.info("spendingMonth 호출성공");
 		return planDao.spendingMonth(planVO);
@@ -38,6 +43,7 @@ public class PlanLogic {
 		logger.info("total_Day 호출 성공");
 		return planDao.total_Day(planVO);
 	}
+
 
 	
 
