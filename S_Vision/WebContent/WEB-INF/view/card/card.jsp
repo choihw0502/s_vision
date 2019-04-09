@@ -59,8 +59,8 @@ $(document).ready(function(){
                    location.href="card";
                 }
             }
-        });    //end ajax    
-    });    //end on
+        });      
+    });   
 
     $("#exampleModal").on('shown.bs.modal', function(){
         $(this).find('#cardnum1').focus();
