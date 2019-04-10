@@ -38,7 +38,6 @@ public class AccountDao {
 		pMap.put("P_ACC_NAME", accountVO.getAcc_name());
 		logger.info(pMap.get("P_MEM_ID"));
 		int accountAdd = sqlSessionTemplate.insert("proc_accountAdd",pMap);
-		// TODO Auto-generated method stub
 		return accountAdd;
 	}
 	public Map<String, List<Map<String, Object>>> accHistory(Map<String, Object> pMap) {

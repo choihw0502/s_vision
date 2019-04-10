@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cardMapper">
+	<insert id="cardAdd" parameterType="map" statementType="CALLABLE">
+		{call proc_cardAdd(#{P_CARD_NUM,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{P_MEM_ID,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{RESULT,mode=OUT,jdbcType=INTEGER,javaType=java.lang.Integer}
+						)}
+	</insert>
+	<select id="storeInfo" parameterType="com.vo.BrandVO" resultType="map">
+		select store_num, store_name,brand_num
+		  from store
+		 where store_name = #{brandname};
+	</select>
+	<select id="cardInfo" parameterType="com.vo.CreditcardVO" resultType="map">
+		select acc_num,a.card_num,vi_used,vi_limit,mem_id,mem_pay_pw
+		from visioncard a,(select card_num, a.mem_id, mem_pay_pw from creditcard a ,
+					(select mem_id, mem_pay_pw from member where mem_id = #{mem_id) b 
+		                 where a.mem_id = b.mem_id) b
+		where a.card_num = b.card_num
+	</select>
+
+</mapper>

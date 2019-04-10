@@ -6,8 +6,9 @@
 		<typeAlias alias="memberVO" type="com.vo.MemberVO"/>
 	</typeAliases>
 	<mappers>
+		<mapper resource="com/mybatis/mapper/block.xml"/>
 		<mapper resource="com/mybatis/mapper/account.xml"/>
-		<mapper resource="com/mybatis/mapper/card.xml"/>
+<!-- 		<mapper resource="com/mybatis/mapper/card.xml"/> -->
 		<mapper resource="com/mybatis/mapper/member.xml"/>
 		<mapper resource="com/mybatis/mapper/membership.xml"/>
 		<mapper resource="com/mybatis/mapper/plan.xml"/>
