@@ -207,8 +207,8 @@ var chart_cnt = new CanvasJS.Chart("cate_drop_cnt", {
 		horizontalAlign: "left"
 	},
 	subtitles: [{
-		text: "<%=center_cnt%>
-	",
+		text: "<%=center_cnt%>"
+	,
 				verticalAlign : "center",
 				fontSize : 24,
 				dockInsidePlotArea : true
