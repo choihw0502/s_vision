@@ -215,7 +215,7 @@ if (mem_id == null) {
 			<div class="col-md-4">
 				<h2>지갑</h2>
 				<p>
-					<a class="btn btn-default btn-lg"  style="border-color: white;" href="card" ><%=r_card %><br>카드</a>
+					<a class="btn btn-default btn-lg"  style="border-color: white;" href="../card/cardAllList?mem_id=<%=mem_id %>" ><%=r_card %><br>카드</a>
 					<a>|</a>  
 					<a class="btn btn-default btn-lg" style="border-color: white;" href="../account/account?mem_id=<%=mem_id %>"><%=r_account %><br>계좌</a>
 					<a>|</a>  

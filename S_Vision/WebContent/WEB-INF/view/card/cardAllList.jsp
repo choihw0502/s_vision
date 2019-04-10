@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.Map, java.util.List" %>    
+<%@ page import="java.util.*" %>    
+<%@page import="java.text.SimpleDateFormat" %>
+<%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html>
 <%
+	List<Map<String,Object>> cardAllList2 = (List<Map<String,Object>>)request.getAttribute("cardAllList2");
 	List<Map<String,Object>> cardAllList = (List<Map<String,Object>>)request.getAttribute("cardAllList");
+
+%>
+<%
+Date today = new Date();         
+SimpleDateFormat date = new SimpleDateFormat("yyyy년 MM월 dd일"); 
+String toDay = date.format(today);
 %>
 <html>
 <head>
@@ -38,7 +47,7 @@ s3 {
 <h4 class="media-heading"></h4>
 <table style="width:300px">
 	<tr>
-	 <td rowspan="3"><img src="/images/행복드림카드.PNG">
+	 <td rowspan="3"><img src="/images/사진.png">
 	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
 	 <%=cardAllList.get(i).get("BIN_NAME") %></td>
 	</tr>
@@ -47,10 +56,7 @@ s3 {
 	</tr>
 	<tr>
 		<td colspan="2">&nbsp;&nbsp;<%=cardAllList.get(i).get("CARD_NUM") %></td>
-	</tr>
-	<tr>
-		<td colspan="2">&nbsp;&nbsp;</td>
-	</tr>
+ 	</tr> 
 	<!-- <tr>
 		<td><button id="btn_accountAdd" name="btn_accountAdd" type="button" class="btn" style="width:150px">거래내역</button></td>
 		<td><button id="btn_accountAdd" name="btn_accountAdd" type="button" class="btn" style="width:150px">이체</button></td>

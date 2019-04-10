@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, java.util.Map" %>
+<%@ page import="java.util.List, java.util.*" %>
+<%@page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <%
-	List<Map<String,Object>> cardAllList = (List<Map<String,Object>>)request.getAttribute("accountList");
+	List<Map<String,Object>> cardAllList = (List<Map<String,Object>>)request.getAttribute("cardAllList");
+	List<Map<String,Object>> allCard = (List<Map<String,Object>>)request.getAttribute("allCard");
+
+	
 %>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -70,6 +75,28 @@ $(document).ready(function(){
 
   
 </script>
+<script type="text/javascript">
+ $(document).ready(function(){
+var v_usecard = document.getElementById("use");
+var v_allcard = document.getElementById("all");
+
+
+v_usecard.style.display = 'block';
+v_allcard.style.display = 'none';
+
+
+	$("#btn_useCard").click(function(){
+		v_usecard.style.display = 'block';
+		v_allcard.style.display = 'none';
+
+	  });
+	  $("#btn_allCard").click(function(){
+			v_usecard.style.display = 'none';
+			v_allcard.style.display = 'block';
+
+	  });
+	}); 
+</script>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<br>
@@ -77,7 +104,8 @@ $(document).ready(function(){
 				<div class="navbar-header">
 					<a style="color: #ffffff; height: 25px" href="index"><</a>
 					<a href="card" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;카드</a>
-					<span style="margin-left: 150px;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" img src="/images/card.png">&nbsp;추가</a></span>
+					<span style="margin-left: 150px;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" img src="/images/card.png">&nbsp;카드 추가</a></span>
+					
 				</div>
 			</h4>
 			<br>
@@ -91,14 +119,89 @@ $(document).ready(function(){
 				<div class="col-md-11">
 					<h3>
 						<p>
-						<br>
-						<br>
 						<h3>
 						<p>
-							<br>보유한 카드리스트
+					<button id="btn_useCard" name="btn_useCard" type="button" class="btn" style="width:150px">이번 달 사용카드</button></td>
+	             	<button id="btn_allCard" name="btn_allCard" type="button" class="btn" style="width:150px">나의 카드 목록</button></td>
+							<br>
+							<br>
+							<br>
 						</p>
 					</h3>
-<iframe id="Contents" src="../card/cardAllList?mem_id=<%=mem_id %>" scrolling="no" frameborder="0" onload="SetElements()"></iframe>
+<div id="use">
+<%
+
+
+	if(cardAllList!=null){
+		for(int i=0;i<cardAllList.size();i++){
+%>
+<div class="media">
+<div class="media-left">
+</div>
+<div class="media-body">
+<h4 class="media-heading"></h4>
+<table style="width:300px">
+	<tr>
+	 <td rowspan="3"><img src="/images/<%=cardAllList.get(i).get("BIN_COMPANY") %>.png">
+	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=cardAllList.get(i).get("BIN_NAME") %></td>
+	</tr>
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=cardAllList.get(i).get("BIN_COMPANY") %></td>
+	</tr>
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;<%=cardAllList.get(i).get("CARD_NUM") %></td>
+ 	</tr> 
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;이번달 사용금액&nbsp;<%=cardAllList.get(i).get("PH_PRICE")%>원</td>
+	</tr>
+	 <tr>
+		
+</table>
+
+</div>
+</div>
+
+<%			
+		}
+	}
+%>
+</div>
+
+<div id="all">
+<%
+
+	if(allCard!=null){
+		for(int i=0;i<allCard.size();i++){
+%>
+<div class="media">
+<div class="media-left">
+</div>
+<div class="media-body">
+<h4 class="media-heading"></h4>
+<table style="width:300px">
+	<tr>
+	 <td rowspan="3"><img src="/images/<%=allCard.get(i).get("BIN_COMPANY") %>.png">
+	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=allCard.get(i).get("BIN_NAME") %></td>
+	</tr>
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=allCard.get(i).get("BIN_COMPANY") %></td>
+	</tr>
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;<%=allCard.get(i).get("CARD_NUM") %></td>
+ 	</tr> 
+	<tr>
+		
+</table>
+</div>
+</div>
+
+<%			
+		}
+	}
+%>
+</div>
 						</p>
 					</h3>
 				</div>
@@ -110,27 +213,7 @@ $(document).ready(function(){
 <!--카드리스트 끗!!  -->
 	<!-- 네비게이션 바 시작 -->
 	<!-- 네비게이션 바 끝 -->
-	<!-- 카드 화면 시작 -->
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<div class="col-md-1"></div>
-				<div class="col-md-11">
-					<h3>
-						<p>
-							<img src="/images/AAP1266.png" style="width: 250px; height: 150px; margin-right: 20px" align="left"> 
-							<br>삼성카드 
-							<br>3월 지출 
-							<br>3,000
-						</p>
-					</h3>
-				</div>
-			</div>
-		</div>
-		<hr>
-	</div>
-
-	<!-- 카드 화면 끝 -->
+	
 	<!-- 푸터 시작 -->
 	<%@ include file="../include/footer.jsp" %>	
 	<!-- 푸터 끝 -->
