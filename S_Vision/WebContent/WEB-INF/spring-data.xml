@@ -26,7 +26,6 @@
 			<value>tiger</value>
 		</property>
 	</bean>
-
 	<bean id="accountDao" class="com.account.AccountDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
@@ -46,6 +45,9 @@
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
 	<bean id="planDao" class="com.plan.PlanDao">
+		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
+	</bean>
+	<bean id="blockDao" class="block.BlockDao">
 		<property name="sqlSessionTemplate" ref="sqlSessionTemplate"/>
 	</bean>
 	<!-- 

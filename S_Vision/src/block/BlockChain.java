@@ -17,25 +17,27 @@ public class BlockChain {
 	public static int difficulty = 3;
 	public static List<Transaction> pendingTransactions;
 	public int miningReward = 1000;
-
+	public String key = "brand";
+	
 	public BlockChain() {
-		chain = new ArrayList<Block>();					//블럭정보 List
+		chain = new ArrayList<Block>();						//블럭정보 List
 		pendingTransactions = new ArrayList<Transaction>();	//트랜잭션 List
-		System.out.println("GenesisBlock 생성");		
-		Block block = createGenesisBlock();			//블럭생성
-		chain.add(block);
+		System.out.println("key Block 생성");		
+		Block block = createGenesisBlock(key);				//블럭생성
+		chain.add(block);									//List에 블럭 연결
 		minePendingTransactions("Master");
 		minePendingTransactions("Master");
 	}
 
-	public Block createGenesisBlock() {//새로운 블럭 생성 후 연결 
-		return new Block(pendingTransactions, "Genesis Block");
+	public Block createGenesisBlock(String key) {//새로운 블럭 생성 후 연결 
+		return new Block(pendingTransactions, key);
 	}
 
 	public Block getLatestBlock() {//이전 블럭 불러오기
 		return chain.get(chain.size() - 1);
 	}
-
+	
+//hash값이 맞는지 확인
 	public boolean isChainValid() {
 		for (int i = 1; i < chain.size(); i++) {
 			Block currentBlock = chain.get(i);
@@ -64,7 +66,7 @@ public class BlockChain {
 	}
 
 	// 거래내역을 넣고나서 체이닝
-	public void minePendingTransactions(String miningRewardAddress) {
+	public void minePendingTransactions(String miningRewardAddress) {//파라미터 받는사람의 주소
 		Block newBlock = new Block(pendingTransactions, chain.get(chain.size() - 1).hash);
 		newBlock.mineBlock(difficulty);
 		chain.add(newBlock);
@@ -72,24 +74,17 @@ public class BlockChain {
 		Transaction newTran = new Transaction("CoinManager", miningRewardAddress, miningReward);
 		pendingTransactions.add(newTran);
 	}
-
-	@RequestMapping(value = "mining", method = RequestMethod.POST)
-	public List<Block> miningpage() {
-		minePendingTransactions("Master");
-		return chain;
-	}
-
+	
+	//추가 금액인지 차감 금액인지 체크
 	public int getBalance(String address) {
 		int balance = 0;
 		// Loop over each block and each transaction inside the block
 		for (Block block : chain) {
 			for (Transaction trans : block.tList) {
-
 				// If the given address is the sender -> reduce the balance
 				if (trans.from.equals(address)) {
 					balance -= trans.amount;
 				}
-
 				// If the given address is the receiver -> increase the balance
 				if (trans.to.equals(address)) {
 					balance += trans.amount;
@@ -99,6 +94,13 @@ public class BlockChain {
 		return balance;
 	}
 	
+	@RequestMapping(value = "mining", method = RequestMethod.POST)
+	public List<Block> miningpage() {
+		minePendingTransactions("Master");
+		return chain;
+	}
+
+
 	@RequestMapping(value="myCoin", method = RequestMethod.POST)
 	public int myCoin(@RequestParam("email") String email) {
 		int coin = 0;
@@ -106,15 +108,16 @@ public class BlockChain {
 		return coin;
 	}
 	
+//거래 내역 페이지로 호출될 값들	
 	@RequestMapping(value="/trans",method=RequestMethod.POST)
-	public List<Map<String,Object>> transactions(@RequestParam("address") String address){
+	public List<Map<String,Object>> transactions(@RequestParam("address") String address){//나인지 너인지의 정보 불러오기
 		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 		int balance = 0;
-		for (Block block : chain) {
-			for (Transaction trans : block.tList) {
-				Map<String,Object> inputCoin = new HashMap<String,Object>();
-				Map<String,Object> outputCoin = new HashMap<String,Object>();
-				if (trans.from.equals(address)) {
+		for (Block block : chain) { //block에 List<chain>의 정보를 넣는다.
+			for (Transaction trans : block.tList) {//block에 담긴 트랜잭션의 정보를 담는다.
+				Map<String,Object> inputCoin = new HashMap<String,Object>(); //나에게서 나가는돈 
+				Map<String,Object> outputCoin = new HashMap<String,Object>(); //너에게 들어가는 돈
+				if (trans.from.equals(address)) {//나에게서 나가는돈 
 					balance -= trans.amount;
 					inputCoin.put("from", trans.from);
 					inputCoin.put("to", trans.to);
@@ -123,8 +126,7 @@ public class BlockChain {
 					inputCoin.put("balance", balance);
 					list.add(inputCoin);
 				}
-
-				if (trans.to.equals(address)) {
+				if (trans.to.equals(address)) {//너에게 들어가는 돈
 					balance += trans.amount;
 					outputCoin.put("from", trans.from);
 					outputCoin.put("to", trans.to);
@@ -137,5 +139,4 @@ public class BlockChain {
 		}
 		return list;
 	}
-	
 }
