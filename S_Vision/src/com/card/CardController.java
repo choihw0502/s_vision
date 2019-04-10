@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,21 +31,35 @@ public class CardController {
 	CardLogic cardLogic = null;
 	@GetMapping("cardAllList")
 	public String cardAllList(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException {
-		List<Map<String,Object>> cardAllList = cardLogic.cardAllList(cardVO);
 		HttpSession session = req.getSession();
 		String path ="";
 		String mem_id = (String)session.getAttribute("mem_id");
+		cardVO.setMem_id(mem_id);
+		logger.info(mem_id);
+		List<Map<String,Object>> cardAllList = cardLogic.cardAllList(cardVO);
+		List<Map<String,Object>> allCard = cardLogic.allCard(cardVO);
+		logger.info(allCard);
 		//String mem_id = req.getParameter("mem_id");
 		cardVO.setMem_id(mem_id);
 		model.addAttribute("cardAllList", cardAllList);
-		path = "card/cardAllList";
+		model.addAttribute("allCard", allCard);
+		path = "card/card";
 		
 		return path;
 		
 		
 	}
+	@RequestMapping(value = "allCard", method = RequestMethod.POST)
+	public String allCard(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req)throws ServletException, IOException{
+	logger.info("allCard 호출 성공");
+	List<Map<String,Object>> allCard = null;
+	String path = "";
+	allCard = cardLogic.allCard(cardVO);
+	model.addAttribute("allCard", allCard);
+	path = "card/card";
+	return path;
 	
-	
+	}
 	
 	@GetMapping("cardList")
 	public ModelAndView cardList(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException {

@@ -44,5 +44,17 @@ public class CardDao {
 		cardAllList = sqlSessionTemplate.selectList("cardAllList",cardVO);
 		return cardAllList;
 	}
+	public List<Map<String, Object>> cardAllList2(CardVO cardVO) {
+		logger.info("cardAllList2 나옴");
+		List<Map<String,Object>> cardAllList2 = new ArrayList<Map<String,Object>>();
+		cardAllList2 = sqlSessionTemplate.selectList("cardAllList2",cardVO);
+		return cardAllList2;
+	}
+	public List<Map<String, Object>> allCard(CardVO cardVO) {
+		List<Map<String,Object>> allCard = new ArrayList<Map<String,Object>>();
+		allCard = sqlSessionTemplate.selectList("allCard",cardVO);
+		
+		return allCard;
+	}
 
 }

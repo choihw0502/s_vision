@@ -33,6 +33,5 @@ from creditcard, cardbin
 where CREDITCARD.bin=cardbin.bin
 and mem_id = #{mem_id}   
 </select>
-
-
 </mapper>
+
