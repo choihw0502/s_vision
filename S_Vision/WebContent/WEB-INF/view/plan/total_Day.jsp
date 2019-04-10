@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, com.vo.PlanVO" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.vo.PlanVO"%>
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
 <jsp:include page="../common/UI_common.jsp"></jsp:include>
@@ -40,7 +41,7 @@
  	dataPoints2 = gsonObj.toJson(list1);
 	}
  %>
- 
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -92,26 +93,34 @@ chart1.render();
 
 </head>
 <body>
-			<div id="total_Day" class="span12" style="width: 100%; height:100%;">
-				<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-				    <ul id="myTab" class="nav nav-tabs" role="tablist" >
-				      <li role="presentation" class="active" style="width: 50%; text-align: center;"><a href="#day_sum_pane" id="day_sum-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">합계순</a></li>
-				      <li role="presentation" style="width: 50%; text-align: center"><a href="#day_cnt_pane" role="tab" id="day_cnt-tab" data-toggle="tab" aria-controls="profile">건수 순</a></li>
-				    </ul>
-				    <div id="myTabContent" class="tab-content">
-					      <div role="tabpanel" class="tab-pane fade in active" id="day_sum_pane" aria-labelledBy="day_sum-tab">
-								<div class="container-fluid" >
-										<div id="day_sum"></div>
-								</div>
-							</div>
-				      <div role="tabpanel" class="tab-pane fade" id="day_cnt_pane" aria-labelledBy="day_cnt-tab">
-					        	<div class="container-fluid" >
-								 		<div id="day_cnt"></div>
-								</div>
-				      </div>
-				      
-				    </div>
-				  </div>
+	<div id="total_Day" class="span12" style="width: 100%; height: 100%;">
+		<div class="bs-example bs-example-tabs" role="tabpanel"
+			data-example-id="togglable-tabs">
+			<ul id="myTab" class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"
+					style="width: 50%; text-align: center;"><a
+					href="#day_sum_pane" id="day_sum-tab" role="tab" data-toggle="tab"
+					aria-controls="home" aria-expanded="true">합계순</a></li>
+				<li role="presentation" style="width: 50%; text-align: center"><a
+					href="#day_cnt_pane" role="tab" id="day_cnt-tab" data-toggle="tab"
+					aria-controls="profile">건수 순</a></li>
+			</ul>
+			<div id="myTabContent" class="tab-content">
+				<div role="tabpanel" class="tab-pane fade in active"
+					id="day_sum_pane" aria-labelledBy="day_sum-tab">
+					<div class="container-fluid">
+						<div id="day_sum"></div>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="day_cnt_pane"
+					aria-labelledBy="day_cnt-tab">
+					<div class="container-fluid">
+						<div id="day_cnt"></div>
+					</div>
+				</div>
+
 			</div>
+		</div>
+	</div>
 </body>
 </html>

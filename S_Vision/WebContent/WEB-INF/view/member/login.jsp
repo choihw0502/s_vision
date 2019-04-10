@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script type="text/javascript">
 $(document).ready(function(){
-	if(status.equals("1")){
+	if(status=="1"){
 	alert("이미 로그인중입니다");
 		}
 });

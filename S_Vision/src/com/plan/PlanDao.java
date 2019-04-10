@@ -69,6 +69,20 @@ public class PlanDao {
 		return r_result;
 	}
 
+	public PlanVO mainCarousel(PlanVO planVO) {
+		logger.info("mainCarousel 호출 성공");
+		sqlSessionTemplate.selectList("spendingMonth",planVO);
+		List<Map<String, Object>> r_result = planVO.getR_month();
+		logger.info("spendingMonth : "+r_result.get(0).get("R_SUM1"));
+		sqlSessionTemplate.selectList("spendingCategory",planVO);
+		r_result = planVO.getR_cate();
+		logger.info("spendingCategory : "+r_result.get(0).get("R_CNT1"));
+		sqlSessionTemplate.selectList("total_Week",planVO);
+		r_result = planVO.getR_week();
+		logger.info("total_Week : "+r_result.get(0).get("R_CNT1"));
+		return planVO;
+	}
+
 
 
 

@@ -1,10 +1,6 @@
 package com.plan;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,89 +19,111 @@ import org.springframework.web.servlet.ModelAndView;
 import com.vo.PlanVO;
 
 @Controller
-@RequestMapping(value="/plan/")
+@RequestMapping(value = "/plan/")
 public class PlanController {
 	Logger logger = Logger.getLogger(PlanController.class);
 	@Autowired
 	PlanLogic planLogic = null;
-	
+
 	@GetMapping("planList")
-	public String planList(@ModelAttribute PlanVO planVO,HttpServletRequest req) throws ServletException, IOException{
+	public String planList(@ModelAttribute PlanVO planVO, HttpServletRequest req) throws ServletException, IOException {
 		logger.info("planList 호출 성공");
-		//ModelAndView mav = new ModelAndView();
+		// ModelAndView mav = new ModelAndView();
 		planVO.setMem_id("Pascale Mcfadden");
 		planVO = planLogic.planList(planVO);
-		//mav.addObject("planVO",planVO);
+		// mav.addObject("planVO",planVO);
 		HttpSession session = req.getSession();
 		session.setAttribute("planVO", planVO);
-		session.setMaxInactiveInterval(60*60);
+		session.setMaxInactiveInterval(60 * 60);
 		return "plan/planner";
 	}
-	
-	@PostMapping("spendingMonth")//URL예시 : http://localhost:9000/plan/spendingMonth?mem_id=Piper Rich&month=20190101
-	public String spendingMonth(@ModelAttribute PlanVO planVO,Model model) throws ServletException, IOException {
-		model.addAttribute("month",planVO.getP_date());
+
+	@PostMapping("spendingMonth") // URL예시 : http://localhost:9000/plan/spendingMonth?mem_id=Piper
+									// Rich&month=20190101
+	public String spendingMonth(@ModelAttribute PlanVO planVO, Model model) throws ServletException, IOException {
+		model.addAttribute("month", planVO.getP_date());
 		return "plan/spendingMonth";
 	}
 
 	@PostMapping("spendingCategory")
-	public String spendingCategory(@ModelAttribute PlanVO planVO,Model model) throws ServletException, IOException {
-		model.addAttribute("month",planVO.getP_date());
+	public String spendingCategory(@ModelAttribute PlanVO planVO, Model model) throws ServletException, IOException {
+		model.addAttribute("month", planVO.getP_date());
 		return "plan/spendingCategory";
 	}
-	
+
 	@PostMapping("spendingStore")
 	public String spendingStore(@ModelAttribute PlanVO planVO, Model model) throws ServletException, IOException {
-		//매장별 지출 (결제 많은순(건 기준) | 지출순(지출합계기준))
-		//이것도 6개월치를 뽑아야 한다.
-		logger.info("memid : "+planVO.getMem_id()+" , month :"+planVO.getP_date());
+		// 매장별 지출 (결제 많은순(건 기준) | 지출순(지출합계기준))
+		// 이것도 6개월치를 뽑아야 한다.
+		logger.info("memid : " + planVO.getMem_id() + " , month :" + planVO.getP_date());
 		planVO = planLogic.spendingStore(planVO);
 		model.addAttribute("planVO", planVO);
 		logger.info(planVO.getR_store_cnt().size());
 		return "plan/spendingStore";
 	}
+
 	@PostMapping("total_Week")
-	public String total_Week(@ModelAttribute PlanVO planVO,Model model) throws ServletException, IOException {
-		model.addAttribute("month",planVO.getP_date());
+	public String total_Week(@ModelAttribute PlanVO planVO, Model model) throws ServletException, IOException {
+		model.addAttribute("month", planVO.getP_date());
 		return "plan/total_Week";
 	}
+
 	@PostMapping("total_Day")
-	public String total_Day(@ModelAttribute PlanVO planVO,Model model) throws ServletException, IOException {
-		model.addAttribute("month",planVO.getP_date());
+	public String total_Day(@ModelAttribute PlanVO planVO, Model model) throws ServletException, IOException {
+		model.addAttribute("month", planVO.getP_date());
 		return "plan/total_Day";
 	}
 
+	@GetMapping("mainCarousel")
+	public String mainCarousel(HttpServletRequest req, Model model) throws ServletException, IOException {
+		logger.info("planList 호출 성공");
+		HttpSession session = req.getSession();
+		String mem_id = (String) session.getAttribute("mem_id");
+		logger.info("회원 아이디 : " + mem_id);
+		PlanVO planVO = new PlanVO();
+		planVO.setMem_id(mem_id);
+		planVO = planLogic.mainCarousel(planVO);
+		session.setAttribute("planVO", planVO);
+		session.setMaxInactiveInterval(60 * 60);
+		return "member/mainCarousel";
+	}
+
 	@GetMapping("total_Budget")
-	public ModelAndView total_Budget(@ModelAttribute PlanVO planVO, Model model, HttpServletRequest req) throws ServletException, IOException {
-		//insert here
-		//메소드이름으로 알맞게 타입정하고		
-		//메소드이름=로직.같은이름메소드(VO);
-		
+	public ModelAndView total_Budget(@ModelAttribute PlanVO planVO, Model model, HttpServletRequest req)
+			throws ServletException, IOException {
+		// insert here
+		// 메소드이름으로 알맞게 타입정하고
+		// 메소드이름=로직.같은이름메소드(VO);
+
 		ModelAndView mav = new ModelAndView();
-		//mav.addObject("total_Budget", total_Budget);
+		// mav.addObject("total_Budget", total_Budget);
 		mav.setViewName("plan/total_Budget");
 		return mav;
 	}
+
 	@GetMapping("card_Budget")
-	public ModelAndView card_Budget(@ModelAttribute PlanVO planVO, Model model, HttpServletRequest req) throws ServletException, IOException {
-		//insert here
-		//메소드이름으로 알맞게 타입정하고		
-		//메소드이름=로직.같은이름메소드(VO);
-		
+	public ModelAndView card_Budget(@ModelAttribute PlanVO planVO, Model model, HttpServletRequest req)
+			throws ServletException, IOException {
+		// insert here
+		// 메소드이름으로 알맞게 타입정하고
+		// 메소드이름=로직.같은이름메소드(VO);
+
 		ModelAndView mav = new ModelAndView();
-		//mav.addObject("card_Budget", card_Budget);
+		// mav.addObject("card_Budget", card_Budget);
 		mav.setViewName("common/UI_common");
 		return mav;
 	}
+
 	@GetMapping("otherUsersSpending")
-	public ModelAndView otherUsersSpending(@ModelAttribute PlanVO planVO, Model model, HttpServletRequest req) throws ServletException, IOException {
-		//insert here
-		//메소드이름으로 알맞게 타입정하고		
-		//메소드이름=로직.같은이름메소드(VO);
-		
+	public ModelAndView otherUsersSpending(@ModelAttribute PlanVO planVO, Model model, HttpServletRequest req)
+			throws ServletException, IOException {
+		// insert here
+		// 메소드이름으로 알맞게 타입정하고
+		// 메소드이름=로직.같은이름메소드(VO);
+
 		ModelAndView mav = new ModelAndView();
-		//mav.addObject("otherUsersSpending", otherUsersSpending);
-		mav.setViewName("plan/otherUsersSpending");
+		// mav.addObject("otherUsersSpending", otherUsersSpending);
+		mav.setViewName("member/main");
 		return mav;
 	}
 
