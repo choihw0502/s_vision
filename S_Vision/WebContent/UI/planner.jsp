@@ -1,114 +1,303 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.vo.PlanVO" %>
+<jsp:include page="../WEB-INF/view/common/UI_common.jsp"></jsp:include>
+
+<!DOCTYPE HTML>
 <html>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="js/bootstrap.js"></script>
+<head>
+<%
+PlanVO planVO = (PlanVO)session.getAttribute("planVO");
+String mem_id = planVO.getMem_id();
+
+List<String> p_date = new ArrayList<String>();
+Calendar cal = Calendar.getInstance();
+for (int i = 1; i < 7; i++) {
+		p_date.add((cal.get(Calendar.YEAR) + "/"
+				+ (((cal.get(Calendar.MONTH) + 1) > 9) ? (cal.get(Calendar.MONTH) + 1)
+						: "0" + (cal.get(Calendar.MONTH) + 1))
+				+ "/" + "01"));	
+	cal.add(Calendar.MONTH, -1);
+}
+%>
 <meta charset="UTF-8">
 <mata name="viewport" content="width=device-width" , inital-scale="1">
-<head>
-<title>ÇÃ·¡³Ê ÆäÀÌÁö</title>
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="css/bin.css">
+<title>í”Œë˜ë„ˆ í˜ì´ì§€</title>
+<script type="text/javascript">
+var mem_id ="<%=mem_id%>"
+	$(function() {
+		$("#mydd a").click(
+				function() {
+					$("#dropdownMenu1").html(
+					$(this).text() + '<span class="caret"></span>');
+					var month = $(this).attr('value');
+					alert(month);
+					var date;
+					switch(month){
+					case 1 : date="<%=p_date.get(0).toString()%>"; break;
+					case 2 : date="<%=p_date.get(1).toString()%>"; break;
+					case 3 : date="<%=p_date.get(2).toString()%>"; break;
+					case 4 : date="<%=p_date.get(3).toString()%>"; break;
+					case 5 : date="<%=p_date.get(4).toString()%>"; break;
+					case 6 : date="<%=p_date.get(5).toString()%>"; break;
+					};
+					$("#spendingMonth").load("./spendingMonth.jsp", {
+						month : month
+					});
+					$("#spendingCategory").load("./spendingCategory.jsp", {
+						month : month
+					});
+					$("#total_Week").load("./total_Week.jsp", {
+						month : month
+					});
+					$("#total_Day").load("./total_Day.jsp", {
+						month : month
+					});
+					$("#spendingStore").ajax({
+					    type: "GET",
+					    url : "http://localhost:9000/UI/spendingStore",
+					    data : { mem_id : "<%=mem_id%>" 
+					            ,p_date : date
+					           },
+					    success : function(){
+						    alert("ì„±ê³µ");
+						    location.href="./spendingStore.jsp";  
+					    },error:function(jqXHR, exception){
+						    alert('ì‹¤íŒ¨');
+				            if (jqXHR.status === 0) {
+				                alert('Not connect.\n Verify Network.');
+				            }
+				            else if (jqXHR.status == 400) {
+				                alert('Server understood the request, but request content was invalid. [400]');
+				            }
+				            else if (jqXHR.status == 401) {
+				                alert('Unauthorized access. [401]');
+				            }
+				            else if (jqXHR.status == 403) {
+				                alert('Forbidden resource can not be accessed. [403]');
+				            }
+				            else if (jqXHR.status == 404) {
+				                alert('Requested page not found. [404]');
+				            }
+				            else if (jqXHR.status == 500) {
+				                alert('Internal server error. [500]');
+				            }
+				            else if (jqXHR.status == 503) {
+				                alert('Service unavailable. [503]');
+				            }
+				            else if (exception === 'parsererror') {
+				                alert('Requested JSON parse failed. [Failed]');
+				            }
+				            else if (exception === 'timeout') {
+				                alert('Time out error. [Timeout]');
+				            }
+				            else if (exception === 'abort') {
+				                alert('Ajax request aborted. [Aborted]');
+				            }
+				            else {
+				                alert('Uncaught Error.n' + jqXHR.responseText);
+				            }
+
+					    }
+					});
+	});
+	});
+	$(document).ready(function() {
+		$("#spendingMonth").load("./spendingMonth.jsp", {
+			month : "1"
+		});
+		$("#spendingCategory").load("./spendingCategory.jsp", {
+			month : "1"
+		});
+		$("#total_Week").load("./total_Week.jsp", {
+			month : "1"
+		});
+		$("#total_Day").load("./total_Day.jsp", {
+			month : "1"
+		});
+		$.ajax({
+		    type: "GET",
+		    url : "http://localhost:9000/UI/spendingStore",
+		    data : { mem_id : "<%=mem_id%>",
+		             p_date : "<%=p_date.get(0).toString()%>"
+			        },
+			dataType : "HTML",
+		    success : function(data){
+			    $("#spendingStore").html(data);  
+		    }
+		 	,error:function(jqXHR, exception){
+			    alert('ì‹¤íŒ¨');
+	            if (jqXHR.status === 0) {
+	                alert('Not connect.\n Verify Network.');
+	            }
+	            else if (jqXHR.status == 400) {
+	                alert('Server understood the request, but request content was invalid. [400]');
+	            }
+	            else if (jqXHR.status == 401) {
+	                alert('Unauthorized access. [401]');
+	            }
+	            else if (jqXHR.status == 403) {
+	                alert('Forbidden resource can not be accessed. [403]');
+	            }
+	            else if (jqXHR.status == 404) {
+	                alert('Requested page not found. [404]');
+	            }
+	            else if (jqXHR.status == 500) {
+	                alert('Internal server error. [500]');
+	            }
+	            else if (jqXHR.status == 503) {
+	                alert('Service unavailable. [503]');
+	            }
+	            else if (exception === 'parsererror') {
+	                alert('Requested JSON parse failed. [Failed]');
+	            }
+	            else if (exception === 'timeout') {
+	                alert('Time out error. [Timeout]');
+	            }
+	            else if (exception === 'abort') {
+	                alert('Ajax request aborted. [Aborted]');
+	            }
+	            else {
+	                alert('Uncaught Error.n' + jqXHR.responseText);
+	            }
+		    }
+		});
+
+	});
+	
+</script>
 </head>
 <body>
-<!-- ³×ºñ°ÔÀÌ¼Ç ¹Ù ½ÃÀÛ -->
+
+<!-- ë„¤ë¹„ê²Œì´ì…˜ ë°” ì‹œì‘ -->
 	<nav class="navbar navbar-default">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navber-collapse-1" aria-expanded="false">
-					<span class="sr-only"></span> 
-					<span class="icon-bar"></span> 
-					<span class="icon-bar"></span> 
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#">
-					<img src="images/vision_pay.png" id="imagepreview" style="width: 150px; height: 30px">
-				</a>
-			</div>
-			<div class="collapse navbar-collapse"
-				id="bs-example-navber-collapse-1">
-				<ul class="nav navbar-nav">
-					<li class="active">
-						<a href="main.jsp">VISION PAY ¼Ò°³ 
-							<span class="sr-only"></span>
-						</a>
-					</li>
-					<li><a href="crew.jsp">VISION ÆÀ¿ø ¼Ò°³</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle"	data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VISION PAY ±â´É
-							<span class="caret"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="card.jsp"><img src="images/card.png" id="imagepreview" style="width: 30px; height: 20px">Ä«µå</a></li>
-							<li><a href="account.jsp"><img src="images/account.png" id="imagepreview" style="width: 30px; height: 20px">°èÁÂ</a></li>
-							<li><a href="membership.jsp"><img src="images/membership.png" id="imagepreview" style="width: 30px; height: 20px">¸â¹ö½±</a></li>
-							<li><a href="planner.jsp"><img src="images/planner.png" id="imagepreview" style="width: 30px; height: 20px">ÇÃ·¹³Ê</a></li>
-							<li><a href="cardRecommend.jsp"><img src="images/cardRecommend.png" id="imagepreview" style="width: 30px; height: 20px">Ä«µå ÃßÃµ</a></li>
-							<li><a href="reward.jsp"><img src="images/reward.png" id="imagepreview" style="width: 30px; height: 20px">¸®¿öÁî</a></li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: black;">
-							<img src="images/login.png" style="width: 20px; height: 20px"><span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="login.jsp">·Î±×ÀÎ</a></li>
-							<li><a href="memberJoin.jsp">È¸¿ø°¡ÀÔ</a></li>
-						</ul>
-					</li>
-				</ul>
-				<form class="navbar-form navbar-right">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="³»¿ëÀ» ÀÔ·ÂÇÏ¼¼¿ä.">
-					</div>
-					<button type="submit" class="btn btn-default">°Ë»ö</button>
-				</form>
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navber-collapse-1" aria-expanded="false">
+				<span class="sr-only"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">
+				<img src="images/vision_pay.png" id="imagepreview" style="width: 150px; height: 30px">
+			</a>
+		</div>
+		<div class="collapse navbar-collapse"
+			id="bs-example-navber-collapse-1">
+			<ul class="nav navbar-nav">
+				<li class="active">
+					<a href="main.jsp">VISION PAY ì†Œê°œ 
+						<span class="sr-only"></span>
+					</a>
+				</li>
+				<li><a href="crew.jsp">VISION íŒ€ì› ì†Œê°œ</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle"	data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">VISION PAY ê¸°ëŠ¥
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="card.jsp"><img src="images/card.png" id="imagepreview" style="width: 30px; height: 20px">ì¹´ë“œ</a></li>
+						<li><a href="account.jsp"><img src="images/account.png" id="imagepreview" style="width: 30px; height: 20px">ê³„ì¢Œ</a></li>
+						<li><a href="membership.jsp"><img src="images/membership.png" id="imagepreview" style="width: 30px; height: 20px">ë©¤ë²„ì‰½</a></li>
+						<li><a href="planner.jsp"><img src="images/planner.png" id="imagepreview" style="width: 30px; height: 20px">í”Œë ˆë„ˆ</a></li>
+						<li><a href="cardRecommend.jsp"><img src="images/cardRecommend.png" id="imagepreview" style="width: 30px; height: 20px">ì¹´ë“œ ì¶”ì²œ</a></li>
+						<li><a href="reward.jsp"><img src="images/reward.png" id="imagepreview" style="width: 30px; height: 20px">ë¦¬ì›Œì¦ˆ</a></li>
+					</ul>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="background-color: black;">
+						<img src="images/login.png" style="width: 20px; height: 20px"><span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="login.jsp">ë¡œê·¸ì¸</a></li>
+						<li><a href="memberJoin.jsp">íšŒì›ê°€ì…</a></li>
+					</ul>
+				</li>
+			</ul>
+			<form class="navbar-form navbar-right">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”.">
+				</div>
+				<button type="submit" class="btn btn-default">ê²€ìƒ‰</button>
+			</form>
+		</div>
+	</div>
+</nav>
+<!-- ë„¤ë¹„ê²Œì´ì…˜ ë°” ë -->
+
+<!-- ë“œë¡­ë‹¤ìš´ ì‹œì‘ -->
+<div class="dropdown" id="mydropdown">
+	<button class="btn btn-default dropdown-toggle" type="button"
+		id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+		<%=p_date.get(0).toString().substring(5, 7)+" ì›”"%> <span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" id="mydd">
+		<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="1"><%=p_date.get(0).toString().substring(5,7)+" ì›”"%></a></li>
+		<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="2"><%=p_date.get(1).toString().substring(5,7)+" ì›”"%></a></li>
+		<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="3"><%=p_date.get(2).toString().substring(5,7)+" ì›”"%></a></li>
+		<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="4"><%=p_date.get(3).toString().substring(5,7)+" ì›”"%></a></li>
+		<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="5"><%=p_date.get(4).toString().substring(5,7)+" ì›”"%></a></li>
+		<li role="presentation"><a role="menuitem" tabindex="-1" href="#" value="6"><%=p_date.get(5).toString().substring(5,7)+" ì›”"%></a></li>
+	</ul>
+</div>
+<!-- ë“œë¡­ë‹¤ìš´ ë -->
+<!-- í”Œë˜ë„ˆ2 ì‹œì‘ -->
+	<div class="bs-docs-grid">
+		<div class="row-fluid show-grid">
+			<div class="span12" style=" padding:10px;">í•œë‹¬ê¸°ì¤€ ì§€ì¶œë‚´ì—­</div>
+			<div id="spendingMonth" class="span12" style="width: 100%; height:300px">
 			</div>
 		</div>
-	</nav>
-	<!-- ³×ºñ°ÔÀÌ¼Ç ¹Ù ³¡ -->
-	
-	
-	
-	
-	
-	<!-- °èÁÂ È­¸é ½ÃÀÛ -->
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<h2>ÇÃ·¡³Ê</h2>
+		<div class="row-fluid show-grid">
+			<div class="span12" style=" padding:10px;">ì¹´í…Œê³ ë¦¬ë³„ ì§€ì¶œ ë‚´ì—­</div>
+			<div id="spendingCategory" class="span12" style="width: 100%; height:500px">
+			</div>
+		</div>
+ 		<div class="row-fluid show-grid">
+			<div class="span12" style="padding:10px;" >ë§¤ì¥ë³„ ì§€ì¶œ</div>
+			<div id="spendingStore" class="span12" style="width: 100%; height:300px;">
+			</div>
+		</div>
+		<div class="row-fluid show-grid">
+			<div class="span12" style="padding:10px;" >ì£¼ì¼ë³„ ì§€ì¶œ</div>
+			<div id="total_Week" class="span12" style="width: 100%; height:500px;">
+			</div>
+		</div>
+		<div class="row-fluid show-grid">
+			<div class="span12" style="padding:10px;" >ì‹œê°„ë³„ ì§€ì¶œ</div>
+			<div id="total_Day" class="span12" style="width: 100%; height:500px;">
 			</div>
 		</div>
 	</div>
-	<!-- °èÁÂ È­¸é ³¡ -->
-	<!-- ÇªÅÍ ½ÃÀÛ -->
-	<footer style="background-color: #000000;">
+<!-- í”Œë˜ë„ˆ2 ë -->
+	<!-- í‘¸í„° ì‹œì‘ -->
+	 <footer style="background-color: #000000;">
 		<div class="container">
 			<br>
 			<div class="row">
 				<div class="col-sm-3">
-					<h4 style="text-align: left;">»çÀÌÆ®¸Ê</h4>
+					<h4 style="text-align: left;">ì‚¬ì´íŠ¸ë§µ</h4>
 					<div class="list-group">
-						<a href="main.jsp" class="list-group-item">VISIONÆÀ Á¤º¸</a> 
-						<a href="crew.jsp" class="list-group-item">VISIONÆÀ¿ø Á¤º¸</a> 
-						<a href="notice.jsp" class="list-group-item">°øÁö»çÇ×</a> 
+						<a href="main.jsp" class="list-group-item">VISIONíŒ€ ì •ë³´</a> 
+						<a href="crew.jsp" class="list-group-item">VISIONíŒ€ì› ì •ë³´</a> 
+						<a href="notice.jsp" class="list-group-item">ê³µì§€ì‚¬í•­</a> 
 						<a href="FAQ.jsp" class="list-group-item">FAQ</a>
 					</div>
 				</div>
 				<div class="col-sm-2">
-					<h4 style="text-align: left;">°í°´ ¹®ÀÇ</h4>
-					<a href="email.jsp" class="list-group-item">ÀÌ¸ŞÀÏ ¹®ÀÇ</a>
+					<h4 style="text-align: left;">ê³ ê° ë¬¸ì˜</h4>
+					<a href="email.jsp" class="list-group-item">ì´ë©”ì¼ ë¬¸ì˜</a>
 				</div>
 				<div class="col-sm-4"></div>
 				<div class="col-sm-3">
 					<h4 style="text-align: left;">sns</h4>
 					<div class="list-group">
-						<a href="https://www.kakaocorp.com/service/KakaoTalk" class="list-group-item">Ä«Ä«¿ÀÅå</a> 
-						<a href="https://ko-kr.facebook.com/" class="list-group-item">ÆäÀÌ½ººÏ</a>
+						<a href="https://www.kakaocorp.com/service/KakaoTalk" class="list-group-item">ì¹´ì¹´ì˜¤í†¡</a> 
+						<a href="https://ko-kr.facebook.com/" class="list-group-item">í˜ì´ìŠ¤ë¶</a>
 					</div>
-					<h5 style="text-align: left;">Çù·Â ¾÷Ã¼</h5>
+					<h5 style="text-align: left;">í˜‘ë ¥ ì—…ì²´</h5>
 					<div class="list-group">
 						<a href="http://www.ikosmo.co.kr/" class="list-group-item" style="width: 190px; background-color: #ffffff;">
 							<img src="images/top_logo.gif"></a> 
@@ -129,14 +318,14 @@
 					</div>
 					<div class="col-sm-9">
 						<h4 style="text-align: centar;">
-							<br>(ÁÖ)ºñÀü¼ÒÇÁÆ®¿ş¾î(123-456) ¼­¿ï½Ã ±İÃµ±¸ °¡»êµ¿ 426-5 ¿ùµå¸Ş¸£µğ¾Ó 2Â÷ 311È£ 5°­ÀÇ½Ç <br>
-							ºñÀüÁÖ½ÄÈ¸»ç ´ëÇ¥ÀÌ»ç È²Èñ»ó »ç¾÷ÀÚµî·Ï¹øÈ£ 123-456-78910 ´ëÇ¥¹øÈ£:010-423-9948
+							<br>(ì£¼)ë¹„ì „ì†Œí”„íŠ¸ì›¨ì–´(123-456) ì„œìš¸ì‹œ ê¸ˆì²œêµ¬ ê°€ì‚°ë™ 426-5 ì›”ë“œë©”ë¥´ë””ì•™ 2ì°¨ 311í˜¸ 5ê°•ì˜ì‹¤ <br>
+							ë¹„ì „ì£¼ì‹íšŒì‚¬ ëŒ€í‘œì´ì‚¬ í™©í¬ìƒ ì‚¬ì—…ìë“±ë¡ë²ˆí˜¸ 123-456-78910 ëŒ€í‘œë²ˆí˜¸:010-423-9948
 						</h4>
 					</div>
-					<!--    <div class="col-sm-2"><h4 style="text-align: center;"><span class="glyphicon glyphicon-ok">&nbsp; by Çö¼®</span></h4> -->
+					   <div class="col-sm-2"><h4 style="text-align: center;"><span class="glyphicon glyphicon-ok">&nbsp; by í˜„ì„</span></h4>
 				</div>
 			</div>
 	</footer>
-	<!-- ÇªÅÍ ³¡ -->
+	<!-- í‘¸í„° ë -->
 </body>
 </html>

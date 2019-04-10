@@ -25,5 +25,36 @@ public class CardDao {
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
+	public List<Map<String,String>> cardList(CardVO cardVO){
+		  String p_mem_id = cardVO.getP_mem_id();	
+		  List<Map<String,String>> cardList = new ArrayList<Map<String,String>>();
+		  System.out.println(cardVO.getR_list());
+		  sqlSessionTemplate.selectList("cardList",cardVO);
+		  System.out.println(cardVO.getR_list());
+		  cardList.add(cardVO.getR_list().get(0));
+		  return cardList;
+	}
+	public int cardAdd(Map<String, Object> pMap) {
+		int result=sqlSessionTemplate.insert("cardAdd",pMap);
+		return result;
+	}
+	public List<Map<String, Object>> cardAllList(CardVO cardVO) {
+		logger.info("cardAllList 나옴");
+		List<Map<String,Object>> cardAllList = new ArrayList<Map<String,Object>>();
+		cardAllList = sqlSessionTemplate.selectList("cardAllList",cardVO);
+		return cardAllList;
+	}
+	public List<Map<String, Object>> cardAllList2(CardVO cardVO) {
+		logger.info("cardAllList2 나옴");
+		List<Map<String,Object>> cardAllList2 = new ArrayList<Map<String,Object>>();
+		cardAllList2 = sqlSessionTemplate.selectList("cardAllList2",cardVO);
+		return cardAllList2;
+	}
+	public List<Map<String, Object>> allCard(CardVO cardVO) {
+		List<Map<String,Object>> allCard = new ArrayList<Map<String,Object>>();
+		allCard = sqlSessionTemplate.selectList("allCard",cardVO);
+		
+		return allCard;
+	}
 
 }

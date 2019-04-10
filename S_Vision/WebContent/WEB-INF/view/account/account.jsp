@@ -1,6 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.util.Map, java.util.List" %>        
+<%
+String mem_id = (String)session.getAttribute("mem_id");
+List<Map<String,Object>> accountList = (List<Map<String,Object>>)request.getAttribute("accountList");
+%>
 <!DOCTYPE html>
 <html>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -8,21 +12,20 @@
 <meta charset="UTF-8">
 <mata name="viewport" content="width=device-width" , inital-scale="1">
 <head>
-<title>°èÁÂ ÆäÀÌÁö</title>
+<title>ê³„ì¢Œ í˜ì´ì§€</title>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bin.css">
 </head>
-<body>
 
-<%
-String mem_id = (String)session.getAttribute("mem_id");
-%>
+<body>
+<!-- ë„¤ë¹„ê²Œì´ì…˜ ë°” ì‹œì‘ -->
 <script type="text/javascript">
 $(document).ready(function(){
+
     $('#btn_accountAdd').on('click', function(){
         $.ajax({
             type: 'POST',
-            url: '../account/accountAdd',
+            url: 'accountAdd',
             data: {
                 "mem_id" : "<%=mem_id%>",
                 "acc_num" : document.getElementById("acc_num").value,
@@ -31,146 +34,151 @@ $(document).ready(function(){
             },
             success: function(data){
                 if(data == 0){
-                   alert("°èÁÂ Ãß°¡ ½ÇÆĞ");
+                   alert("ê³„ì¢Œ ì¶”ê°€ ì‹¤íŒ¨");
                 }
                 else{
-                   alert("°èÁÂ Ãß°¡ ¼º°ø");
-                   location.href="account";
+                   alert("ê³„ì¢Œ ì¶”ê°€ ì„±ê³µ");
+                   location.href="account?mem_id=<%=mem_id%>";
                 }
             }
         });    //end ajax    
     });    //end on    
+
+    $("#m_accountAdd").on('shown.bs.modal', function(){
+        $(this).find('#acc_name').focus();
+    });
 });
   
 </script>
-<script type="text/javascript">
-$(document).on('click', '.dropdown-menu li a', function() {
-    $('#datebox').val($(this).html());
-}); 
-</script>
-<!-- ³×ºñ°ÔÀÌ¼Ç ¹Ù ½ÃÀÛ -->
-
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<br>
 			<h4>
 				<div class="navbar-header">
-					<a style="color: #ffffff; height: 25px" href="index"><</a>
-					<a href="account" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;°èÁÂ</a>
-					<span style="margin-left: 150px;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#m_accountAdd" img src="/images/card.png">&nbsp;°èÁÂÃß°¡</a></span>
+					<a style="color: #ffffff; height: 25px" href="../member/index"><</a>
+					<a href="account" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;ê³„ì¢Œ</a>
+					<span style="margin-left: 150px;"><button type="button" data-toggle="modal" data-target="#m_accountAdd"style="background-color: #000000; color: #ffffff; border-color: #000000"><img src="/images/account.png">ì¶”ê°€</a></span>
 				</div>
 			</h4>
 			<br>
 		</div>
 	</nav>
-<!-- <table class="dg_accountList" style="width:400px;height:250px"
-        data-options="url:'account/accountList?mem_id=elesex',fitColumns:true,singleSelect:true">
-    <thead>
-        <tr>
-            <th data-options="field:'ACC_BANK',width:100">Code</th>
-            <th data-options="field:'ACC_NAME',width:100">Name</th>
-            <th data-options="field:'ACC_NUM',width:100,align:'right'">Price</th>
-        </tr>
-    </thead>
-</table> -->
-<iframe src="http://192.168.0.10:9000/account/accountList?mem_id=<%=mem_id%>" weight="600px" height="1000px" align="middle"></iframe>			
 
-
-	<!-- °èÁÂ È­¸é ³¡ -->
-	<!-- ÇªÅÍ ½ÃÀÛ -->
-	<footer style="background-color: #000000;">
-		<div class="container">
-			<br>
-			<div class="row">
-				<div class="col-sm-3">
-					<h4 style="text-align: left;">»çÀÌÆ®¸Ê</h4>
-					<div class="list-group">
-						<a href="index" class="list-group-item">VISIONÆÀ Á¤º¸</a> 
-						<a href="crew" class="list-group-item">VISIONÆÀ¿ø Á¤º¸</a> 
-						<a href="notice.jsp" class="list-group-item">°øÁö»çÇ×</a> 
-						<a href="FAQ.jsp" class="list-group-item">FAQ</a>
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<h4 style="text-align: left;">°í°´ ¹®ÀÇ</h4>
-					<a href="email.jsp" class="list-group-item">ÀÌ¸ŞÀÏ ¹®ÀÇ</a>
-				</div>
-				<div class="col-sm-4"></div>
-				<div class="col-sm-3">
-					<h4 style="text-align: left;">sns</h4>
-					<div class="list-group">
-						<a href="https://www.kakaocorp.com/service/KakaoTalk" class="list-group-item">Ä«Ä«¿ÀÅå</a> 
-						<a href="https://ko-kr.facebook.com/" class="list-group-item">ÆäÀÌ½ººÏ</a>
-					</div>
-					<h5 style="text-align: left;">Çù·Â ¾÷Ã¼</h5>
-					<div class="list-group">
-						<a href="http://www.ikosmo.co.kr/" class="list-group-item" style="width: 190px; background-color: #ffffff;">
-							<img src="/images/top_logo.gif"></a> 
-						<a href="http://www.moel.go.kr/index.do" class="list-group-item" style="width: 190px; background-color: #ffffff;">
-							<img src="/images/logo.png"></a>
-					</div>
-				</div>
-				<div class="col-sm-12" style="height: 30px;">
-					<h5 style="text-align: left;">Copyright &copy; 2018-2019
-						HEESANG All Rights Reserved.</h5>
-				</div>
-				
-				<div class="col-sm-12"><hr></div>
-					<div class="col-sm-3">
-						<h1 style="text-align: centar;">
-							<img src="/images/VISION4.png" id="imagepreview" style="width: 150px; height: 80px">
-						</h1>
-					</div>
-					<div class="col-sm-9">
-						<h4 style="text-align: centar;">
-							<br>(ÁÖ)ºñÀü¼ÒÇÁÆ®¿ş¾î(123-456) ¼­¿ï½Ã ±İÃµ±¸ °¡»êµ¿ 426-5 ¿ùµå¸Ş¸£µğ¾Ó 2Â÷ 311È£ 5°­ÀÇ½Ç <br>
-							ºñÀüÁÖ½ÄÈ¸»ç ´ëÇ¥ÀÌ»ç È²Èñ»ó »ç¾÷ÀÚµî·Ï¹øÈ£ 123-456-78910 ´ëÇ¥¹øÈ£:010-423-9948
-						</h4>
-					</div>
-					<!--    <div class="col-sm-2"><h4 style="text-align: center;"><span class="glyphicon glyphicon-ok">&nbsp; by Çö¼®</span></h4> -->
-				</div>
-			</div>
-	</footer>
-	<!-- ÇªÅÍ ³¡ -->
-
-
-<!-- Modal -->
 <div class="modal fade" id="m_accountAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">°èÁÂ Ãß°¡ÇÏ±â</h5>
+        <h5 class="modal-title" id="exampleModalLabel">ê³„ì¢Œ ì¶”ê°€í•˜ê¸°</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-       <div class="form-group"> <label for="foo">°èÁÂÀÌ¸§</label> <input type="text" class="form-control" id="acc_name" name="acc_name"> </div>
- 	   </select>
- 	   <div class="form-group">
+       <div class="group row"><div class="col-md-6 form-group"> <label for="foo">ê³„ì¢Œì´ë¦„</label> <input type="text" class="form-control" id="acc_name" name="acc_name"> </div>
+ 	  </div><br>
+ 	   <div class="group row">
+ 	   <div class="col-md-4">
             <select class="combobox form-control" id="acc_bank" name="acc_bank">
-              <option value="ÀºÇà¼±ÅÃ" selected="selected">ÀºÇà¼±ÅÃ</option>
-              <option value="³óÇù">³óÇù</option>
-              <option value="½ÅÇÑÀºÇà">½ÅÇÑÀºÇà</option>
-              <option value="±¹¹ÎÀºÇà">±¹¹ÎÀºÇà</option>
-              <option value="¿ì¸®ÀºÇà">¿ì¸®ÀºÇà</option>
-              <option value="ÇÏ³ªÀºÇà">ÇÏ³ªÀºÇà</option>
-              <option value="±â¾÷ÀºÇà">IBK±â¾÷ÀºÇà</option>
-              <option value="¿ìÃ¼±¹">¿ìÃ¼±¹</option>
-              <option value="»õ¸¶À»±İ°í">»õ¸¶À»±İ°í</option>
-              <option value="ÃàÇù">ÃàÇù</option>
-              <option value="¼öÇù">¼öÇù</option>
+              <option value="ì€í–‰ì„ íƒ" selected="selected">ì€í–‰ì„ íƒ</option>
+              <option value="ë†í˜‘">ë†í˜‘</option>
+              <option value="ì‹ í•œì€í–‰">ì‹ í•œì€í–‰</option>
+              <option value="êµ­ë¯¼ì€í–‰">êµ­ë¯¼ì€í–‰</option>
+              <option value="ìš°ë¦¬ì€í–‰">ìš°ë¦¬ì€í–‰</option>
+              <option value="í•˜ë‚˜ì€í–‰">í•˜ë‚˜ì€í–‰</option>
+              <option value="ê¸°ì—…ì€í–‰">IBKê¸°ì—…ì€í–‰</option>
+              <option value="ìš°ì²´êµ­">ìš°ì²´êµ­</option>
+              <option value="ìƒˆë§ˆì„ê¸ˆê³ ">ìƒˆë§ˆì„ê¸ˆê³ </option>
+              <option value="ì¶•í˜‘">ì¶•í˜‘</option>
+              <option value="ìˆ˜í˜‘">ìˆ˜í˜‘</option>
             </select>
           </div>
-       <div class="form-group"> <label for="foo">°èÁÂ¹øÈ£</label> <input type="text" class="form-control" id="acc_num" name="acc_num"> </div>
+       </div><br>   
+       <div class="group row"><div class="col-md-6 form-group"><label for="foo">ê³„ì¢Œë²ˆí˜¸</label> <input type="text" class="form-control" id="acc_num" name="acc_num"></div>
+      </div>
       </div>
       <div class="modal-footer">
-        <button id="btn_accountAdd" name="btn_accountAdd" type="button" class="btn btn-primary">Ãß°¡</button>
+        <button id="btn_accountAdd" name="btn_accountAdd" type="button" class="btn btn-primary">ì¶”ê°€</button>
         </form>
       </div>
     </div>
   </div>
+</div>	
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="col-md-1"></div>
+				<div class="col-md-11">
+					<h3>
+						<p>
+						<br>
+						<br>
+							<h3>
+						<p>
+							<br>ê³„ì¢Œë¦¬ìŠ¤íŠ¸
+						</p>
+					</h3>
+					
+<%
+	if(accountList!=null){
+		for(int i=0;i<accountList.size();i++){
+%>
+
+<div class="media">
+<div class="media-left">
+<a href="#"> <img class="media-object" src="/images/<%=accountList.get(i).get("ACC_BANK") %>.PNG" style="width: 230px; height: 140px">
+</a>
 </div>
-</body>
+<div class="media-body">
+<h4 class="media-heading"></h4>
+<form id="accList" name="accList" method="post" action="accHistory?mem_id=<%=mem_id%>&acc_num=<%=accountList.get(i).get("ACC_NUM") %>">
+	<table style="width:300px">
+	<tr>
+		<td colspan="2" style="color:orange; font-size:120%; background-color:#D8D8D8"><%=accountList.get(i).get("ACC_NUM") %></td>
+	</tr>
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;<%=accountList.get(i).get("ACC_BANK") %></td>
+	</tr>
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;<%=accountList.get(i).get("ACC_NAME") %></td>
+	</tr>
+	<tr>
+		<td>&nbsp;&nbsp;ìµœì¢…ê±°ë˜ì¼</td>
+		<td style="text-align:right"><%=accountList.get(i).get("ACC_DATE") %></td>
+	</tr>
+	<tr>
+		<td>&nbsp;&nbsp;ì”ì•¡</td>
+		<td style="text-align:right; color:blue;"><%=accountList.get(i).get("ACC_BALANCE") %><s2>ì›</s2></td>
+	</tr>
+	<tr>
+		<td><button id="btn_acc_history" name="btn_acc_history" type="submit" class="btn" style="width:150px">ê±°ë˜ë‚´ì—­</button></td>
+		<td><button id="btn_sendMoney" name="btn_sendMoney" type="button" class="btn" style="width:150px">ì´ì²´</button></td>
+	<tr>	
+	</table>
+</form>
+</div>
+</div>
+
+<%			
+		}
+	}
+%>
+
+						</p>
+					</h3>
+				</div>
+			</div>
+		</div>
+		<hr>
+	</div>
+<!-- Modal -->
+
+
+			
+
+
+	<!-- ê³„ì¢Œ í™”ë©´ ë -->
+	<!-- í‘¸í„° ì‹œì‘ -->
+<%@ include file="../include/footer.jsp" %>	
+	<!-- í‘¸í„° ë -->
 </body>
 </html>

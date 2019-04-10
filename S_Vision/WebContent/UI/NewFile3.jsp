@@ -60,7 +60,7 @@ String dataPoints2 = gsonObj.toJson(list);
 <head>
 <meta charset=UTF-8">
 <script type="text/javascript">
-window.onload = function() { 
+$(document).ready(function(){
  
 var chart = new CanvasJS.Chart("chartContainer", { 
 	animationEnabled: true, 
@@ -116,7 +116,7 @@ function toggleDataSeries(e){
 	chart.render();
 }
  
-}
+});
 </script>
 </head>
 <body>
