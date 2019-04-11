@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,49 +30,39 @@ public class MemberController {
 	HttpSession session = null;
 	String path = "";
 	@GetMapping("index")
-	public String index(@ModelAttribute MemberVO memberVO,
-							HttpServletRequest req,
-							Model model) {
+	public String index(@RequestParam Map<String,Object> pMap, HttpServletRequest req,	Model model) {
 		path = "member/main";
 	
 	
 		return path;
 		
 	}
-	@GetMapping("login")
-	public String login(@ModelAttribute MemberVO memberVO,
-							HttpServletRequest req,
-							Model model) {
-		session = req.getSession();
-		memberVO.setMem_id(req.getParameter("id"));
-		memberVO.setMem_pw(req.getParameter("password"));
-		if(memberVO.getMem_id()==null) {
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	public String login(@RequestParam Map<String,Object> pMap, HttpServletRequest req,	Model model) {
+		if(pMap.get("mem_id")==null) {
 			path = "member/login";
 		}
-		else if(memberVO.getMem_id()!=null) {
-			logger.info("로그인시도");
-			Map<String, Object> login = memberLogic.login(memberVO);
-			if(login.get("MEM_ID")==null) {
-				logger.info("로그인실패");
-				path = "member/login";
-			}
-			else if(login.get("MEM_ID")!=null) {
-				logger.info("로그인성공");
-				logger.info(login.get("R_CARD"));
+		else if(pMap.get("mem_id")!=null) {
+			Map<String,Object> login = memberLogic.login(pMap);
+			session = req.getSession();
+			if(login.get("MEM_ID")!=null) {
+				path = "member/main";
 				String r_card = String.valueOf(login.get("R_CARD"));
 				String r_account = String.valueOf(login.get("R_ACCOUNT"));
 				String r_point = String.valueOf(login.get("R_POINT"));
 				String r_mship = String.valueOf(login.get("R_MSHIP"));
-				path = "member/main";
-				logger.info(login.get("MEM_ID"));
-				session.setAttribute("mem_id", login.get("MEM_ID"));
+				String mem_id = (String)login.get("MEM_ID");
+				session.setAttribute("mem_id", mem_id);
 				session.setAttribute("r_card", r_card);
 				session.setAttribute("r_account", r_account);
 				session.setAttribute("r_point", r_point);
 				session.setAttribute("r_mship", r_mship);
 			}
+			else if(login.get("MEM_ID")==null) {
+				req.setAttribute("mem_id", null);
+				path = "member/login";
+			}
 		}
-			
 		return path;
 	}		
 	@GetMapping("register")
@@ -89,9 +80,11 @@ public class MemberController {
 	}
 	@GetMapping("logout")
 	public String logout(@ModelAttribute MemberVO memberVO, HttpServletRequest req, Model model) {
+		session = req.getSession();
 		if(session.getAttribute("mem_id")!=null) {
 			session.invalidate();
-			
+		}
+		else if(session.getAttribute("mem_id")==null) {
 		}
 		path = "member/main";
 		return path;

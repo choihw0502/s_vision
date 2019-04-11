@@ -24,10 +24,10 @@ public class MemberLogic {
 	MemberDao memberDao = null;
 	String path = "";
 	
-	public Map<String, Object> login (MemberVO memberVO) {
+	public Map<String, Object> login (Map<String,Object> pMap) {
 		logger.info("memberLogic 호출성공");
 		logger.info("로그인폼호출성공");
-		Map<String, Object> login = memberDao.login(memberVO);
+		Map<String, Object> login = memberDao.login(pMap);
 		return login;
 	}
 
