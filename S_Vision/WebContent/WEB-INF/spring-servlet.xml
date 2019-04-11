@@ -39,6 +39,7 @@
 	<context:component-scan base-package="com.plan"/>
 	<context:component-scan base-package="com.recommend"/>
 	<context:component-scan base-package="com.rewards"/>
+	<context:component-scan base-package="com.pay"/>
 
 
 	<bean id="blockController" class="block.BlockController"/>

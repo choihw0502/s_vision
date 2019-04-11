@@ -112,7 +112,7 @@
 								<li><a href="#"><img src="/images/reward.png"
 										id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;리워즈</a></li>
 							</ul></li>
-						<li><a href="card">VISION 결제</a></li>
+						<li><a href="../pay/payment">VISION 결제</a></li>
 
 						<%
 							}
