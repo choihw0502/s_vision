@@ -58,7 +58,7 @@ $(document).ready(function(){
                 }
                 else{
                    alert("카드 추가 성공");
-                   location.href="card";
+                   location.href="card?mem_id=<%=mem_id%>";
                 }
             }
         });      
@@ -98,8 +98,6 @@ $(document).ready(function(){
 						<p>
 						<h3>
 						<p>
-					<button id="btn_useCard" name="btn_useCard" type="button" class="btn" style="width:150px">이번 달 사용카드</button></td>
-	             	<button id="btn_allCard" name="btn_allCard" type="button" class="btn" style="width:150px">나의 카드 목록</button></td>
 							<br>
 							<br>
 							<br>
@@ -107,50 +105,37 @@ $(document).ready(function(){
 					</h3>
 
 <%
-
-
 	if(detail_card!=null){
 		for(int i=0;i<detail_card.size();i++){
 %>
-
 <div class="media">
 <div class="media-left">
 </div>
 <div class="media-body">
 <h4 class="media-heading"></h4>
 <table style="width:300px">
-<form id="accList" name="accList" method="post" action="detail_card?card_num=<%=detail_card.get(i).get("CARD_NUM") %>">
 	<tr>
-	 <td rowspan="3"><<button type="submit" id="detail_card"  value="<%=detail_card.get(i).get("CARD_NUM") %>"><img src="/images/<%=detail_card.get(i).get("BIN_COMPANY") %>.png"></button>
+	 <td rowspan="3">
 	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=detail_card.get(i).get("BIN_NAME") %></td>
+	 &nbsp;&nbsp;<%=detail_card.get(i).get("STORE_NAME") %></td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=detail_card.get(i).get("BIN_COMPANY") %></td>
+		<td colspan="2">&nbsp;&nbsp;사용 금액&nbsp;<%=detail_card.get(i).get("PH_PRICE")%>원</td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;<%=detail_card.get(i).get("CARD_NUM") %></td>
- 	</tr> 
-	<tr>
-		<td colspan="2">&nbsp;&nbsp;이번달 사용금액&nbsp;<%=detail_card.get(i).get("PH_PRICE")%>원</td>
+		<td colspan="2">&nbsp;&nbsp;사용 날짜&nbsp;<%=detail_card.get(i).get("PAY_DATE")%></td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;이번달 사용금액&nbsp;<%=detail_card.get(i).get("PH_PRICE")%>원</td>
+		<td colspan="2">&nbsp;&nbsp;사용 시간&nbsp;<%=detail_card.get(i).get("PAY_TIME")%></td>
 	</tr>
 	 <tr>
-		
 </table>
-
 </div>
 </div>
-</form>
 <%			
 		}
 	}
 %>
-
-
-
 						</p>
 					</h3>
 				</div>
