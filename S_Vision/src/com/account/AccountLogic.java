@@ -26,6 +26,10 @@ public class AccountLogic {
 		Map<String, List<Map<String, Object>>> accHistory = accountDao.accHistory(pMap);
 		return accHistory;
 	}
+	public int accTransfer(Map<String, Object> pMap) {
+		 int accTransfer = accountDao.accTransfer(pMap);
+		return accTransfer;
+	}
 	
 
 }

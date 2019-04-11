@@ -69,15 +69,13 @@ public class MemberController {
 	public String register(@ModelAttribute MemberVO memberVO,
 							HttpServletRequest req,
 							Model model) {
-		logger.info("회원가입 호출");
 		path = "member/register";
 		return path;
 	}
 	@GetMapping("crew")
-	public String crew(@ModelAttribute MemberVO memberVO, HttpServletRequest req, Model model) {
-//		path = "member/crew";
-		logger.info("crew호출");
-		return "member/crew";
+	public String crew(@RequestParam Map<String,Object> pMap, HttpServletRequest req,	Model model) {
+		path = "member/crew";
+		return path;
 		
 	}
 	@GetMapping("logout")
@@ -127,7 +125,7 @@ public class MemberController {
 	}
 	@ResponseBody
     @RequestMapping(value = "check_id", method = RequestMethod.POST)
-    public String check_id(HttpServletRequest req, Model model) {
+    public String check_id(@RequestParam Map<String,Object> pMap, HttpServletRequest req, Model model) {
         String id = req.getParameter("mem_id");
         logger.info(id);
         int rowcount = memberLogic.check_id(id);
