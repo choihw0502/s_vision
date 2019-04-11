@@ -21,8 +21,8 @@
 			<br>
 			<h4>
 				<div class="navbar-header" style="height: 50px">
-					<a style="color: #ffffff; height: 25px" href="../member/main"><</a>
-					<a href="../card/card?mem_id=<%=mem_id %>" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;카드 결제</a>
+					<a style="color: #ffffff; height: 25px" href="../member/index"><</a>
+					<a href="../member/index" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;카드 결제</a>
 					<span style="margin-left: 150px;"><a href="memberJoin.jsp" ><img src="/images/card.png" id="imagepreview" style="width: 40px; height: 20px;">&nbsp;추가</a></span>
 				</div>
 			</h4>

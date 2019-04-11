@@ -27,8 +27,6 @@ public class MemberDao {
 		logger.info("다오호출성공");
 		Map<String, Object> login = new HashMap<String,Object>();
 		login = sqlSessionTemplate.selectOne("login",pMap);
-		logger.info(login.get("MEM_ID"));
-		logger.info(login);
 		return login;
 	}
 	public int check_id(String id) {

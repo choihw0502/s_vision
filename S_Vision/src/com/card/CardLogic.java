@@ -52,7 +52,7 @@ public class CardLogic {
 	}
 	public List<Map<String, Object>> detail_card(CardVO cardVO) {
 		List<Map<String,Object>>detail_card = null;
-		detail_card = cardDao.allCard(cardVO);
+		detail_card = cardDao.detail_card(cardVO);
 		return detail_card;
 	}
 
