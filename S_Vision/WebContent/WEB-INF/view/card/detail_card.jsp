@@ -134,6 +134,9 @@ $(document).ready(function(){
 	<tr>
 		<td colspan="2">&nbsp;&nbsp;이번달 사용금액&nbsp;<%=detail_card.get(i).get("PH_PRICE")%>원</td>
 	</tr>
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;이번달 사용금액&nbsp;<%=detail_card.get(i).get("PH_PRICE")%>원</td>
+	</tr>
 	 <tr>
 		
 </table>
