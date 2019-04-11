@@ -171,7 +171,7 @@
 $(document).ready(function(){
  
 var chart_sum = new CanvasJS.Chart("cate_drop_sum", {
-	width: $(window).width(),
+	width: $(window).width()*0.85,
 	height: "250",
 	animationEnabled: true, 
 	theme: "light",
@@ -192,15 +192,15 @@ var chart_sum = new CanvasJS.Chart("cate_drop_sum", {
 	data: [{
 		type: "doughnut",
 		showInLegend: true,
-		legendText: "{label} : ￦  {y} 원",
+		legendText: "{label} : ￦ {y} 원",
 		indexLabel: "{label}",
-		toolTipContent: "<b>{label}</b>: ￦  {y} 원",
+		toolTipContent: "<b>{label}</b>: ￦ {y} 원",
 		dataPoints : <%out.print(data_sum);%>
 	}]
 	
 });
 var chart_cnt = new CanvasJS.Chart("cate_drop_cnt", {
-	width: $(window).width(),
+	width: $(window).width()*0.85,
 	height: "250",
 	animationEnabled: true, 
 	theme: "light",
@@ -226,8 +226,8 @@ var chart_cnt = new CanvasJS.Chart("cate_drop_cnt", {
 				indexLabel : "{label}",
 				toolTipContent : "<b>{label}</b>: {y} 건",
 				dataPoints :
-<%out.print(data_cnt);%>
-	} ]
+				<%out.print(data_cnt);%>
+					} ]
 
 		});
 		chart_sum.render();

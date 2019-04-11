@@ -54,6 +54,7 @@
 				var chart = new CanvasJS.Chart("month_drop", {
 					animationEnabled : true,
 					theme : "light",
+					height: "290",
 					title : {
 						text : "월 기준 지출내역"
 					},
@@ -80,7 +81,7 @@
 						name : "평균 지출액",
 						color : "#BDBDBD",
 						showInLegend : true,
-						yValueFormatString : "￦#,##0",
+						yValueFormatString : "￦ #,##0 원",
 						dataPoints :
 					<%out.print(dataPoints);%>
 						}, {
@@ -88,8 +89,7 @@
 						name : "이번달 지출액",
 						color : "#6799FF",
 						showInLegend : true,
-						indexLabel : "{y}",
-						yValueFormatString : "￦#,##0",
+						yValueFormatString : "￦ #,##0 원",
 						dataPoints :
 					<%out.print(dataPoints2);%>
 						} ]

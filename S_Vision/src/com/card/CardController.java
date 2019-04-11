@@ -48,6 +48,7 @@ public class CardController {
 		
 		return path;
 	}
+	@RequestMapping(value = "detail_card", method = RequestMethod.POST)
 	public String detail_card(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException{
 		logger.info("detail카드 호출성공");
 		String path ="";

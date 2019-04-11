@@ -80,7 +80,7 @@ $(document).ready(function(){
 	 
 
 		var chart1 = new CanvasJS.Chart("week_sum", {
-			width: $(window).width(),
+			width: $(window).width()*0.85,
 			height: "250",
 			animationEnabled : true,
 			theme : "light3", // "light1", "light2", "dark1", "dark2"
@@ -93,15 +93,15 @@ $(document).ready(function(){
 			data : [ {
 				type : "column",
 				showInLegend : true,
-				yValueFormatString : "￦ #,##0 원",
 				legendMarkerColor : "grey",
+				yValueFormatString : "￦ #,##0 원",
 				legendText : "금액 기준",
 				dataPoints :
 			<%out.print(dataPoints);%>
 			} ]
 	});
 	var chart2 = new CanvasJS.Chart("week_cnt", { 
-		width: $(window).width(),
+		width: $(window).width()*0.85,
 		height: "250",
 		animationEnabled: true,
 		theme: "light3", // "light1", "light2", "dark1", "dark2"
@@ -114,8 +114,8 @@ $(document).ready(function(){
 		data: [{        
 			type: "column",  
 			showInLegend: true, 
-			yValueFormatString : "##0 건",
 			legendMarkerColor: "grey",
+			yValueFormatString : "##0 건",
 			legendText: "건수 기준",
 			dataPoints: <%out.print(dataPoints2);%>
 		}]

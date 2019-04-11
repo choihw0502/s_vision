@@ -50,6 +50,12 @@ public class PlanController {
 		model.addAttribute("month", planVO.getP_date());
 		return "plan/spendingCategory";
 	}
+	
+	@PostMapping("spendingCategory1")
+	public String spendingCategory1(@ModelAttribute PlanVO planVO, Model model) throws ServletException, IOException {
+		model.addAttribute("month", planVO.getP_date());
+		return "plan/spendingCategory1";
+	}
 
 	@PostMapping("spendingStore")
 	public String spendingStore(@ModelAttribute PlanVO planVO, Model model) throws ServletException, IOException {
@@ -66,6 +72,12 @@ public class PlanController {
 	public String total_Week(@ModelAttribute PlanVO planVO, Model model) throws ServletException, IOException {
 		model.addAttribute("month", planVO.getP_date());
 		return "plan/total_Week";
+	}
+
+	@PostMapping("total_Week1")
+	public String total_Week1(@ModelAttribute PlanVO planVO, Model model) throws ServletException, IOException {
+		model.addAttribute("month", planVO.getP_date());
+		return "plan/total_Week1";
 	}
 
 	@PostMapping("total_Day")

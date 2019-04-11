@@ -306,7 +306,7 @@ $(document).ready(function(){
 					</div>
 					<div class="input-field col s12">
 						<p class="margin center medium-small sign-up">
-							계정을 있으신가요? <a href="loginForm.jsp">로그인</a>
+							계정을 있으신가요? <a href="../member/login">로그인</a>
 						</p>
 					</div>
 				</div>
