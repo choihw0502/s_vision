@@ -123,7 +123,7 @@ $(document).ready(function(){
 <div id="total_Week" class="span12" style="width: 100%; height:100%;">
 	<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
 	    <ul id="myTab" class="nav nav-tabs" role="tablist" >
-	      <li role="presentation" class="active" style="width: 50%; text-align: center;"><a href="#week_sum_pane" id="week_sum-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><%=a %>+합계순</a></li>
+	      <li role="presentation" class="active" style="width: 50%; text-align: center;"><a href="#week_sum_pane" id="week_sum-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">합계순</a></li>
 	      <li role="presentation" style="width: 50%; text-align: center"><a href="#week_cnt_pane" role="tab" id="week_cnt-tab" data-toggle="tab" aria-controls="profile">건수 순</a></li>
 	    </ul>
 	    <div id="myTabContent" class="tab-content">

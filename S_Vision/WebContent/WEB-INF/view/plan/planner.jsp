@@ -33,8 +33,7 @@ var mem_id ="<%=mem_id%>"
 					$("#dropdownMenu1").html($(this).text() + '<span class="caret"></span>');
 					
 					var month = $(this).attr('value');
-					alert(month);
-					
+					//alert(month);
 					var date;
 					switch(month){
 					case 1 : date="<%=p_date.get(0).toString()%>"; break;
@@ -201,8 +200,8 @@ var mem_id ="<%=mem_id%>"
 							src="../images/login.png" style="width: 20px; height: 20px"><span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="login.jsp">로그인</a></li>
-							<li><a href="memberJoin.jsp">회원가입</a></li>
+							<li><a href="../member/login">로그인</a></li>
+							<li><a href="../member/register">회원가입</a></li>
 						</ul></li>
 				</ul>
 				<form class="navbar-form navbar-right">
