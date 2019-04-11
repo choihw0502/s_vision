@@ -26,6 +26,7 @@ import com.vo.CardVO;
 @Controller
 @RequestMapping(value="/card/")
 public class CardController {
+
 	Logger logger = Logger.getLogger(CardController.class);
 	@Autowired
 	CardLogic cardLogic = null;
@@ -46,8 +47,16 @@ public class CardController {
 		path = "card/card";
 		
 		return path;
+	}
+	public String detail_card(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException{
+		logger.info("detail카드 호출성공");
+		String path ="";
+		List<Map<String,Object>> detail_card= null;
+		detail_card=cardLogic.detail_card(cardVO);
+		model.addAttribute("detail_card", detail_card);
+		path = "card/card";
 		
-		
+	return path;	
 	}
 	@RequestMapping(value = "allCard", method = RequestMethod.POST)
 	public String allCard(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req)throws ServletException, IOException{
@@ -58,9 +67,7 @@ public class CardController {
 	model.addAttribute("allCard", allCard);
 	path = "card/card";
 	return path;
-	
 	}
-	
 	@GetMapping("cardList")
 	public ModelAndView cardList(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		cardVO.setP_mem_id(req.getParameter("mem_id"));
@@ -86,23 +93,22 @@ public class CardController {
 		return mav;
 	}
 	@ResponseBody
-    @RequestMapping(value = "cardAdd", method = RequestMethod.POST)
-	public int cardAdd(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException {
-		logger.info("cardAdd 나옴");
-		
-		Map<String,Object>pMap = new HashMap<String,Object>();
-		pMap.put("P_MEM_ID",req.getParameter("mem_id"));
-		pMap.put("P_CARD_NUM",req.getParameter("cardnum"));
-		logger.info(req.getParameter("mem_id"));
-	
-		int result = cardLogic.cardAdd(pMap);
-		logger.info(result);
-		return result;
-	}
-		
+  @RequestMapping(value = "cardAdd", method = RequestMethod.POST)
+   public int cardAdd(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+      logger.info("cardAdd 나옴");
+      
+      Map<String,Object>pMap = new HashMap<String,Object>();
+      pMap.put("P_MEM_ID",req.getParameter("mem_id"));
+      pMap.put("P_CARD_NUM",req.getParameter("cardnum"));
+      logger.info(req.getParameter("mem_id"));
+   
+      int result = cardLogic.cardAdd(pMap);
+      logger.info(result);
+      return result;
+   }
+      
 
 }
-
 
 
 

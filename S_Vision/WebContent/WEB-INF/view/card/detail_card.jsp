@@ -4,10 +4,7 @@
 <%@page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <%
-	List<Map<String,Object>> cardAllList = (List<Map<String,Object>>)request.getAttribute("cardAllList");
-	List<Map<String,Object>> allCard = (List<Map<String,Object>>)request.getAttribute("allCard");
 	List<Map<String,Object>> detail_card = (List<Map<String,Object>>)request.getAttribute("detail_card");
-	
 %>
 
 <html>
@@ -75,34 +72,8 @@ $(document).ready(function(){
 
   
 </script>
-<script type="text/javascript">
- $(document).ready(function(){
-var v_usecard = document.getElementById("use");
-var v_allcard = document.getElementById("all");
 
 
-v_usecard.style.display = 'block';
-v_allcard.style.display = 'none';
-
-
-	$("#btn_useCard").click(function(){
-		v_usecard.style.display = 'block';
-		v_allcard.style.display = 'none';
-
-	  });
-	  $("#btn_allCard").click(function(){
-			v_usecard.style.display = 'none';
-			v_allcard.style.display = 'block';
-
-	  });
-	  $("#detail_card").click(function(){
-		  var i = document.getElementById("detail_card").value;
-		  location.href="card/detail_card?card_num="+i;
-			
-	  });
-	  
-	}); 
-</script>
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<br>
@@ -134,32 +105,37 @@ v_allcard.style.display = 'none';
 							<br>
 						</p>
 					</h3>
-<div id="use">
+
 <%
 
 
-	if(cardAllList!=null){
-		for(int i=0;i<cardAllList.size();i++){
+	if(detail_card!=null){
+		for(int i=0;i<detail_card.size();i++){
 %>
+
 <div class="media">
 <div class="media-left">
 </div>
 <div class="media-body">
 <h4 class="media-heading"></h4>
 <table style="width:300px">
+<form id="accList" name="accList" method="post" action="detail_card?card_num=<%=detail_card.get(i).get("CARD_NUM") %>">
 	<tr>
-	 <td rowspan="3"><input type="image" id="detail_card" img src="/images/<%=cardAllList.get(i).get("BIN_COMPANY") %>.png" value="<%=cardAllList.get(i).get("CARD_NUM") %>">
+	 <td rowspan="3"><<button type="submit" id="detail_card"  value="<%=detail_card.get(i).get("CARD_NUM") %>"><img src="/images/<%=detail_card.get(i).get("BIN_COMPANY") %>.png"></button>
 	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=cardAllList.get(i).get("BIN_NAME") %></td>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=detail_card.get(i).get("BIN_NAME") %></td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=cardAllList.get(i).get("BIN_COMPANY") %></td>
+		<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=detail_card.get(i).get("BIN_COMPANY") %></td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;<%=cardAllList.get(i).get("CARD_NUM") %></td>
+		<td colspan="2">&nbsp;&nbsp;<%=detail_card.get(i).get("CARD_NUM") %></td>
  	</tr> 
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;이번달 사용금액&nbsp;<%=cardAllList.get(i).get("PH_PRICE")%>원</td>
+		<td colspan="2">&nbsp;&nbsp;이번달 사용금액&nbsp;<%=detail_card.get(i).get("PH_PRICE")%>원</td>
+	</tr>
+	<tr>
+		<td colspan="2">&nbsp;&nbsp;이번달 사용금액&nbsp;<%=detail_card.get(i).get("PH_PRICE")%>원</td>
 	</tr>
 	 <tr>
 		
@@ -167,47 +143,14 @@ v_allcard.style.display = 'none';
 
 </div>
 </div>
-
+</form>
 <%			
 		}
 	}
 %>
-</div>
 
-<div id="all">
-<%
 
-	if(allCard!=null){
-		for(int i=0;i<allCard.size();i++){
-%>
-<div class="media">
-<div class="media-left">
-</div>
-<div class="media-body">
-<h4 class="media-heading"></h4>
-<table style="width:300px">
-	<tr>
-	 <td rowspan="3"> <input type="image"  img src="/images/<%=allCard.get(i).get("BIN_COMPANY") %>.png" value="<%=allCard.get(i).get("CARD_NUM") %>">
-	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=allCard.get(i).get("BIN_NAME") %></td>
-	</tr>
-	<tr>
-		<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=allCard.get(i).get("BIN_COMPANY") %></td>
-	</tr>
-	<tr>
-		<td colspan="2">&nbsp;&nbsp;<%=allCard.get(i).get("CARD_NUM") %></td>
- 	</tr> 
-	<tr>
-		
-</table>
-</div>
-</div>
 
-<%			
-		}
-	}
-%>
-</div>
 						</p>
 					</h3>
 				</div>

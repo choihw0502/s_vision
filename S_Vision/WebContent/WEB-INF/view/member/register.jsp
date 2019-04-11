@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <title>회원가입 페이지</title>
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <link rel="stylesheet" href="/css/jquery-ui.min.css">

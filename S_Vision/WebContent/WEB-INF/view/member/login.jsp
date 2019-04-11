@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <title>로그인 페이지</title>
 <%-- <%@ include file="../common/UI_common.jsp" %> --%>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -16,7 +17,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script type="text/javascript">
 $(document).ready(function(){
-	if(status.equals("1")){
+	if(status=="1"){
 	alert("이미 로그인중입니다");
 		}
 });
@@ -88,14 +89,14 @@ $(document).ready(function(){
         <div class="row margin">
           <div class="input-field col s12">
             <i class="material-icons prefix">account_circle</i>
-            <input id="id" name="id" type="text" style=" cursor: auto;"/>
+            <input id="mem_id" name="mem_id" type="text" style=" cursor: auto;"/>
             <label for="id" class="center-align" >아이디</label>            
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s12">
             <i class="material-icons prefix">vpn_key</i>
-            <input id="password" name="password" type="password" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=&quot;);"/>
+            <input id="mem_pw" name="mem_pw" type="password" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR4nGP6zwAAAgcBApocMXEAAAAASUVORK5CYII=&quot;);"/>
             <label for="password"  class="center-align" >비밀번호</label>
           </div>
         </div>

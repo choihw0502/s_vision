@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <title>Insert title here</title>
 </head>
 <body>

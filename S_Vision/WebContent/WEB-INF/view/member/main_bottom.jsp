@@ -5,7 +5,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 <meta charset="UTF-8">
-<mata name="viewport" content="width=device-width" , inital-scale="1">
+<mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <head>
 <title>메인(푸터)</title>
 <link rel="stylesheet" href="/css/bootstrap.css">

@@ -7,7 +7,7 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 <meta charset="UTF-8">
-<mata name="viewport" content="width=device-width" , inital-scale="1">
+<mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <head>
 <title>조원소계 페이지</title>
 <link rel="stylesheet" href="/css/bootstrap.css">
@@ -38,7 +38,7 @@ if (request.getParameter("pageNumber") != null) {
 					<span class="icon-bar"></span> 
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="main.jsp">
+				<a class="navbar-brand" href="index">
 					<img src="/images/vision_pay.png" id="imagepreview" style="width: 150px; height: 30px">
 				</a></h4>
 			</div>

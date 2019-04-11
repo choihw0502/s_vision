@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <meta charset="UTF-8">
-<mata name="viewport" content="width=device-width" , inital-scale="1">
+<mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <head>
 <title>메인(로그인) 페이지</title>
 </head>
