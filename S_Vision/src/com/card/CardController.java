@@ -41,11 +41,7 @@ public class CardController {
 		
 		return path;
 		
-		
 	}
-	
-	
-	
 	@GetMapping("cardList")
 	public ModelAndView cardList(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		cardVO.setP_mem_id(req.getParameter("mem_id"));
