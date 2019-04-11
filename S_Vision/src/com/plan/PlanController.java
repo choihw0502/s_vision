@@ -28,11 +28,11 @@ public class PlanController {
 	@GetMapping("planList")
 	public String planList(@ModelAttribute PlanVO planVO, HttpServletRequest req) throws ServletException, IOException {
 		logger.info("planList 호출 성공");
-		// ModelAndView mav = new ModelAndView();
-		planVO.setMem_id("Pascale Mcfadden");
-		planVO = planLogic.planList(planVO);
-		// mav.addObject("planVO",planVO);
 		HttpSession session = req.getSession();
+		String mem_id = (String) session.getAttribute("mem_id");
+		planVO.setMem_id(mem_id);
+		logger.info("회원 아이디 : "+mem_id);
+		planVO = planLogic.planList(planVO); 
 		session.setAttribute("planVO", planVO);
 		session.setMaxInactiveInterval(60 * 60);
 		return "plan/planner";

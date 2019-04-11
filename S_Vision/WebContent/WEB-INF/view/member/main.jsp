@@ -177,24 +177,24 @@
 		%>
 		<div>
 			<!-- 캐러셀 시작 -->
-			<div style="width: 100%; height: 500px">
-				<h2>플래너</h2>
-				<div id="mainCar" style="width: 100%; height: 100%"></div>
-			</div>
 			<div>
-				<p>
-					<a>
-						<button type="button" class="btn btn-info btn-lg"
-							data-toggle="modal" data-target="#myModal"
-							style="background-color: white; color: black; border-color: white;">
-							추천 카드 ></button>
-					</a>
-				</p>
+				<h2>플래너</h2>
+				<div id="mainCar" style="width: 100%; height: 400px"></div>
 			</div>
 			<br>
 			<!-- 캐러셀 끝 -->
 
 			<div class="row">
+			<div class="col-md-4">
+				<p>
+					<a>
+						<button type="button" class="btn btn-info btn-lg"
+							data-toggle="modal" data-target="#myModal"
+							style="background-color: white; color: black; border-color: white;">
+							추천 카드</button>
+					</a>
+				</p>
+			</div>
 				<div class="col-md-4">
 					<h2>지갑</h2>
 					<p>
@@ -235,15 +235,15 @@
 				<div class="col-sm-3">
 					<h4 style="text-align: left;">사이트맵</h4>
 					<div class="list-group">
-						<a href="index" class="list-group-item">VISION팀 정보</a> <a
+						<a href="#" class="list-group-item">VISION팀 정보</a> <a
 							href="crew" class="list-group-item">VISION팀원 정보</a> <a
-							href="notice.jsp" class="list-group-item">공지사항</a> <a
-							href="FAQ.jsp" class="list-group-item">FAQ</a>
+							href="#" class="list-group-item">공지사항</a> <a
+							href="#" class="list-group-item">FAQ</a>
 					</div>
 				</div>
 				<div class="col-sm-2">
 					<h4 style="text-align: left;">고객 문의</h4>
-					<a href="email.jsp" class="list-group-item">이메일 문의</a>
+					<a href="#" class="list-group-item">이메일 문의</a>
 				</div>
 				<div class="col-sm-4"></div>
 				<div class="col-sm-3">

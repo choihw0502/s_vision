@@ -3,7 +3,6 @@
 <%@ page import="java.util.* , com.vo.PlanVO"%>
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
-<%-- <jsp:include page="../common/UI_common.jsp"></jsp:include> --%>
 <%
 	//R_cnt1~R_cnt6 : 건수
 	//R_sum1~R_sum6 : 합계금액
@@ -167,10 +166,13 @@
 <script type="text/javascript" src="../canvasjs/canvasjs.min.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <script type="text/javascript">
 $(document).ready(function(){
  
 var chart_sum = new CanvasJS.Chart("cate_drop_sum", {
+	width: $(window).width()*0.8,
+	height: "337",
 	animationEnabled: true, 
 	theme: "light",
 	title: {
@@ -198,9 +200,10 @@ var chart_sum = new CanvasJS.Chart("cate_drop_sum", {
 	
 });
 var chart_cnt = new CanvasJS.Chart("cate_drop_cnt", {
+	width: $(window).width()*0.75,
+	height: "337",
 	animationEnabled: true, 
 	theme: "light",
-	width:  $( window ).width(),
 	title: {
 		text: "카테고리별 지출"
 	},
@@ -234,30 +237,30 @@ var chart_cnt = new CanvasJS.Chart("cate_drop_cnt", {
 </script>
 </head>
 <body>
-	<div id="spendingMonth" class="span12"
-		style="width: 100%; height: 100%;">
+	<div id="spendingMonth" class="span12">
 		<div class="bs-example bs-example-tabs" role="tabpanel"
 			data-example-id="togglable-tabs">
 			<ul id="myTab" class="nav nav-tabs" role="tablist">
-				<li role="presentation" class="active"
-					style="width: 50%; text-align: center;"><a
-					href="#cate_sum_pane" id="cate_sum-tab" role="tab"
-					data-toggle="tab" aria-controls="home" aria-expanded="true">합계순</a></li>
-				<li role="presentation" style="width: 50%; text-align: center"><a
-					href="#cate_cnt_pane" role="tab" id="cate_cnt-tab"
-					data-toggle="tab" aria-controls="profile">건수 순</a></li>
+				<li role="presentation" class="active" style="width: 50%; text-align: center;">
+					<a  href="#cate_sum_pane" id="cate_sum-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+					합계순
+					</a>
+				</li>
+				<li role="presentation" style="width: 50%; text-align: center">
+					<a href="#cate_cnt_pane" role="tab" id="cate_cnt-tab" data-toggle="tab" aria-controls="profile">
+					건수 순
+					</a>
+				</li>
 			</ul>
-			<div id="myTabContent" class="tab-content">
-				<div role="tabpanel" class="tab-pane fade in active"
-					id="cate_sum_pane" aria-labelledBy="cate_sum-tab">
+			<div id="myTabContent" class="tab-content" align="center" >
+				<div role="tabpanel" class="tab-pane fade in active" id="cate_sum_pane" aria-labelledBy="cate_sum-tab">
 					<div class="container-fluid">
-						<div id="cate_drop_sum"></div>
+						<div id="cate_drop_sum" style="width:100%; height:100%"></div>
 					</div>
 				</div>
-				<div role="tabpanel" class="tab-pane fade" id="cate_cnt_pane"
-					aria-labelledBy="cate_cnt-tab">
+				<div role="tabpanel" class="tab-pane fade" id="cate_cnt_pane" aria-labelledBy="cate_cnt-tab">
 					<div class="container-fluid">
-						<div id="cate_drop_cnt"></div>
+						<div id="cate_drop_cnt" style="width:100%; height:100%"></div>
 					</div>
 				</div>
 

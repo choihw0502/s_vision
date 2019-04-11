@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <title>로그인 페이지</title>
 <%-- <%@ include file="../common/UI_common.jsp" %> --%>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>

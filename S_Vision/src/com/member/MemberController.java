@@ -69,13 +69,15 @@ public class MemberController {
 	public String register(@ModelAttribute MemberVO memberVO,
 							HttpServletRequest req,
 							Model model) {
+		logger.info("회원가입 호출");
 		path = "member/register";
 		return path;
 	}
 	@GetMapping("crew")
 	public String crew(@ModelAttribute MemberVO memberVO, HttpServletRequest req, Model model) {
-		path = "member/crew";
-		return path;
+//		path = "member/crew";
+		logger.info("crew호출");
+		return "member/crew";
 		
 	}
 	@GetMapping("logout")

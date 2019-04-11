@@ -45,12 +45,15 @@
 <html>
 <head>
 <meta charset=UTF-8">
+<mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <script type="text/javascript" src="../canvasjs/jquery.canvasjs.min.js"></script>
 <script type="text/javascript" src="../canvasjs/canvasjs.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
 		var chart1 = new CanvasJS.Chart("day_sum", {
+			width: $(window).width()*0.8,
+			height: "337",
 			animationEnabled : true,
 			theme : "light2", // "light1", "light2", "dark1", "dark2"
 			title : {
@@ -65,11 +68,12 @@
 				legendMarkerColor : "grey",
 				legendText : "금액 기준",
 				dataPoints :
-<%out.print(dataPoints);%>
-	} ]
+			<%out.print(dataPoints);%>
+			} ]
 		});
 		var chart2 = new CanvasJS.Chart("day_cnt", {
-			width : $(window).width(),
+			width: $(window).width()*0.8,
+			height: "337",
 			animationEnabled : true,
 			theme : "light2", // "light1", "light2", "dark1", "dark2"
 			title : {
@@ -84,8 +88,8 @@
 				legendMarkerColor : "grey",
 				legendText : "건수 기준",
 				dataPoints :
-<%out.print(dataPoints2);%>
-	} ]
+			<%out.print(dataPoints2);%>
+				} ]
 		});
 
 		chart2.render();
@@ -96,7 +100,7 @@
 
 </head>
 <body>
-	<div id="total_Day" class="span12" style="width: 100%; height: 100%;">
+	<div id="total_Day" class="span12">
 		<div class="bs-example bs-example-tabs" role="tabpanel"
 			data-example-id="togglable-tabs">
 			<ul id="myTab" class="nav nav-tabs" role="tablist">
@@ -108,17 +112,15 @@
 					href="#day_cnt_pane" role="tab" id="day_cnt-tab" data-toggle="tab"
 					aria-controls="profile">건수 순</a></li>
 			</ul>
-			<div id="myTabContent" class="tab-content">
-				<div role="tabpanel" class="tab-pane fade in active"
-					id="day_sum_pane" aria-labelledBy="day_sum-tab">
+			<div id="myTabContent" align="center" class="tab-content">
+				<div role="tabpanel" align="center" class="tab-pane fade in active" id="day_sum_pane" aria-labelledBy="day_sum-tab">
 					<div class="container-fluid">
-						<div id="day_sum"></div>
+						<div id="day_sum" style="width: 100%; height: 100%;"></div>
 					</div>
 				</div>
-				<div role="tabpanel" class="tab-pane fade" id="day_cnt_pane"
-					aria-labelledBy="day_cnt-tab">
+				<div role="tabpanel" align="center" class="tab-pane fade" id="day_cnt_pane" aria-labelledBy="day_cnt-tab">
 					<div class="container-fluid">
-						<div id="day_cnt"></div>
+						<div id="day_cnt" style="width: 100%; height: 100%;"></div>
 					</div>
 				</div>
 

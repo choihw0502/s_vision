@@ -12,6 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <title>Insert title here</title>
 <script type="text/javascript" src="../canvasjs/jquery.canvasjs.min.js"></script>
 <script type="text/javascript" src="../canvasjs/canvasjs.min.js"></script>
@@ -70,7 +71,7 @@
 				<div role="tabpanel" class="tab-pane fade" id="sum_pane"
 					aria-labelledBy="sum-tab">
 					<div class="container-fluid">
-						<div class="bs-example" data-example-id="table-within-panel">
+						<div class="bs-example"  data-example-id="table-within-panel">
 							<div class="panel panel-default">
 								<!-- Table -->
 								<table class="table">

@@ -3,13 +3,16 @@
 <%@ page import="java.util.*, com.vo.PlanVO"%>
 <!DOCTYPE HTML>
 <html>
+<meta charset="UTF-8">
+<mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <head>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bin.css">
 <%
 	PlanVO planVO = (PlanVO) session.getAttribute("planVO");
-	String mem_id = planVO.getMem_id();
+	String mem_id= (String) session.getAttribute("mem_id");
+	planVO.setMem_id(mem_id);
 
 	List<String> p_date = new ArrayList<String>();
 	Calendar cal = Calendar.getInstance();
@@ -83,7 +86,7 @@ var mem_id ="<%=mem_id%>"
 					$.ajax({
 					    type: "POST",
 					    url : "/plan/spendingStore",
-					    data : { mem_id : "<%=mem_id%>",
+					    data : { mem_id : mem_id,
 					             p_date : date
 						        },
 						dataType : "HTML",
@@ -134,7 +137,7 @@ var mem_id ="<%=mem_id%>"
 		$.ajax({
 		    type: "POST",
 		    url : "/plan/spendingStore",
-		    data : { mem_id : "<%=mem_id%>",
+		    data : { mem_id : mem_id,
 		             p_date : "<%=p_date.get(0).toString()%>"
 			},
 			dataType : "HTML",
@@ -166,7 +169,7 @@ var mem_id ="<%=mem_id%>"
 			<div class="collapse navbar-collapse"
 				id="bs-example-navber-collapse-1">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="main.jsp">VISION PAY 소개 <span
+					<li class="active"><a href="../member/index">VISION PAY 소개 <span
 							class="sr-only"></span>
 					</a></li>
 					<li><a href="crew.jsp">VISION 팀원 소개</a></li>
@@ -200,8 +203,8 @@ var mem_id ="<%=mem_id%>"
 							src="../images/login.png" style="width: 20px; height: 20px"><span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="../member/login">로그인</a></li>
-							<li><a href="../member/register">회원가입</a></li>
+								<li><a href="#">내계정</a></li>
+								<li><a href="../member/logout">로그아웃</a></li>
 						</ul></li>
 				</ul>
 				<form class="navbar-form navbar-right">
@@ -253,11 +256,6 @@ var mem_id ="<%=mem_id%>"
 				style="width: 100%; height: 500px"></div>
 		</div>
 		<div class="row-fluid show-grid">
-			<div class="span12" style="padding: 10px;">매장별 지출</div>
-			<div id="spendingStore" class="span12"
-				style="width: 100%; height: 300px;"></div>
-		</div>
-		<div class="row-fluid show-grid">
 			<div class="span12" style="padding: 10px;">주일별 지출</div>
 			<div id="total_Week" class="span12"
 				style="width: 100%; height: 500px;"></div>
@@ -266,6 +264,11 @@ var mem_id ="<%=mem_id%>"
 			<div class="span12" style="padding: 10px;">시간별 지출</div>
 			<div id="total_Day" class="span12"
 				style="width: 100%; height: 500px;"></div>
+		</div>
+		<div class="row-fluid show-grid">
+			<div class="span12" style="padding: 10px;">매장별 지출</div>
+			<div id="spendingStore" class="span12"
+				style="width: 100%; height: 300px;"></div>
 		</div>
 	</div>
 	<!-- 플래너2 끝 -->
@@ -277,15 +280,15 @@ var mem_id ="<%=mem_id%>"
 				<div class="col-sm-3">
 					<h4 style="text-align: left;">사이트맵</h4>
 					<div class="list-group">
-						<a href="main.jsp" class="list-group-item">VISION팀 정보</a> <a
-							href="crew.jsp" class="list-group-item">VISION팀원 정보</a> <a
-							href="notice.jsp" class="list-group-item">공지사항</a> <a
-							href="FAQ.jsp" class="list-group-item">FAQ</a>
+						<a href="#" class="list-group-item">VISION팀 정보</a> <a
+							href="../member/crew" class="list-group-item">VISION팀원 정보</a> <a
+							href="#" class="list-group-item">공지사항</a> <a
+							href="#" class="list-group-item">FAQ</a>
 					</div>
 				</div>
 				<div class="col-sm-2">
 					<h4 style="text-align: left;">고객 문의</h4>
-					<a href="email.jsp" class="list-group-item">이메일 문의</a>
+					<a href="#" class="list-group-item">이메일 문의</a>
 				</div>
 				<div class="col-sm-4"></div>
 				<div class="col-sm-3">

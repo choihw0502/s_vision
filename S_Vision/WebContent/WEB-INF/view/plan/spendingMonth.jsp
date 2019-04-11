@@ -43,9 +43,11 @@
 <html>
 <head>
 <meta charset=UTF-8">
+<mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <script type="text/javascript" src="../canvasjs/jquery.canvasjs.min.js"></script>
 <script type="text/javascript" src="../canvasjs/canvasjs.min.js"></script>
 <script type="text/javascript">
+
 	$(document).ready(
 			function() {
 
@@ -72,6 +74,7 @@
 						cursor : "pointer",
 						itemclick : toggleDataSeries
 					},
+
 					data : [ {
 						type : "stepArea",
 						name : "평균 지출액",
@@ -79,8 +82,8 @@
 						showInLegend : true,
 						yValueFormatString : "￦#,##0",
 						dataPoints :
-<%out.print(dataPoints);%>
-	}, {
+					<%out.print(dataPoints);%>
+						}, {
 						type : "stepArea",
 						name : "이번달 지출액",
 						color : "#6799FF",
@@ -88,8 +91,8 @@
 						indexLabel : "{y}",
 						yValueFormatString : "￦#,##0",
 						dataPoints :
-<%out.print(dataPoints2);%>
-	} ]
+					<%out.print(dataPoints2);%>
+						} ]
 				});
 
 				chart.render();
@@ -108,6 +111,6 @@
 </script>
 </head>
 <body>
-	<div id="month_drop" style="height: 100%; width: 100%;"></div>
+	<div id="month_drop" align="center" style="height: 100%; width: 100%;"></div>
 </body>
 </html>
