@@ -193,6 +193,7 @@
 			</div>
 			<br>
 			<!-- 캐러셀 끝 -->
+
 			<div class="row">
 				<div class="col-md-4">
 					<h2>지갑</h2>
@@ -217,6 +218,7 @@
 					<a>|</a> <a class="btn btn-default btn-lg" href="pointSave.jsp">적립하기</a>
 					</p>
 				</div>
+
 			</div>
 			<%
 				}
