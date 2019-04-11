@@ -270,7 +270,7 @@ var mem_id ="<%=mem_id%>"
 			<div id="spendingStore" class="span12"
 				style="width: 100%; height: 300px;"></div>
 		</div>
-	</div>
+	</div> 
 	<!-- 플래너2 끝 -->
 	<!-- 푸터 시작 -->
 	<footer style="background-color: #000000;">
