@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bin.css">
 <script type="text/javascript">
-$(document).ready(function() {
+$(document).ready(function() { 
 	$.ajax({
 	    type: "POST",
 	    url : "/plan/spendingMonth",
