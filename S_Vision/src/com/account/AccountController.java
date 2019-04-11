@@ -96,6 +96,15 @@ public class AccountController {
 		//path = "forward:./accountList.jsp";
 		return result;
 	}
+	@ResponseBody
+    @RequestMapping(value = "accTransfer", method = RequestMethod.POST)
+	public int accTransfer(@RequestParam Map<String,Object> pMap, HttpServletRequest req,	Model model) {
+		logger.info("이체 시도");
+		logger.info(pMap);
+		int accTransfer = 0;
+		accTransfer = accountLogic.accTransfer(pMap);
+		return accTransfer;
+	}
 		
 
 }

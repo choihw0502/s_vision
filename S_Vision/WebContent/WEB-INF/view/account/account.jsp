@@ -41,15 +41,47 @@ $(document).ready(function(){
                    location.href="account?mem_id=<%=mem_id%>";
                 }
             }
-        });    //end ajax    
-    });    //end on    
+        });     
+    });
+   
 
     $("#m_accountAdd").on('shown.bs.modal', function(){
         $(this).find('#acc_name').focus();
     });
+    $('#btn_accTransfer').on('click', function(){
+    	 $.ajax({
+    	        type: 'POST',
+    	        url: 'accTransfer',
+    	        data: {
+    	            "p_acc_from" : document.getElementById("btn_sendMoney").value,
+    	            "p_acc_to" : document.getElementById("p_acc_to").value,
+    	            "p_acc_price" : document.getElementById("p_acc_price").value,
+    	            "p_acc_bank" : document.getElementById("p_acc_bank").value,
+    	        },
+    	        success: function(data){
+    	            if(data == 1){
+    	               alert("이체 완료");
+    	            }
+    	            else if(data == -1){
+    	               alert("이체에 실패하였습니다");
+    	            }
+    	            else if(data == 2){
+    	               alert("잔액이 부족합니다");
+    	            }
+    	            else if(data == 3){
+    	               alert("은행을 다시 확인해주세요");
+    	            }
+    	            else if(data == 4){
+    	               alert("계좌번호를 다시 확인해주세요");
+    	            }
+    	            location.href="account?mem_id=<%=mem_id%>";
+    	        }
+    	 });   
+    });
 });
   
 </script>
+
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<br>
@@ -102,7 +134,48 @@ $(document).ready(function(){
       </div>
     </div>
   </div>
-</div>	
+</div>
+<!-- 계좌이체 추가  -->
+<div class="modal fade" id="m_accounTransfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">실시간 이체하기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <div class="group row"><div class="col-md-6 form-group"> <label for="foo">계좌번호</label> <input type="text" class="form-control" id="p_acc_to" name="p_acc_to"> </div>
+ 	  </div><br>
+ 	   <div class="group row">
+ 	   <div class="col-md-4">
+            <select class="combobox form-control" id="p_acc_bank" name="p_acc_bank">
+              <option value="은행선택" selected="selected">은행선택</option>
+              <option value="농협">농협</option>
+              <option value="신한은행">신한은행</option>
+              <option value="국민은행">국민은행</option>
+              <option value="우리은행">우리은행</option>
+              <option value="하나은행">하나은행</option>
+              <option value="기업은행">IBK기업은행</option>
+              <option value="우체국">우체국</option>
+              <option value="새마을금고">새마을금고</option>
+              <option value="축협">축협</option>
+              <option value="수협">수협</option>
+            </select>
+          </div>
+       </div><br>   
+       <div class="group row"><div class="col-md-6 form-group"><label for="foo">이체할 금액</label> <input type="text" class="form-control" id="p_acc_price" name="p_acc_price"></div>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button id="btn_accTransfer" name="btn_accTransfer" type="button" class="btn btn-primary">이체하기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>		
+<!-- 계좌이체 끝  -->	
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -123,15 +196,15 @@ $(document).ready(function(){
 		for(int i=0;i<accountList.size();i++){
 %>
 
-<div class="media">
+<div class="media" style="width:100%;">
 <div class="media-left">
-<a href="#"> <img class="media-object" src="/images/<%=accountList.get(i).get("ACC_BANK") %>.PNG" style="width: 230px; height: 140px">
+<a href="#"> <img class="media-object" src="/images/<%=accountList.get(i).get("ACC_BANK") %>.PNG" style="width: 100px; height: 70px">
 </a>
 </div>
 <div class="media-body">
 <h4 class="media-heading"></h4>
 <form id="accList" name="accList" method="post" action="accHistory?mem_id=<%=mem_id%>&acc_num=<%=accountList.get(i).get("ACC_NUM") %>">
-	<table style="width:300px">
+	<table>
 	<tr>
 		<td colspan="2" style="color:orange; font-size:120%; background-color:#D8D8D8"><%=accountList.get(i).get("ACC_NUM") %></td>
 	</tr>
@@ -150,8 +223,8 @@ $(document).ready(function(){
 		<td style="text-align:right; color:blue;"><%=accountList.get(i).get("ACC_BALANCE") %><s2>원</s2></td>
 	</tr>
 	<tr>
-		<td><button id="btn_acc_history" name="btn_acc_history" type="submit" class="btn" style="width:150px">거래내역</button></td>
-		<td><button id="btn_sendMoney" name="btn_sendMoney" type="button" class="btn" style="width:150px">이체</button></td>
+		<td><button id="btn_acc_history" name="btn_acc_history" type="submit" class="btn" ">거래내역</button></td>
+		<td><button id="btn_sendMoney" name="btn_sendMoney" type="button" class="btn"  data-toggle="modal" data-target="#m_accounTransfer" value="<%=accountList.get(i).get("ACC_NUM") %>">&nbsp;이체&nbsp;</button></td>
 	<tr>	
 	</table>
 </form>

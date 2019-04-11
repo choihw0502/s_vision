@@ -12,6 +12,14 @@
 						 ,#{RESULT,mode=OUT,jdbcType=INTEGER,javaType=java.lang.Integer}
 						)}
 	</insert>
+	<select id="accTransfer2" parameterType="map" statementType="CALLABLE">
+		{call proc_accTransfer2(#{p_acc_from,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{p_acc_to,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{p_acc_price,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{p_acc_bank,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{result,mode=OUT,jdbcType=INTEGER,javaType=java.lang.Integer}
+						)}
+	</select>
 	<select id="accountList2" parameterType="map" resultType="map">
 	select ah.acc_balance, ah.acc_num, ah.acc_rownum, ah.acc_date, a.acc_name, a.acc_bank from acc_history2 ah, account a 
 	where ah.acc_rownum in(select max(to_number(acc_rownum)) from acc_history2 group by acc_num) 

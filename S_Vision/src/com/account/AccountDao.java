@@ -38,6 +38,7 @@ public class AccountDao {
 		pMap.put("P_ACC_NAME", accountVO.getAcc_name());
 		logger.info(pMap.get("P_MEM_ID"));
 		int accountAdd = sqlSessionTemplate.insert("proc_accountAdd",pMap);
+		// TODO Auto-generated method stub
 		return accountAdd;
 	}
 	public Map<String, List<Map<String, Object>>> accHistory(Map<String, Object> pMap) {
@@ -62,6 +63,13 @@ public class AccountDao {
 		accHistory.put("12", acchistory12);
 		accHistory.put("3day", acchistory3day);
 		return accHistory;
+	}
+	public int accTransfer(Map<String, Object> pMap) {
+		logger.info("이체 sql호출직전");
+		sqlSessionTemplate.selectOne("accTransfer2",pMap);
+		int accTransfer = (Integer)pMap.get("result");
+		logger.info(accTransfer);
+		return accTransfer;
 	}
 
 	/*

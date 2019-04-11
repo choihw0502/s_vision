@@ -8,9 +8,11 @@
 	List<Map<String,Object>> allCard = (List<Map<String,Object>>)request.getAttribute("allCard");
 	List<Map<String,Object>> detail_card = (List<Map<String,Object>>)request.getAttribute("detail_card");
 	
+	
 %>
 
 <html>
+
 <head>
 <meta charset="UTF-8">
 <mata name="viewport" content="width=device-width" , inital-scale="1">
@@ -19,9 +21,6 @@
 <script src="/js/bootstrap.js"></script>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bin.css">
-<script type="text/javascript">
-var card1 = $("#cardnum1").length();
-</script>  
 <script type="text/javascript">
 var frame; //iframe을 담아둘 변수
         function SetElements() {
@@ -37,44 +36,58 @@ var frame; //iframe을 담아둘 변수
             scrollTo(0,0); //최상단으로 스크롤 이동
 
         }
+        function keyCheck(objName,objSize,nextObjName){
+    		if(objName.value.length==objSize){
+	    		nextObjName.focus();
+	    		return;
+    		}
+    	}       
 </script>     
 </head>
 <body>
 <%
 	String mem_id = (String)session.getAttribute("mem_id");
 %>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	$(this).find('#acc_name').focus();
     $('#btn_cardAdd').on('click', function(){
+		var cardnum = $("#cardnum1").val()
+		             +""+$("#cardnum2").val()
+		             +""+$("#cardnum3").val()
+		             +""+$("#cardnum4").val();
+        alert("카드번호:"+cardnum);
+        var param = "mem_id=<%=mem_id%>";
+            param+= "&cardnum="+cardnum;
+        alert(param);
         $.ajax({
             type: 'POST',
             url: '../card/cardAdd',
-            data: {
-            	"mem_id" : "<%=mem_id%>",
-                "cardnum" : document.getElementById("cardnum1").value+document.getElementById("cardnum2").value+
-                document.getElementById("cardnum3").value+document.getElementById("cardnum4").value
-            },
+            data:param,
             success: function(data){
                 if(data == 0){
                    alert("카드 추가 실패");
                 }
                 else{
                    alert("카드 추가 성공");
-                   location.href="card";
+                   location.href="card?mem_id=<%=mem_id%>";
                 }
-            }
+            },
+            
+       
         });      
     });   
 
     $("#exampleModal").on('shown.bs.modal', function(){
         $(this).find('#cardnum1').focus();
     });
-        
-});
 
-  
+});
 </script>
+
+
+
 <script type="text/javascript">
  $(document).ready(function(){
 var v_usecard = document.getElementById("use");
@@ -95,11 +108,11 @@ v_allcard.style.display = 'none';
 			v_allcard.style.display = 'block';
 
 	  });
-	  $("#detail_card").click(function(){
+	/*   $("#detail_card").click(function(){
 		  var i = document.getElementById("detail_card").value;
-		  location.href="card/detail_card?card_num="+i;
-			
-	  });
+		  location.href="detail_card?card_num="+i;
+		
+	  }); */
 	  
 	}); 
 </script>
@@ -146,14 +159,15 @@ v_allcard.style.display = 'none';
 </div>
 <div class="media-body">
 <h4 class="media-heading"></h4>
+<form id="detail_card" name="detail_card" method="post" action="detail_card?card_num=<%=cardAllList.get(i).get("CARD_NUM") %>">
 <table style="width:300px">
 	<tr>
-	 <td rowspan="3"><input type="image" id="detail_card" img src="/images/<%=cardAllList.get(i).get("BIN_COMPANY") %>.png" value="<%=cardAllList.get(i).get("CARD_NUM") %>">
+	 <td rowspan="3"><button type="submit" id="detail_card"  value="<%=cardAllList.get(i).get("CARD_NUM") %>"><img src="/images/<%=cardAllList.get(i).get("BIN_COMPANY") %>.png"></button>
 	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=cardAllList.get(i).get("BIN_NAME") %></td>
+	 &nbsp;<%=cardAllList.get(i).get("BIN_NAME") %></td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=cardAllList.get(i).get("BIN_COMPANY") %></td>
+		<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=cardAllList.get(i).get("BIN_COMPANY")%></td>
 	</tr>
 	<tr>
 		<td colspan="2">&nbsp;&nbsp;<%=cardAllList.get(i).get("CARD_NUM") %></td>
@@ -164,7 +178,7 @@ v_allcard.style.display = 'none';
 	 <tr>
 		
 </table>
-
+</form>
 </div>
 </div>
 
@@ -237,16 +251,16 @@ v_allcard.style.display = 'none';
        <div class="form-group"> <label for="foo">카드번호</label></div>
         <div class="form-group row">
             <div class="col-md-3">
-                <input type="text" class="form-control focusedInput" id="cardnum1" placeholder="">
+                <input type="text" class="form-control focusedInput" id="cardnum1" size="4" maxlength="4" onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum2'));">
             </div>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" id="cardnum2" placeholder="">
+                    <input type="text"  class="form-control" id="cardnum2" size="4" maxlength="4" onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum3'));">
                 </div>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" id="cardnum3" placeholder="">
+                    <input type="text"  class="form-control" id="cardnum3" size="4" maxlength="4"  onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum4'));">
                 </div>
                 <div class="col-md-3">
-                    <input type="text" class="form-control" id="cardnum4" placeholder="">
+                    <input type="text"  class="form-control" id="cardnum4" size="4" maxlength="4">
                 </div>                                
         </div>
 	</div>
