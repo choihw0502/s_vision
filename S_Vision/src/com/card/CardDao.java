@@ -20,6 +20,7 @@ import com.vo.CardVO;
 import com.vo.RecommendVO;
 
 public class CardDao {
+
 	Logger logger = Logger.getLogger(CardDao.class);
 	private SqlSessionTemplate sqlSessionTemplate = null;
 	public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
@@ -62,5 +63,6 @@ public class CardDao {
 		
 		return detail_card;
 	}
+
 
 }

@@ -26,6 +26,7 @@ import com.vo.CardVO;
 @Controller
 @RequestMapping(value="/card/")
 public class CardController {
+
 	Logger logger = Logger.getLogger(CardController.class);
 	@Autowired
 	CardLogic cardLogic = null;
@@ -92,23 +93,22 @@ public class CardController {
 		return mav;
 	}
 	@ResponseBody
-    @RequestMapping(value = "cardAdd", method = RequestMethod.POST)
-	public int cardAdd(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException {
-		logger.info("cardAdd 나옴");
-		
-		Map<String,Object>pMap = new HashMap<String,Object>();
-		pMap.put("P_MEM_ID",req.getParameter("mem_id"));
-		pMap.put("P_CARD_NUM",req.getParameter("cardnum"));
-		logger.info(req.getParameter("mem_id"));
-	
-		int result = cardLogic.cardAdd(pMap);
-		logger.info(result);
-		return result;
-	}
-		
+  @RequestMapping(value = "cardAdd", method = RequestMethod.POST)
+   public int cardAdd(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException {
+      logger.info("cardAdd 나옴");
+      
+      Map<String,Object>pMap = new HashMap<String,Object>();
+      pMap.put("P_MEM_ID",req.getParameter("mem_id"));
+      pMap.put("P_CARD_NUM",req.getParameter("cardnum"));
+      logger.info(req.getParameter("mem_id"));
+   
+      int result = cardLogic.cardAdd(pMap);
+      logger.info(result);
+      return result;
+   }
+      
 
 }
-
 
 
 
