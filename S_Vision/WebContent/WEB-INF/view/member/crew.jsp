@@ -62,12 +62,12 @@ if (mem_id == null) {//로그아웃인 경우
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
-							<li><a href="card"><img src="/images/card.png" id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;카드</a></li>
-							<li><a href="account"><img src="/images/account.png" id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;계좌</a></li>
-							<li><a href="membership"><img src="/images/membership.png" id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;멤버쉽</a></li>
-							<li><a href="plan"><img src="/images/planner.png" id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;플레너</a></li>
-							<li><a href="recommend"><img src="/images/cardRecommend.png" id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;카드 추천</a></li>
-							<li><a href="rewards"><img src="/images/reward.png" id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;리워즈</a></li>
+							<li><a href="../member/card"><img src="/images/card.png" id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;카드</a></li>
+							<li><a href="../account/account?mem_id=<%=mem_id%>"><img src="/images/account.png" id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;계좌</a></li>
+							<li><a href="#"><img src="/images/membership.png" id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;멤버쉽</a></li>
+							<li><a href="../plan/planList"><img src="/images/planner.png" id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;플래너</a></li>
+							<li><a href="#"><img src="/images/cardRecommend.png" id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;카드 추천</a></li>
+							<li><a href="../rewards/myPoint"><img src="/images/reward.png" id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;리워즈</a></li>
 						</ul>
 					</li>
 					<li><a href="card">VISION 결제</a></li>

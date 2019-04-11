@@ -30,7 +30,7 @@ public class CardController {
 	Logger logger = Logger.getLogger(CardController.class);
 	@Autowired
 	CardLogic cardLogic = null;
-	@GetMapping("cardAllList")
+	@GetMapping("card")
 	public String cardAllList(@ModelAttribute CardVO cardVO, Model model, HttpServletRequest req) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String path ="";

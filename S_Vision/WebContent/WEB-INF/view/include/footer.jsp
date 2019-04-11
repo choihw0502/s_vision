@@ -18,15 +18,15 @@
 				<div class="col-sm-3">
 					<h4 style="text-align: left;">사이트맵</h4>
 					<div class="list-group">
-						<a href="index" class="list-group-item">VISION팀 정보</a> 
-						<a href="crew" class="list-group-item">VISION팀원 정보</a> 
-						<a href="notice.jsp" class="list-group-item">공지사항</a> 
-						<a href="FAQ.jsp" class="list-group-item">FAQ</a>
+						<a href="#" class="list-group-item">VISION팀 정보</a> 
+						<a href="../member/crew" class="list-group-item">VISION팀원 정보</a> 
+						<a href="#" class="list-group-item">공지사항</a> 
+						<a href="#" class="list-group-item">FAQ</a>
 					</div>
 				</div>
 				<div class="col-sm-2">
 					<h4 style="text-align: left;">고객 문의</h4>
-					<a href="email.jsp" class="list-group-item">이메일 문의</a>
+					<a href="#" class="list-group-item">이메일 문의</a>
 				</div>
 				<div class="col-sm-4"></div>
 				<div class="col-sm-3">
