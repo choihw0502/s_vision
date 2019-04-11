@@ -1,88 +1,128 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@ page import="java.util.*" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.vo.PlanVO"%>
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
- 
+<jsp:include page="../common/UI_common.jsp"></jsp:include>
 <%
-List<Map<Object, Object>> r_ever = (List<Map<Object, Object>>)request.getAttribute("r_cnt");
-List<Map<Object, Object>> r1 = (List<Map<Object, Object>>)request.getAttribute("r_sum");
+	PlanVO planVO = (PlanVO) session.getAttribute("planVO");
+	Map<Object, Object> map1 = null;
+	Map<Object, Object> map2 = null;
+	String dataPoints = "";
+	String dataPoints2 = "";
+	List<Map<Object, Object>> list1 = new ArrayList<Map<Object, Object>>();
+	List<Map<Object, Object>> list2 = new ArrayList<Map<Object, Object>>();
+	String month = (String) request.getAttribute("month");
+	if (planVO.getR_day().size() > 0) {
+		String r_cnts = (String) planVO.getR_day().get(0).get("R_CNT" + month);
+		String r_sums = (String) planVO.getR_day().get(0).get("R_SUM" + month);
 
-Gson gsonObj = new Gson();
+		if (r_cnts != null && r_cnts.length() > 1) {
 
-String dataPoints = gsonObj.toJson(r_ever);
+			String[] r_cnt = r_cnts.split("/");
+			String[] r_sum = r_sums.split("/");
+			int y = 2;
+			for (int i = 0; i < r_cnt.length; i++) {
+				map1 = new HashMap<Object, Object>();
+				map2 = new HashMap<Object, Object>();
+				map1.put("x", y);
+				map2.put("x", y);
+				map1.put("y", Integer.parseInt(r_cnt[i]));
+				map2.put("y", Integer.parseInt(r_sum[i]));
+				list1.add(map1);
+				list2.add(map2);
+				y = y + 2;
+			}
+		}
+		Gson gsonObj = new Gson();
 
- 
-String dataPoints2 = gsonObj.toJson(r1);
+		dataPoints = gsonObj.toJson(list2);
 
+		dataPoints2 = gsonObj.toJson(list1);
+	}
 %>
- 
+
 <!DOCTYPE HTML>
 <html>
 <head>
 <meta charset=UTF-8">
 <script type="text/javascript">
-window.onload = function() { 
- 
-var chart = new CanvasJS.Chart("chartContainer", { 
-	animationEnabled: true, 
-	theme: "light",
-	title: {
-		text: "지출 내역"
-	},
-	subtitles: [{
-		text: "지출 총액:"
-	}],
-	axisX: {
-		includeZero: false
-	},
-	axisY: {
-		includeZero: false,
-		prefix: ""
-	},
-	toolTip: {
-		shared: true
-	},
-	legend:{
-		cursor: "pointer",
-		itemclick: toggleDataSeries
-	},
-	data: [{
-		type: "stackedArea100",
-		name: "건수",
-		color: "#BDBDBD",
-		showInLegend: true,
-		yValueFormatString: "￦#,##0",
-		dataPoints: <%out.print(dataPoints);%>
-	},
-	{
-		type: "column",
-		name: "시간별 지출액",
-		color: "#6799FF",
-		showInLegend: true,
-		indexLabel: "{y}",
-		yValueFormatString: "￦#,##0",
-		dataPoints: <%out.print(dataPoints2);%>
-	}]
-});
+	$(document).ready(function() {
 
-chart.render();
- 
-function toggleDataSeries(e){
-	if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-		e.dataSeries.visible = false;
-	}
-	else{
-		e.dataSeries.visible = true;
-	}
-	chart.render();
-}
- 
-}
+		var chart1 = new CanvasJS.Chart("day_sum", {
+			animationEnabled : true,
+			theme : "light2", // "light1", "light2", "dark1", "dark2"
+			title : {
+				text : "시간기준"
+			},
+			axisY : {
+				title : "금액"
+			},
+			data : [ {
+				type : "column",
+				showInLegend : true,
+				legendMarkerColor : "grey",
+				legendText : "금액 기준",
+				dataPoints :
+<%out.print(dataPoints);%>
+	} ]
+		});
+		var chart2 = new CanvasJS.Chart("day_cnt", {
+			width : $(window).width(),
+			animationEnabled : true,
+			theme : "light2", // "light1", "light2", "dark1", "dark2"
+			title : {
+				text : "시간기준"
+			},
+			axisY : {
+				title : "건수"
+			},
+			data : [ {
+				type : "column",
+				showInLegend : true,
+				legendMarkerColor : "grey",
+				legendText : "건수 기준",
+				dataPoints :
+<%out.print(dataPoints2);%>
+	} ]
+		});
+
+		chart2.render();
+		chart1.render();
+
+	});
 </script>
 
 </head>
 <body>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	<div id="total_Day" class="span12" style="width: 100%; height: 100%;">
+		<div class="bs-example bs-example-tabs" role="tabpanel"
+			data-example-id="togglable-tabs">
+			<ul id="myTab" class="nav nav-tabs" role="tablist">
+				<li role="presentation" class="active"
+					style="width: 50%; text-align: center;"><a
+					href="#day_sum_pane" id="day_sum-tab" role="tab" data-toggle="tab"
+					aria-controls="home" aria-expanded="true">합계순</a></li>
+				<li role="presentation" style="width: 50%; text-align: center"><a
+					href="#day_cnt_pane" role="tab" id="day_cnt-tab" data-toggle="tab"
+					aria-controls="profile">건수 순</a></li>
+			</ul>
+			<div id="myTabContent" class="tab-content">
+				<div role="tabpanel" class="tab-pane fade in active"
+					id="day_sum_pane" aria-labelledBy="day_sum-tab">
+					<div class="container-fluid">
+						<div id="day_sum"></div>
+					</div>
+				</div>
+				<div role="tabpanel" class="tab-pane fade" id="day_cnt_pane"
+					aria-labelledBy="day_cnt-tab">
+					<div class="container-fluid">
+						<div id="day_cnt"></div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </body>
 </html>

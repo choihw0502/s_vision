@@ -11,8 +11,8 @@ PlanVO planVO = (PlanVO) session.getAttribute("planVO");
 	List<Map<Object, Object>> list1 = new ArrayList<Map<Object, Object>>();
 	List<Map<Object, Object>> list2 = new ArrayList<Map<Object, Object>>();
 	String month = (String) request.getParameter("month");
-	String r_cnts = (String) planVO.getR_day().get(0).get("R_CNT" + month);
-	String r_sums = (String) planVO.getR_day().get(0).get("R_SUM" + month);
+	String r_cnts = (String) planVO.getR_week().get(0).get("R_CNT" + month);
+	String r_sums = (String) planVO.getR_week().get(0).get("R_SUM" + month);
 
 	if(r_cnts !=null && r_cnts.length()>1){
 

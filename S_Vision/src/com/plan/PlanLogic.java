@@ -44,6 +44,11 @@ public class PlanLogic {
 		return planDao.total_Day(planVO);
 	}
 
+	public PlanVO mainCarousel(PlanVO planVO) {
+		logger.info("mainCarousel 호출 성공");
+		return planDao.mainCarousel(planVO);
+	}
+
 
 	
 

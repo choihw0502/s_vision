@@ -38,7 +38,7 @@ if (request.getParameter("pageNumber") != null) {
 					<span class="icon-bar"></span> 
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="main.jsp">
+				<a class="navbar-brand" href="index">
 					<img src="/images/vision_pay.png" id="imagepreview" style="width: 150px; height: 30px">
 				</a></h4>
 			</div>
