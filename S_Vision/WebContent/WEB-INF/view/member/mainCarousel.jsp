@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/css/bin.css">
 <script type="text/javascript">
 $(document).ready(function() { 
-	$.ajax({
+	$.ajax({ 
 	    type: "POST",
 	    url : "/plan/spendingMonth",
 	    data : { p_date : "1"},
