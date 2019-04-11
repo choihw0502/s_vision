@@ -3,7 +3,7 @@
 <%@ page import="java.util.* , com.vo.PlanVO"%>
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
-<jsp:include page="../common/UI_common.jsp"></jsp:include>
+<%-- <jsp:include page="../common/UI_common.jsp"></jsp:include> --%>
 <%
 	//R_cnt1~R_cnt6 : 건수
 	//R_sum1~R_sum6 : 합계금액
@@ -163,6 +163,8 @@
 
 <!DOCTYPE HTML>
 <html>
+<script type="text/javascript" src="../canvasjs/jquery.canvasjs.min.js"></script>
+<script type="text/javascript" src="../canvasjs/canvasjs.min.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script type="text/javascript">

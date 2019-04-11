@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, com.vo.PlanVO, java.text.DecimalFormat"%>
-<jsp:include page="../common/UI_common.jsp"></jsp:include>
 <%
 	PlanVO planVO = (PlanVO) request.getAttribute("planVO");
 	List<Map<String, Object>> r_store_sum = planVO.getR_store_sum();
@@ -14,6 +13,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="../canvasjs/jquery.canvasjs.min.js"></script>
+<script type="text/javascript" src="../canvasjs/canvasjs.min.js"></script>
 </head>
 <body>
 	<div id="spendingStore" class="span12"

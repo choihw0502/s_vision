@@ -1,16 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, com.vo.PlanVO"%>
-<jsp:include page="../common/UI_common.jsp"></jsp:include>
 <!DOCTYPE HTML>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap.css">
+<link rel="stylesheet" href="/css/bin.css">
 <%
 	PlanVO planVO = (PlanVO) session.getAttribute("planVO");
 	String mem_id = planVO.getMem_id();
@@ -140,8 +136,7 @@ var mem_id ="<%=mem_id%>"
 		    type: "POST",
 		    url : "/plan/spendingStore",
 		    data : { mem_id : "<%=mem_id%>",
-		             p_date : "<%=p_date.get(0).toString()%>
-	"
+		             p_date : "<%=p_date.get(0).toString()%>"
 			},
 			dataType : "HTML",
 			success : function(data) {
@@ -340,4 +335,5 @@ var mem_id ="<%=mem_id%>"
 	</footer>
 	<!-- 푸터 끝 -->
 </body>
+<script src="/js/bootstrap.js"></script>
 </html>

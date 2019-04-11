@@ -2,15 +2,11 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="/js/bootstrap.js"></script>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/css/bootstrap.css">
-<link rel="stylesheet" href="/css/bin.css">
 <script type="text/javascript">
-$(document).ready(function() { 
+$(document).ready(function() {   
 	$.ajax({ 
 	    type: "POST",
 	    url : "/plan/spendingMonth",

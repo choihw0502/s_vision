@@ -3,8 +3,6 @@
 <%@ page import="java.util.*, com.vo.PlanVO"%>
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
-
-<jsp:include page="../common/UI_common.jsp"></jsp:include>
 <%
 	PlanVO planVO = (PlanVO) session.getAttribute("planVO");
 	String month = (String) request.getAttribute("month");
@@ -45,6 +43,8 @@
 <html>
 <head>
 <meta charset=UTF-8">
+<script type="text/javascript" src="../canvasjs/jquery.canvasjs.min.js"></script>
+<script type="text/javascript" src="../canvasjs/canvasjs.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(
 			function() {
@@ -108,7 +108,6 @@
 </script>
 </head>
 <body>
-
 	<div id="month_drop" style="height: 100%; width: 100%;"></div>
 </body>
 </html>

@@ -3,7 +3,6 @@
 <%@ page import="java.util.*, com.vo.PlanVO"%>
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
-<jsp:include page="../common/UI_common.jsp"></jsp:include>
 <%
 	PlanVO planVO = (PlanVO) session.getAttribute("planVO");
 	Map<Object, Object> map1 = null;
@@ -46,6 +45,8 @@
 <html>
 <head>
 <meta charset=UTF-8">
+<script type="text/javascript" src="../canvasjs/jquery.canvasjs.min.js"></script>
+<script type="text/javascript" src="../canvasjs/canvasjs.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 
