@@ -56,5 +56,11 @@ public class CardDao {
 		
 		return allCard;
 	}
+	public List<Map<String,Object>>detail_card(CardVO cardVO){
+		List<Map<String,Object>>detail_card = new ArrayList<Map<String,Object>>();
+		detail_card = sqlSessionTemplate.selectList("detailCard",cardVO);
+		
+		return detail_card;
+	}
 
 }

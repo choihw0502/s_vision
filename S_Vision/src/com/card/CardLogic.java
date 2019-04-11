@@ -50,5 +50,10 @@ public class CardLogic {
 		allCard = cardDao.allCard(cardVO);
 		return allCard;
 	}
+	public List<Map<String, Object>> detail_card(CardVO cardVO) {
+		List<Map<String,Object>>detail_card = null;
+		detail_card = cardDao.allCard(cardVO);
+		return detail_card;
+	}
 
 }
