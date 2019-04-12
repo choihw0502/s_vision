@@ -100,7 +100,7 @@
 										id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;카드</a></li>
 								<li><a href="../account/account?mem_id=<%=mem_id%>"><img src="/images/account.png"
 										id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;계좌</a></li>
-								<li><a href="membership"><img
+								<li><a href="#"><img
 										src="/images/membership.png" id="imagepreview"
 										style="width: 30px; height: 20px">&nbsp;&nbsp;멤버쉽</a></li>
 								<li><a href="../plan/planList"><img
@@ -177,9 +177,9 @@
 		%>
 		<div>
 			<!-- 캐러셀 시작 -->
-			<div>
+			<div width="100%">
 				<h2>플래너</h2>
-				<div id="mainCar" style="width: 100%; height: 400px"></div>
+				<div id="mainCar" style="width: 100%; height: 290px"></div>
 			</div>
 			<br>
 			<!-- 캐러셀 끝 -->
@@ -211,11 +211,11 @@
 				</div>
 				<div class="col-md-4">
 					<h2>리워즈</h2>
-					<p>
+					<p> 
 					<h1><%=r_point%>point
 					</h1>
-					<br> <a class="btn btn-default btn-lg" href="pointUse.jsp">사용하기</a>
-					<a>|</a> <a class="btn btn-default btn-lg" href="pointSave.jsp">적립하기</a>
+					<br> <a class="btn btn-default btn-lg" href="#">사용하기</a>
+					<a>|</a> <a class="btn btn-default btn-lg" href="#">적립하기</a>
 					</p>
 				</div>
 

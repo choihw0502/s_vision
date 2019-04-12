@@ -78,30 +78,31 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	 
-	var chart1 = new CanvasJS.Chart("week_sum", {
-		width: $(window).width()*0.8,
-		height: "337",
-		horizontalAlign: "right",
-		animationEnabled: true,
-		theme: "light3", // "light1", "light2", "dark1", "dark2"
-		title:{
-			text: "요일기준"
-		},
-		axisY: {
-			title: "금액"
-		},
-		data: [{        
-			type: "column",  
-			showInLegend: true, 
-			legendMarkerColor: "grey",
-			legendText: "금액 기준",
-			dataPoints: <%out.print(dataPoints);%>
-		}]
+
+		var chart1 = new CanvasJS.Chart("week_sum", {
+			width: $(window).width(),
+			height: "250",
+			animationEnabled : true,
+			theme : "light3", // "light1", "light2", "dark1", "dark2"
+			title : {
+				text : "요일기준"
+			},
+			axisY : {
+				title : "금액"
+			},
+			data : [ {
+				type : "column",
+				showInLegend : true,
+				yValueFormatString : "￦ #,##0 원",
+				legendMarkerColor : "grey",
+				legendText : "금액 기준",
+				dataPoints :
+			<%out.print(dataPoints);%>
+			} ]
 	});
 	var chart2 = new CanvasJS.Chart("week_cnt", { 
-		width: $(window).width()*0.8,
-		height: "337",
-		horizontalAlign: "right",
+		width: $(window).width(),
+		height: "250",
 		animationEnabled: true,
 		theme: "light3", // "light1", "light2", "dark1", "dark2"
 		title:{
@@ -113,6 +114,7 @@ $(document).ready(function(){
 		data: [{        
 			type: "column",  
 			showInLegend: true, 
+			yValueFormatString : "##0 건",
 			legendMarkerColor: "grey",
 			legendText: "건수 기준",
 			dataPoints: <%out.print(dataPoints2);%>
@@ -123,7 +125,10 @@ $(document).ready(function(){
 
 });
 </script>
+<style type="text/css">
 
+
+</style>
 </head>
 <body>
 <div id="total_Week" class="span12" >
@@ -140,7 +145,7 @@ $(document).ready(function(){
 		      </a>
 	      </li>
 	    </ul>
-	    <div id="myTabContent" align=" class="tab-content">
+	    <div id="myTabContent" align="center" class="tab-content">
 		      <div role="tabpanel" class="tab-pane fade in active" id="week_sum_pane" aria-labelledBy="week_sum-tab">
 					<div class="container-fluid" >
 							<div id="week_sum" style="width: 100%; height:100%;"></div>
