@@ -93,8 +93,8 @@ $(document).ready(function(){
 			<h5>
 				<div class="navbar-header">
 					<a style="color: #ffffff; height: 25px" href="../member/index"><</a>
-					<a href="account" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;계좌</a>
-					<span style="margin-left: 200px;"><button type="button" data-toggle="modal" data-target="#m_accountAdd"style="background-color: #000000; color: #ffffff; border-color: #000000"><img src="/images/account.png">추가</a></span>
+					<a href="../member/index" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;계좌</a>
+					<span style="margin-left: 100px;"><button type="button" data-toggle="modal" data-target="#m_accountAdd"style="background-color: #000000; color: #ffffff; border-color: #000000"><img src="/images/account.png">추가</a></span>
 				</div>
 			</h5>
 			<br>
@@ -209,7 +209,9 @@ v_3day.style.display = 'block';
 						<br>
 	<h3>
 						<p>
-							<br><%=accHistory.get("12").get(0).get("ACC_NUM") %>&nbsp;거래내역<br>
+							<br>
+							<button type="button" class="btn" style="width:100%"><%=accHistory.get("12").get(0).get("ACC_NUM") %>&nbsp;거래내역</button>
+							<br>
 						</p>
 					</h3>
 

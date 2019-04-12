@@ -8,17 +8,16 @@
 	List<Map<String,Object>> allCard = (List<Map<String,Object>>)request.getAttribute("allCard");
 	List<Map<String,Object>> detail_card = (List<Map<String,Object>>)request.getAttribute("detail_card");
 	
-	
 %>
 
 <html>
 
-<head>
 <meta charset="UTF-8">
 <mata name="viewport" content="width=device-width" , inital-scale="1">
-<title>카드 페이지</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/js/bootstrap.js"></script>
+<head>
+<title>카드 페이지</title>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bin.css">
 <script type="text/javascript">
@@ -121,14 +120,18 @@ v_allcard.style.display = 'none';
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<br>
-			<h4>
+			<h5>
 				<div class="navbar-header">
 					<a style="color: #ffffff; height: 25px" href="../member/index"><</a>
-					<a href="../member/index"" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;카드</a>
-					<span style="margin-left: 100px;"><button type="button" data-toggle="modal" data-target="#exampleModal"style="background-color: #000000; color: #ffffff; border-color: #000000"><img src="/images/card.png">추가</a></span>
-					
+					<a href="../member/index" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;카드</a>
+					<span style="margin-left: 100px;">
+						<a type="button" data-toggle="modal" data-target="#exampleModal"style="background-color: #000000; color: #ffffff; border-color: #000000">
+							<img src="/images/card.png">
+							추가
+						</a>
+					</span>
 				</div>
-			</h4>
+			</h5>
 			<br>
 		</div>
 	</nav>
