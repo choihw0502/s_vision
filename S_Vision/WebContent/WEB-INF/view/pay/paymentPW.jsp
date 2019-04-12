@@ -1,5 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*,block.*" %>   
+<%
+	Map<String,Object> list = (Map<String,Object>)request.getAttribute("list");
+	 if(Wellet.payList.size()==0){
+    	 Wellet.payList.add(list);
+    	 out.print("payList에 값이 없어서 add함");
+    }else{
+    	int i = 0;
+    	while(i == Wellet.payList.size()){
+	    	if(!Wellet.payList.get(i).equals(list)){
+		    	out.print("같은 값이 없어서 add");
+				    Wellet.payList.add(list);
+		    	out.print(Wellet.payList.size());
+		    	out.print(Wellet.payList.get(i).values());
+	   		}else{
+	   			out.print("중복값 있음");
+		    	break;
+	   		}
+    		i++;
+    	}
+    }
+	 out.print(Wellet.payList.size());
+%>
 <!doctype html>
 <html>
 <head>
@@ -46,7 +69,9 @@ src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
 		<div class="cryxpad-clavier">
 			<div class="row" style="left: -50%;position: relative;margin-top: 20px;">
 				<div class="col">
+					<a href="/block/paris">
 					<button id="cryxpad-validate-btn" class="btn btn-primary" type="button" style="width: 100px" >입력</button>
+					</a>
 					<button id="cryxpad-remove-btn" type="button" class="btn btn-danger" style="width: 100px ">삭제</button>
 				</div>
 			</div>
@@ -60,7 +85,7 @@ src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
 
 <!-- <script  src="jquery.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script  src="/js/jquery.cryxpad.js"></script>
+<script  src="js/jquery.cryxpad.js"></script>
 <script type="text/javascript">
 	$(function(){
 		//Appel par défaut du plug-in

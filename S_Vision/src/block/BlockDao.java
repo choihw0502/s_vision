@@ -1,14 +1,12 @@
 package block;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.mybatis.spring.SqlSessionTemplate;
 
-import com.vo.BrandVO;
-import com.vo.CreditcardVO;
 
 public class BlockDao {
 	Logger logger = Logger.getLogger(BlockDao.class);
@@ -18,16 +16,30 @@ public class BlockDao {
 		this.sqlSessionTemplate = sqlSessionTemplate;
 	}
 
-	public List<Map<String, Object>> storeList(BrandVO brandVO) {
+	public Map<String, Object> cardInfo(Map<String, Object> pMap) {
 		logger.info("storList 호출 성공");
-		List<Map<String, Object>> storeInfo = new ArrayList<Map<String,Object>>();
-		storeInfo = sqlSessionTemplate.selectList("storeInfo",brandVO);
+		Map<String, Object> storeInfo = new HashMap<String, Object>();
+		storeInfo = sqlSessionTemplate.selectOne("cardInfo",pMap);
+		logger.info(storeInfo);
 		return storeInfo;
 	}
+	
+	public Map<String, Object> storeList(Map<String, Object> pMap) {
+		logger.info("storList 호출 성공");
+		logger.info(pMap.get("store_name"));
+		Map<String, Object> map = new HashMap<String, Object>();
+		map = sqlSessionTemplate.selectOne("storeInfo",pMap);
+		logger.info(map);
+		return map;
+	}
 
-	public List<Map<String, Object>> cardInfo(CreditcardVO creditcardVO) {
-		// TODO Auto-generated method stub
-		return null;
+
+	public Map<String, Object> payList(Map<String, Object> pMap) {
+		logger.info("storList 호출 성공");
+		Map<String, Object> cardInfo = new HashMap<String, Object>();
+		cardInfo = sqlSessionTemplate.selectOne("cardInfo",pMap);
+		logger.info(cardInfo);
+		return cardInfo;
 	}
 
 }
