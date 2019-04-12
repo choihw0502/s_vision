@@ -43,6 +43,7 @@ public class CardController {
 		//String mem_id = req.getParameter("mem_id");
 		cardVO.setMem_id(mem_id);
 		model.addAttribute("cardAllList", cardAllList);
+		logger.info(cardAllList);
 		model.addAttribute("allCard", allCard);
 		path = "card/card";
 		

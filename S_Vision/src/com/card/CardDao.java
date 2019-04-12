@@ -43,6 +43,7 @@ public class CardDao {
 		logger.info("cardAllList 나옴");
 		List<Map<String,Object>> cardAllList = new ArrayList<Map<String,Object>>();
 		cardAllList = sqlSessionTemplate.selectList("cardAllList",cardVO);
+		logger.info(cardAllList);
 		return cardAllList;
 	}
 	public List<Map<String, Object>> cardAllList2(CardVO cardVO) {

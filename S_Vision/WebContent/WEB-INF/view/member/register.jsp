@@ -104,7 +104,7 @@ $(document).ready(function(){
                 "mem_id" : $('#mem_id').val()
             },
             success: function(data){
-                if($.trim(data) == 1){
+                if($.trim(data) == 0){
                    alert("사용가능");
                 }
                 else{
