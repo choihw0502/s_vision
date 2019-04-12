@@ -269,3 +269,4 @@ var chart_cnt = new CanvasJS.Chart("cate_drop_cnt", {
 	</div>
 
 </body>
+</html>

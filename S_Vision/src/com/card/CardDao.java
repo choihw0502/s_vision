@@ -59,8 +59,8 @@ public class CardDao {
 	}
 	public List<Map<String,Object>>detail_card(CardVO cardVO){
 		List<Map<String,Object>>detail_card = new ArrayList<Map<String,Object>>();
-		detail_card = sqlSessionTemplate.selectList("detailCard",cardVO);
-		
+		detail_card = sqlSessionTemplate.selectList("detail_card",cardVO);
+		logger.info(detail_card);
 		return detail_card;
 	}
 

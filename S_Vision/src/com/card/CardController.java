@@ -55,7 +55,7 @@ public class CardController {
 		List<Map<String,Object>> detail_card= null;
 		detail_card=cardLogic.detail_card(cardVO);
 		model.addAttribute("detail_card", detail_card);
-		path = "card/card";
+		path = "card/detail_card";
 		
 	return path;	
 	}
