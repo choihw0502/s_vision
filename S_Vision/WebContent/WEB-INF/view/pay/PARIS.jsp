@@ -16,7 +16,7 @@
 						style="width: 256px; height: 150px"> <br> ￦2,600
 				</div>
 				<div class="footer" style="text-align: center;">
-				    <a href="payment.jsp">
+				    <a href="../pay/payment">
 								<button type="button" class="btn btn-default">
 								결제
 								</button>

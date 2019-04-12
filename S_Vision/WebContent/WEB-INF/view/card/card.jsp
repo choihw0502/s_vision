@@ -57,10 +57,8 @@ $(document).ready(function(){
 		             +""+$("#cardnum2").val()
 		             +""+$("#cardnum3").val()
 		             +""+$("#cardnum4").val();
-        alert("카드번호:"+cardnum);
         var param = "mem_id=<%=mem_id%>";
             param+= "&cardnum="+cardnum;
-        alert(param);
         $.ajax({
             type: 'POST',
             url: '../card/cardAdd',
@@ -121,9 +119,9 @@ v_allcard.style.display = 'none';
 			<br>
 			<h4>
 				<div class="navbar-header">
-					<a style="color: #ffffff; height: 25px" href="index"><</a>
-					<a href="../member/index" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;카드</a>
-					<span style="margin-left: 150px;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" img src="/images/card.png">&nbsp;카드 추가</a></span>
+					<a style="color: #ffffff; height: 25px" href="../member/index"><</a>
+					<a href="card" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;카드</a>
+					<span style="margin-left: 100px;"><button type="button" data-toggle="modal" data-target="#m_accountAdd"style="background-color: #000000; color: #ffffff; border-color: #000000"><img src="/images/card.png">추가</a></span>
 					
 				</div>
 			</h4>
@@ -149,8 +147,6 @@ v_allcard.style.display = 'none';
 					</h3>
 <div id="use">
 <%
-
-
 	if(cardAllList!=null){
 		for(int i=0;i<cardAllList.size();i++){
 %>
@@ -160,14 +156,14 @@ v_allcard.style.display = 'none';
 <div class="media-body">
 <h4 class="media-heading"></h4>
 <form id="detail_card" name="detail_card" method="post" action="detail_card?card_num=<%=cardAllList.get(i).get("CARD_NUM") %>">
-<table style="width:300px">
+<table style="width:200px">
 	<tr>
-	 <td rowspan="3"><button type="submit" id="detail_card"  value="<%=cardAllList.get(i).get("CARD_NUM") %>"><img src="/images/<%=cardAllList.get(i).get("BIN_COMPANY") %>.png"></button>
+	 <td rowspan="3"><button type="submit" id="detail_card"  value="<%=cardAllList.get(i).get("CARD_NUM") %>"><img src="/images/<%=cardAllList.get(i).get("BIN_COMPANY") %>.png"  style="width: 150px; height: 100px"></button>
 	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
-	 &nbsp;<%=cardAllList.get(i).get("BIN_NAME") %></td>
+	         &nbsp;<%=cardAllList.get(i).get("BIN_NAME") %></td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=cardAllList.get(i).get("BIN_COMPANY")%></td>
+		<td style="color:orange; background-color:#D8D8D8" height="40px" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=cardAllList.get(i).get("BIN_COMPANY")%></td>
 	</tr>
 	<tr>
 		<td colspan="2">&nbsp;&nbsp;<%=cardAllList.get(i).get("CARD_NUM") %></td>
@@ -175,13 +171,10 @@ v_allcard.style.display = 'none';
 	<tr>
 		<td colspan="2">&nbsp;&nbsp;이번달 사용금액&nbsp;<%=cardAllList.get(i).get("PH_PRICE")%>원</td>
 	</tr>
-	 <tr>
-		
 </table>
 </form>
 </div>
 </div>
-
 <%			
 		}
 	}
@@ -201,20 +194,18 @@ v_allcard.style.display = 'none';
 <h4 class="media-heading"></h4>
 <table style="width:300px">
 	<tr>
-	 <td rowspan="3"> <input type="image"  img src="/images/<%=allCard.get(i).get("BIN_COMPANY") %>.png" value="<%=allCard.get(i).get("CARD_NUM") %>">
-	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
+	 <td rowspan="3"> <input type="image"  img src="/images/<%=allCard.get(i).get("BIN_COMPANY") %>.png" style="width: 150px; height: 100px" value="<%=allCard.get(i).get("CARD_NUM") %>">
+	 <td colspan="2"  style="color:orange; font-size:120%; background-color:grey">
 	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=allCard.get(i).get("BIN_NAME") %></td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=allCard.get(i).get("BIN_COMPANY") %></td>
+		<td colspan="2" style="color:orange; background-color:#D8D8D8" height="40px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=allCard.get(i).get("BIN_COMPANY") %></td>
 	</tr>
 	<tr>
 		<td colspan="2">&nbsp;&nbsp;<%=allCard.get(i).get("CARD_NUM") %></td>
  	</tr> 
-	<tr>
-		
 </table>
-</div>
+</div> 
 </div>
 
 <%			

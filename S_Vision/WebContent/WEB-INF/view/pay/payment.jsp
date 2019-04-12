@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
 	String mem_id = (String)session.getAttribute("mem_id");
@@ -8,28 +8,27 @@
 <head>
 <meta charset="UTF-8">
 <mata name="viewport" content="width=device-width" , inital-scale="1">
-<title>°áÁ¦ ÆäÀÌÁö</title>
+<title>ê²°ì œ íŽ˜ì´ì§€</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="/js/bootstrap.js"></script>
 <link rel="stylesheet" href="/css/bootstrap.css">
 <link rel="stylesheet" href="/css/bin.css">
 </head>
 <body>
-	<!-- ³×ºñ°ÔÀÌ¼Ç ¹Ù ½ÃÀÛ -->
+	<!-- ë„¤ë¹„ê²Œì´ì…˜ ë°” ì‹œìž‘ -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<br>
 			<h4>
 				<div class="navbar-header" style="height: 50px">
 					<a style="color: #ffffff; height: 25px" href="../member/index"><</a>
-					<a href="../member/index" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;Ä«µå °áÁ¦</a>
-					<span style="margin-left: 150px;"><a href="memberJoin.jsp" ><img src="/images/card.png" id="imagepreview" style="width: 40px; height: 20px;">&nbsp;Ãß°¡</a></span>
+					<a href="../member/index" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;ì¹´ë“œ ê²°ì œ</a>
 				</div>
 			</h4>
 		</div>
 	</nav>
-	<!-- ³×ºñ°ÔÀÌ¼Ç ¹Ù ³¡ -->
-	<!-- °áÁ¦ È­¸é ½ÃÀÛ -->
+	<!-- ë„¤ë¹„ê²Œì´ì…˜ ë°” ë -->
+	<!-- ê²°ì œ í™”ë©´ ì‹œìž‘ -->
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -38,11 +37,11 @@
 					<h3>
 						<p>
 							<img src="/images/AAP1266.png" style="width: 250px; height: 150px; margin-right: 30px" align="left"> 
-							<br>»ï¼ºÄ«µå 
+							<br>ì‚¼ì„±ì¹´ë“œ 
 							<br><p>
 					        <a href="paymentPW">
 								<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="background-color: white; color: black; border-color: white;">
-								ºñ¹Ð¹øÈ£ > 
+								ë¹„ë°€ë²ˆí˜¸ > 
 								</button>
 							</a>
 						</p>
@@ -52,6 +51,9 @@
 		</div>
 		<hr>
 	</div>
-	<!-- °áÁ¦ È­¸é ³¡ -->
+	<!-- ê²°ì œ í™”ë©´ ë -->
+		<!-- í‘¸í„° ì‹œìž‘ -->
+<%@ include file="../include/footer.jsp" %>	
+	<!-- í‘¸í„° ë -->
 </body>
 </html>
