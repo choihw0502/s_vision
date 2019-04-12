@@ -42,7 +42,11 @@ var frame; //iframe을 담아둘 변수
 	    		return;
     		}
     	}       
-</script>     
+</script>   
+<style>
+.detail_card{border:0}
+
+</style>
 </head>
 <body>
 <%
@@ -157,8 +161,7 @@ v_allcard.style.display = 'none';
 <h4 class="media-heading"></h4>
 <form id="detail_card" name="detail_card" method="post" action="detail_card?card_num=<%=cardAllList.get(i).get("CARD_NUM") %>">
 <table style="width:200px">
-	<tr>
-	 <td rowspan="3"><button type="submit" id="detail_card"  value="<%=cardAllList.get(i).get("CARD_NUM") %>"><img src="/images/<%=cardAllList.get(i).get("BIN_COMPANY") %>.png"  style="width: 150px; height: 100px"></button>
+	 <td rowspan="3"><button type="submit" id="detail_card"  value="<%=cardAllList.get(i).get("CARD_NUM") %>"><img src="/images/<%=cardAllList.get(i).get("BIN_COMPANY") %>.png"  style="width: 150px; height: 100px; border:0; "></button>
 	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
 	         &nbsp;<%=cardAllList.get(i).get("BIN_NAME") %></td>
 	</tr>

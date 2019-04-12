@@ -198,14 +198,14 @@
 				<div class="col-md-4">
 					<h2>지갑</h2>
 					<p>
-						<a class="btn btn-default btn-lg" style="border-color: white;"
+						<a class="btn btn-default btn-lg" style="border-color: white; width:20%;"
 							href="../card/card"><%=r_card%><br>카드</a> <a>|</a> <a
-							class="btn btn-default btn-lg" style="border-color: white;"
+							class="btn btn-default btn-lg" style="border-color: white; width:20%;"
 							href="../account/account?mem_id=<%=mem_id%>"><%=r_account%><br>계좌</a>
 						<a>|</a> <a class="btn btn-default btn-lg"
-							style="border-color: white;" href="#"><%=r_mship%><br>멤버쉽</a>
+							style="border-color: white; width:25%;" href="#"><%=r_mship%><br>멤버쉽</a>
 						<a>|</a> <a class="btn btn-default btn-lg"
-							style="border-color: white;" href="#">+<br>쿠폰
+							style="border-color: white; width:20%;" href="#">+<br>쿠폰
 						</a>
 					</p>
 				</div>
