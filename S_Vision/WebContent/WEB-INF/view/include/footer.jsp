@@ -6,10 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="/js/bootstrap.js"></script>
-<link rel="stylesheet" href="/css/bootstrap.css">
-<link rel="stylesheet" href="/css/bin.css">
 <body>
 <footer style="background-color: #000000;">
 		<div class="container">
@@ -61,4 +57,3 @@
 			</div>
 	</footer>
 </body>
-</html>
