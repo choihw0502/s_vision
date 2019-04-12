@@ -28,4 +28,9 @@ public class PayController {
 		path = "pay/paymentPW";
 		return path;
 	}
+	@GetMapping("paris")
+	public String paris(Model model, HttpServletRequest req, @RequestParam Map<String,Object> pMap) throws ServletException, IOException {
+		path = "pay/PARIS";
+		return path;
+	}
 }

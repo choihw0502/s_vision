@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%
-	String status = (String)session.getAttribute("status");
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +14,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script type="text/javascript">
-$(document).ready(function(){
-	if(status=="1"){
-	alert("이미 로그인중입니다");
-		}
-});
+
 </script>
 <style type="text/css">
       body {
@@ -75,12 +69,38 @@ $(document).ready(function(){
 </style>
 </head>
 <body>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $('#btn_login').on('click', function(){
+        $.ajax({
+            type: 'POST',
+            url: 'main',
+            data: {
+                "mem_id" : $('#mem_id').val(),
+                "mem_pw" : $('#mem_pw').val(),
+            },
+            success: function(data){
+                if(data == 1){
+                   location.href="../member/index";
+                }
+                else{
+                   alert("정보를 다시 입력하세요");
+                   location.href="../member/login";
+                }
+            }
+        });    //end ajax    
+    });    //end on
+
+        
+});
+</script>
+  
 <div id="login-page" class="row">
     <div class="col s12 z-depth-4 card-panel">
-      <form class="login-form" id="f_login" name="f_login" method="post" action="/member/login">
         <div class="row">
           <div class="input-field col s1 center">
-				<h5><a href="index"><</a></h5>
+				<h5><a href="../member/index"><</a></h5>
 		  </div>
           <div class="input-field col s11 center">
             <h6><img src="/images/vision.png" id="imagepreview" style="width: 150px; height: 30px">&nbsp;로그인</h6>
@@ -108,19 +128,23 @@ $(document).ready(function(){
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <button type="submit" class="btn waves-effect waves-light col s12">로그인</button>
-          </div>
+            <button id="btn_login" name="btn_login" class="btn waves-effect waves-light col s12">로그인</button>
+				
+       </div>
         </div>
         <div class="row">
           <div class="input-field col s12 " >
             <p class="margin center-align medium-small" >         
-            <a href="#">  ID찾기 및 비밀번호 재설정</a><br>            
-          &nbsp;또는&nbsp;<a href="register">회원가입</a></p>
+            <a href="forgot-password.jsp">  ID찾기 및 비밀번호 재설정</a><br>            
+          &nbsp;또는&nbsp;<a href="../member/register">회원가입</a></p>
           </div>          
         </div>
       </form>
     </div>
   </div>
+  
+
+
   <script type="text/javascript">
      $(".login-form").validate({
         rules: {

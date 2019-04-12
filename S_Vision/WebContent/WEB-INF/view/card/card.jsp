@@ -57,10 +57,8 @@ $(document).ready(function(){
 		             +""+$("#cardnum2").val()
 		             +""+$("#cardnum3").val()
 		             +""+$("#cardnum4").val();
-        alert("카드번호:"+cardnum);
         var param = "mem_id=<%=mem_id%>";
             param+= "&cardnum="+cardnum;
-        alert(param);
         $.ajax({
             type: 'POST',
             url: '../card/cardAdd',
@@ -121,10 +119,9 @@ v_allcard.style.display = 'none';
 			<br>
 			<h4>
 				<div class="navbar-header">
-					<a style="color: #ffffff; height: 25px" href="index"><</a>
+					<a style="color: #ffffff; height: 25px" href="../member/index"><</a>
 					<a href="card" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;카드</a>
-					<span style="margin-left: 150px;"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" img src="/images/card.png" >&nbsp;카드 추가</a></span>
-					
+					<span style="margin-left: 100px;"><button type="button" data-toggle="modal" data-target="#m_accountAdd"style="background-color: #000000; color: #ffffff; border-color: #000000"><img src="/images/card.png">추가</a></span>
 				</div>
 			</h4>
 			<br>

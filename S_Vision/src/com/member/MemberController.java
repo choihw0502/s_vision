@@ -32,39 +32,41 @@ public class MemberController {
 	@GetMapping("index")
 	public String index(@RequestParam Map<String,Object> pMap, HttpServletRequest req,	Model model) {
 		path = "member/main";
-	
-	
 		return path;
-		
 	}
+	
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(@RequestParam Map<String,Object> pMap, HttpServletRequest req,	Model model) {
-		if(pMap.get("mem_id")==null) {
-			path = "member/login";
-		}
-		else if(pMap.get("mem_id")!=null) {
-			Map<String,Object> login = memberLogic.login(pMap);
-			session = req.getSession();
-			if(login.get("MEM_ID")!=null) {
-				path = "member/main";
-				String r_card = String.valueOf(login.get("R_CARD"));
-				String r_account = String.valueOf(login.get("R_ACCOUNT"));
-				String r_point = String.valueOf(login.get("R_POINT"));
-				String r_mship = String.valueOf(login.get("R_MSHIP"));
-				String mem_id = (String)login.get("MEM_ID");
-				session.setAttribute("mem_id", mem_id);
-				session.setAttribute("r_card", r_card);
-				session.setAttribute("r_account", r_account);
-				session.setAttribute("r_point", r_point);
-				session.setAttribute("r_mship", r_mship);
-			}
-			else if(login.get("MEM_ID")==null) {
-				req.setAttribute("mem_id", null);
-				path = "member/login";
-			}
-		}
+		path = "member/login";
 		return path;
-	}		
+	}
+	@ResponseBody
+    @RequestMapping(value = "main", method = RequestMethod.POST)
+	public String main(@RequestParam Map<String,Object> pMap, HttpServletRequest req,	Model model) {
+		session = req.getSession();
+		int result = 0;
+		logger.info(pMap);
+		Map<String,Object> login = null;
+		login = memberLogic.login(pMap);
+		if(login==null) {
+			result = 0;
+		}
+		else if(login!=null) {
+			result = 1;
+            String r_card = String.valueOf(login.get("R_CARD"));
+            String r_account = String.valueOf(login.get("R_ACCOUNT"));
+            String r_point = String.valueOf(login.get("R_POINT"));
+            String r_mship = String.valueOf(login.get("R_MSHIP"));
+            String mem_id = (String)login.get("MEM_ID");
+            session.setAttribute("mem_id", mem_id);
+            session.setAttribute("r_card", r_card);
+            session.setAttribute("r_account", r_account);
+            session.setAttribute("r_point", r_point);
+            session.setAttribute("r_mship", r_mship);
+		}
+		logger.info(result);
+		return String.valueOf(result);
+	}
 	@GetMapping("register")
 	public String register(@ModelAttribute MemberVO memberVO,
 							HttpServletRequest req,
