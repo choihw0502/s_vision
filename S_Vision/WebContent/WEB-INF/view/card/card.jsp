@@ -198,6 +198,7 @@ v_allcard.style.display = 'none';
 </div>
 <div class="media-body">
 <h4 class="media-heading"></h4>
+<form id="all_card" name="all_card" method="post" action="../pay/payment?card_num=<%=allCard.get(i).get("CARD_NUM") %>">
 <table style="width:300px">
 	<tr>
 	 <td rowspan="3"> <input type="image"  img src="/images/<%=allCard.get(i).get("BIN_COMPANY") %>.png" style="width: 150px; height: 100px" value="<%=allCard.get(i).get("CARD_NUM") %>">
@@ -211,6 +212,7 @@ v_allcard.style.display = 'none';
 		<td colspan="2">&nbsp;&nbsp;<%=allCard.get(i).get("CARD_NUM") %></td>
  	</tr> 
 </table>
+</form>
 </div> 
 </div>
 
