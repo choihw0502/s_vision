@@ -8,6 +8,7 @@
 <insert id="cardAdd" parameterType="map" statementType="CALLABLE">
 		{call proc_cardAdd(#{P_CARD_NUM,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
 						 ,#{P_MEM_ID,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{P_CARD_PAY_PW,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
 						 ,#{RESULT,mode=OUT,jdbcType=INTEGER,javaType=java.lang.Integer}
 						)}
 </insert>
@@ -22,7 +23,7 @@
 
 
 <select id="cardAllList" parameterType="com.vo.CardVO" resultType="map">
- select max(bin_company) as bin_company,max(cd.card_num) as card_num, max(bin_name) as bin_name,max(mem_id) as mem_id, sum(ph_price) as ph_price, max(pay_date) as pay_date  from pay_history2 ph, payment2 pm, creditcard cd, cardbin cb
+ select max(bin_company) as bin_company,max(cd.card_num) as card_num, max(bin_name) as bin_name,max(mem_id) as mem_id, sum(ph_price) as ph_price, max(pay_date) as pay_date  from pay_history ph, payment pm, creditcard cd, cardbin cb
  where ph.pay_num = pm.pay_num
  and cd.bin = cb.bin
  and pm.card_num = cd.card_num
@@ -44,7 +45,7 @@ and mem_id = #{mem_id}
 
 <select id="detail_card" parameterType="com.vo.CardVO" resultType="map">
 select pm.pay_date, pm.pay_time, ph.ph_price, s.store_num, s.store_name 
-from payment2 pm, pay_history2 ph,store s
+from payment pm, pay_history ph,store s
 where pm.pay_num = ph.pay_num 
 and pm.store_num = s.store_num
 and  to_date(pay_date,'yy/mm/dd') >= to_date(substr(to_date(sysdate, 'yy/MM/DD'),0,6)||01)

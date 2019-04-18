@@ -22,7 +22,7 @@ import com.util.HangulConversion;
 import com.vo.MemberVO;
 
 @Controller
-@RequestMapping(value="/member/" , method = {RequestMethod.GET, RequestMethod.POST})
+@RequestMapping("/member/")
 public class MemberController {
 	Logger logger = Logger.getLogger(MemberController.class);
 	@Autowired
@@ -35,13 +35,13 @@ public class MemberController {
 		return path;
 	}
 	
-	@RequestMapping(value = "login", method = RequestMethod.POST)
+	@RequestMapping(value = "login", method = {RequestMethod.GET, RequestMethod.POST})
 	public String login(@RequestParam Map<String,Object> pMap, HttpServletRequest req,	Model model) {
 		path = "member/login";
 		return path;
 	}
 	@ResponseBody
-    @RequestMapping(value = "main", method = RequestMethod.POST)
+    @RequestMapping(value = "main", method = {RequestMethod.GET, RequestMethod.POST})
 	public String main(@RequestParam Map<String,Object> pMap, HttpServletRequest req,	Model model) {
 		session = req.getSession();
 		int result = 0;
@@ -67,7 +67,7 @@ public class MemberController {
 		logger.info(result);
 		return String.valueOf(result);
 	}
-	@GetMapping("register")
+	@RequestMapping(value = "register", method = {RequestMethod.GET, RequestMethod.POST})
 	public String register(@ModelAttribute MemberVO memberVO,
 							HttpServletRequest req,
 							Model model) {
