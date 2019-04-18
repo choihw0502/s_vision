@@ -12,6 +12,16 @@
 		where mem_id=#{mem_id}
 		and mem_pw=#{mem_pw}
 	</select>
+	<select id="refresh" parameterType="map" resultType="map">
+		select mem_id, mem_name, mem_gen,  
+		(select count(rownum) from account where mem_id = #{mem_id}) as r_account,
+		((select count(rownum) from creditcard where mem_id = #{mem_id})+
+		(select count(rownum) from visioncard where acc_num in (select acc_num from account where mem_id = #{mem_id}))) as r_card, 
+		(select vi_point from vision_point where mem_id = #{mem_id}) as r_point,
+		(select count(rownum) from mshipcard where mem_id = #{mem_id}) as r_mship 
+		from member 
+		where mem_id=#{mem_id}
+	</select>
 	<insert id="proc_register" parameterType="map" statementType="CALLABLE">
 		{call proc_register(#{P_MEM_ID,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
 						 ,#{P_MEM_PW,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}

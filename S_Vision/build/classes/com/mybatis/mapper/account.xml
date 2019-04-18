@@ -5,58 +5,60 @@
 		select acc_num, acc_bank, acc_name, acc_blance from account where mem_id = #{mem_id}
 	</select>
 	<insert id="proc_accountAdd" parameterType="map" statementType="CALLABLE">
-		{call proc_accountAdd(#{P_MEM_ID,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
-						 ,#{P_ACC_NAME,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
-						 ,#{P_ACC_BANK,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
-						 ,#{P_ACC_NUM,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+		{call proc_accountAdd(#{mem_id,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{acc_name,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{acc_bank,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{acc_num,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{hash,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
 						 ,#{RESULT,mode=OUT,jdbcType=INTEGER,javaType=java.lang.Integer}
 						)}
 	</insert>
-	<select id="accTransfer2" parameterType="map" statementType="CALLABLE">
-		{call proc_accTransfer2(#{p_acc_from,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
-						 ,#{p_acc_to,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
-						 ,#{p_acc_price,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
-						 ,#{p_acc_bank,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+	<select id="accTransfer" parameterType="map" statementType="CALLABLE">
+		{call proc_accTransfer(#{hash,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{acc_to,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{acc_from,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{acc_price,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
+						 ,#{acc_bank,mode=IN,jdbcType=VARCHAR,javaType=java.lang.String}
 						 ,#{result,mode=OUT,jdbcType=INTEGER,javaType=java.lang.Integer}
 						)}
 	</select>
 	<select id="accountList2" parameterType="map" resultType="map">
-	select ah.acc_balance, ah.acc_num, ah.acc_rownum, ah.acc_date, a.acc_name, a.acc_bank from acc_history2 ah, account a 
-	where ah.acc_rownum in(select max(to_number(acc_rownum)) from acc_history2 group by acc_num) 
+	select ah.acc_balance, ah.acc_num, ah.acc_rownum, ah.acc_date, a.acc_name, a.acc_bank from acc_history ah, account a 
+	where ah.acc_rownum in(select max(to_number(acc_rownum)) from acc_history group by acc_num) 
 	and a.mem_id=#{mem_id} and ah.acc_num = a.acc_num order by ah.acc_balance desc
 	</select>
 	<select id="acchistory12" parameterType="map" resultType="map">
-	select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2
+	select acc_balance, acc_date, acc_rownum, acc_time, nvl(acc_content,' '), acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금','잔액') as acc_inout from acc_history
 	where to_date(acc_date,'yyyy/mm/dd') > (select to_char(add_months(sysdate,-12),'yyyy/mm/dd') from dual) 
 	and acc_num= #{acc_num}
 	order by to_number(acc_rownum) desc
 	</select>
 	<select id="acchistory6" parameterType="map" resultType="map">
-	select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2
+	select acc_balance, acc_date, acc_rownum, acc_time, nvl(acc_content,' '), acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금','잔액') as acc_inout from acc_history
 	where to_date(acc_date,'yyyy/mm/dd') > (select to_char(add_months(sysdate,-6),'yyyy/mm/dd') from dual) 
 	and acc_num= #{acc_num}
 	order by to_number(acc_rownum) desc
 	</select>
 	<select id="acchistory3" parameterType="map" resultType="map">
-	select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2 
+	select acc_balance, acc_date, acc_rownum, acc_time, nvl(acc_content,' '), acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금','잔액') as acc_inout from acc_history 
 	where to_date(acc_date,'yyyy/mm/dd') > (select to_char(add_months(sysdate,-3),'yyyy/mm/dd') from dual) 
 	and acc_num= #{acc_num}
 	order by to_number(acc_rownum) desc
 	</select>
 	<select id="acchistory1" parameterType="map" resultType="map">
-	select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2
+	select acc_balance, acc_date, acc_rownum, acc_time, nvl(acc_content,' '), acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금','잔액') as acc_inout from acc_history
 	where to_date(acc_date,'yyyy/mm/dd') > (select to_char(add_months(sysdate,-1),'yyyy/mm/dd') from dual) 
 	and acc_num= #{acc_num}
 	order by to_number(acc_rownum) desc
 	</select>
 	<select id="acchistoryToday" parameterType="map" resultType="map">
-	select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2
+	select acc_balance, acc_date, acc_rownum, acc_time, nvl(acc_content,' '), acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금','잔액') as acc_inout from acc_history
 	where to_date(acc_date,'yyyy/mm/dd') = (select to_char(sysdate,'yyyy/mm/dd') from dual) 
 	and acc_num= #{acc_num}
 	order by to_number(acc_rownum) desc
 	</select>
 	<select id="acchistory3day" parameterType="map" resultType="map">
-    select acc_balance, acc_date, acc_rownum, acc_time, acc_content, acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금') as acc_inout from acc_history2
+    select acc_balance, acc_date, acc_rownum, acc_time, nvl(acc_content,' '), acc_price, acc_num, decode(acc_inout,0,'입금',1,'출금','잔액') as acc_inout from acc_history
     where to_date(acc_date,'yyyy/mm/dd') >= (select to_char(sysdate-3,'yyyy/mm/dd') from dual) 
     and acc_num= #{acc_num}
     order by to_number(acc_rownum) desc

@@ -43,11 +43,11 @@ $(document).ready(function() {
 		style="width: 100%; height: 100%">
 		<ol class="carousel-indicators">
 			<li data-target="#myCarousel" data-slide-to="0"
-				style="background-color: #585858" class="active" ></li>
+				style="background-color: aqua" class="active" ></li>
 			<li data-target="#myCarousel" data-slide-to="1"
-				style="background-color: #585858"></li>
+				style="background-color: aqua"></li>
 			<li data-target="#myCarousel" data-slide-to="2"
-				style="background-color: #585858"></li>
+				style="background-color: aqua"></li>
 		</ol>
 		<div class="carousel-inner" role="listbox"
 			style="width: 100%; height: 100%;">

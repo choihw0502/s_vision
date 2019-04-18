@@ -242,8 +242,9 @@ if(accHistory.get("3day").size()>0){
 %>
       		<td style="text-align:right; color:red;" colspan="2"><%=accHistory.get("3day").get(i).get("ACC_INOUT") %>&nbsp;<%=accHistory.get("3day").get(i).get("ACC_PRICE") %><s2>원</s2></td>
 <%		
-	}
-%>      	
+	}else if(accHistory.get("3day").get(i).get("ACC_INOUT").equals("잔액")){}
+%>
+   	
       	</tr>
       	<tr>
       		<td style="text-align:right; colspan="2">잔액&nbsp;<%=accHistory.get("12").get(i).get("ACC_BALANCE") %>원</td>
@@ -278,7 +279,7 @@ if(accHistory.get("12").size()>0){
 %>
       		<td style="text-align:right; color:red;" colspan="2"><%=accHistory.get("12").get(i).get("ACC_INOUT") %>&nbsp;<%=accHistory.get("12").get(i).get("ACC_PRICE") %><s2>원</s2></td>
 <%		
-	}
+	}else if(accHistory.get("3day").get(i).get("ACC_INOUT").equals("잔액")){}
 %>      	
       	</tr>
       	<tr>
@@ -314,7 +315,7 @@ if(accHistory.get("1").size()>0){
 %>
       		<td style="text-align:right; color:red;" colspan="2"><%=accHistory.get("1").get(i).get("ACC_INOUT") %>&nbsp;<%=accHistory.get("1").get(i).get("ACC_PRICE") %><s2>원</s2></td>
 <%		
-	}
+	}else if(accHistory.get("3day").get(i).get("ACC_INOUT").equals("잔액")){}
 %>      	
       	</tr>
       	<tr>
@@ -350,7 +351,7 @@ if(accHistory.get("3").size()>0){
 %>
       		<td style="text-align:right; color:red;" colspan="2"><%=accHistory.get("3").get(i).get("ACC_INOUT") %>&nbsp;<%=accHistory.get("3").get(i).get("ACC_PRICE") %><s2>원</s2></td>
 <%		
-	}
+	}else if(accHistory.get("3day").get(i).get("ACC_INOUT").equals("잔액")){}
 %>         	
       	</tr>
       	<tr>
@@ -386,7 +387,7 @@ if(accHistory.get("6").size()>0){
 %>
       		<td style="text-align:right; color:red;" colspan="2"><%=accHistory.get("6").get(i).get("ACC_INOUT") %>&nbsp;<%=accHistory.get("6").get(i).get("ACC_PRICE") %><s2>원</s2></td>
 <%		
-	}
+	}else if(accHistory.get("3day").get(i).get("ACC_INOUT").equals("잔액")){}
 %>         	
       	</tr>
       	<tr>
@@ -422,7 +423,7 @@ if(accHistory.get("today").size()>0){
 %>
       		<td style="text-align:right; color:red;" colspan="2"><%=accHistory.get("today").get(i).get("ACC_INOUT") %>&nbsp;<%=accHistory.get("today").get(i).get("ACC_PRICE") %><s2>원</s2></td>
 <%		
-	}
+	}else if(accHistory.get("3day").get(i).get("ACC_INOUT").equals("잔액")){}
 %>         	
       	</tr>
       	<tr>

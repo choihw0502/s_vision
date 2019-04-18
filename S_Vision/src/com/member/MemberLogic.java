@@ -51,6 +51,11 @@ public class MemberLogic {
 		int result = memberDao.join(pMap);
 		return result;
 	}
+
+	public Map<String, Object> refresh(Map<String, Object> pMap) {
+		Map<String, Object> refresh = memberDao.refresh(pMap);
+		return refresh;
+	}
 	
 
 	

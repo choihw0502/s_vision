@@ -38,5 +38,10 @@ public class MemberDao {
 		int result = (Integer)pMap.get("R_RESULT");
 		return result;
 	}
+	public Map<String, Object> refresh(Map<String, Object> pMap) {
+		Map<String, Object> refresh = new HashMap<String,Object>();
+		refresh = sqlSessionTemplate.selectOne("refresh",pMap);
+		return refresh;
+	}
 
 }

@@ -21,6 +21,12 @@ List<Map<String,Object>> accountList = (List<Map<String,Object>>)request.getAttr
 <!-- 네비게이션 바 시작 -->
 <script type="text/javascript">
 $(document).ready(function(){
+	var acc_from;
+	$("[id^=btnn]").on('click', function(event){
+		 var id = $(this).attr("id");
+		 acc_from = id.replace("btnn", ""); 
+		 alert(acc_from); 
+	});
 
     $('#btn_accountAdd').on('click', function(){
         $.ajax({
@@ -53,17 +59,14 @@ $(document).ready(function(){
     	        type: 'POST',
     	        url: 'accTransfer',
     	        data: {
-    	            "p_acc_from" : document.getElementById("btn_sendMoney").value,
-    	            "p_acc_to" : document.getElementById("p_acc_to").value,
-    	            "p_acc_price" : document.getElementById("p_acc_price").value,
-    	            "p_acc_bank" : document.getElementById("p_acc_bank").value,
+    	            "acc_from" : acc_from,
+    	            "acc_to" : document.getElementById("p_acc_to").value,
+    	            "acc_price" : document.getElementById("p_acc_price").value,
+    	            "acc_bank" : document.getElementById("p_acc_bank").value,
     	        },
     	        success: function(data){
     	            if(data == 1){
     	               alert("이체 완료");
-    	            }
-    	            else if(data == -1){
-    	               alert("이체에 실패하였습니다");
     	            }
     	            else if(data == 2){
     	               alert("잔액이 부족합니다");
@@ -74,7 +77,10 @@ $(document).ready(function(){
     	            else if(data == 4){
     	               alert("계좌번호를 다시 확인해주세요");
     	            }
-    	            location.href="account?mem_id=<%=mem_id%>";
+    	            else if(data == 5){
+     	               alert("해시에러");
+     	            }
+    	            location.href="../account/account";
     	        }
     	 });   
     });
@@ -146,7 +152,7 @@ $(document).ready(function(){
         </button>
       </div>
       <div class="modal-body">
-       <div class="group row"><div class="col-md-6 form-group"> <label for="foo">계좌번호</label> <input type="text" class="form-control" id="p_acc_to" name="p_acc_to"> </div>
+       <div class="group row"><div class="col-md-6 form-group"> <label for="foo">계좌번호</label> <input type="text" class="form-control" id="acc_to" name="acc_to"> </div>
  	  </div><br>
  	   <div class="group row">
  	   <div class="col-md-4">
@@ -165,7 +171,7 @@ $(document).ready(function(){
             </select>
           </div>
        </div><br>   
-       <div class="group row"><div class="col-md-6 form-group"><label for="foo">이체할 금액</label> <input type="text" class="form-control" id="p_acc_price" name="p_acc_price"></div>
+       <div class="group row"><div class="col-md-6 form-group"><label for="foo">이체할 금액</label> <input type="text" class="form-control" id="acc_price" name="acc_price"></div>
       </div>
       </div>
       <div class="modal-footer">
@@ -224,8 +230,8 @@ $(document).ready(function(){
 		<td style="text-align:right; color:blue;"><%=accountList.get(i).get("ACC_BALANCE") %><s2>원</s2></td>
 	</tr>
 	<tr>
-		<td><button id="btn_acc_history" name="btn_acc_history" type="submit" class="btn" ">거래내역</button></td>
-		<td><button id="btn_sendMoney" name="btn_sendMoney" type="button" class="btn"  data-toggle="modal" data-target="#m_accounTransfer" value="<%=accountList.get(i).get("ACC_NUM") %>">&nbsp;이체&nbsp;</button></td>
+		<td><button id="btn_acc_history" name="btn_acc_history" type="submit" class="btn">거래내역</button></td>
+		<td><button id="btnn<%=accountList.get(i).get("ACC_NUM") %>" name="btnn<%=accountList.get(i).get("ACC_NUM") %>" type="button" class="btn"  data-toggle="modal" data-target="#m_accounTransfer" value="<%=accountList.get(i).get("ACC_NUM") %>">&nbsp;이체&nbsp;</button></td>
 	<tr>	
 	</table>
 </form>

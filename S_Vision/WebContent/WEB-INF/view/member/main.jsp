@@ -30,11 +30,11 @@
 		String r_point = null;
 		String r_mship = null;
 		if (session.getAttribute("mem_id") != null) {
-			mem_id = (String) session.getAttribute("mem_id");
-			r_card = (String) session.getAttribute("r_card");
-			r_account = (String) session.getAttribute("r_account");
-			r_point = (String) session.getAttribute("r_point");
-			r_mship = (String) session.getAttribute("r_mship");
+			mem_id = (String)session.getAttribute("mem_id");
+			r_card = (String)request.getAttribute("r_card");
+			r_account = (String)request.getAttribute("r_account");
+			r_point = (String)request.getAttribute("r_point");
+			r_mship = (String)request.getAttribute("r_mship");
 	%>
 	<script type="text/javascript">
 		$(function() {
