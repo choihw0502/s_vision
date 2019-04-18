@@ -23,7 +23,9 @@
 		String[] r_months = r_month.split("/");
 		int y = 1;
 		for (int i = 1; i < r_evers.length; i++) {
-
+			if(y>30){
+				y=31;
+			}
 			map1 = new HashMap<Object, Object>();
 			map2 = new HashMap<Object, Object>();
 			map1.put("x", y);

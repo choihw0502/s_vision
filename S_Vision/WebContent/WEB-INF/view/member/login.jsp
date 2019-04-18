@@ -70,8 +70,51 @@
 </head>
 <body>
 
+
 <script type="text/javascript">
 $(document).ready(function(){
+	$("#mem_id").keydown(function(){
+		if (window.event.keyCode == 13) {
+	        $.ajax({
+	            type: 'POST',
+	            url: 'main',
+	            data: {
+	                "mem_id" : $('#mem_id').val(),
+	                "mem_pw" : $('#mem_pw').val(),
+	            },
+	            success: function(data){
+	                if(data == 1){
+	                   location.href="../member/index";
+	                }
+	                else{
+	                   alert("정보를 다시 입력하세요");
+	                    //location.href="../member/login";
+	                }
+	            }
+	        });
+		}
+	})
+	$("#mem_pw").keydown(function(){
+		if (window.event.keyCode == 13) {
+	        $.ajax({
+	            type: 'POST',
+	            url: 'main',
+	            data: {
+	                "mem_id" : $('#mem_id').val(),
+	                "mem_pw" : $('#mem_pw').val(),
+	            },
+	            success: function(data){
+	                if(data == 1){
+	                   location.href="../member/index";
+	                }
+	                else{
+	                   alert("정보를 다시 입력하세요");
+	                   location.href="../member/login";
+	                }
+	            }
+	        });
+		}
+	})
     $('#btn_login').on('click', function(){
         $.ajax({
             type: 'POST',
@@ -126,7 +169,7 @@ $(document).ready(function(){
               <label for="test6" class="pointer-events">아이디 기억하기</label>
           </div>
         </div>
-        <div class="row">
+        <div class="row" >
           <div class="input-field col s12">
             <button id="btn_login" name="btn_login" class="btn waves-effect waves-light col s12">로그인</button>
 				

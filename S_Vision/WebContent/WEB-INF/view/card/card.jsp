@@ -40,6 +40,7 @@ var frame; //iframe을 담아둘 변수
 	    		nextObjName.focus();
 	    		return;
     		}
+		
     	}       
 </script>   
 <style>
@@ -60,8 +61,10 @@ $(document).ready(function(){
 		             +""+$("#cardnum2").val()
 		             +""+$("#cardnum3").val()
 		             +""+$("#cardnum4").val();
+        var pwnum = $("#pwnum").val();
         var param = "mem_id=<%=mem_id%>";
-            param+= "&cardnum="+cardnum;
+            param+= "&cardnum="+cardnum+"&pwnum="+pwnum;
+            
         $.ajax({
             type: 'POST',
             url: '../card/cardAdd',
@@ -72,7 +75,7 @@ $(document).ready(function(){
                 }
                 else{
                    alert("카드 추가 성공");
-                   location.href="card?mem_id=<%=mem_id%>";
+                   location.href="../card/card?mem_id=<%=mem_id%>";
                 }
             },
             
@@ -198,6 +201,7 @@ v_allcard.style.display = 'none';
 </div>
 <div class="media-body">
 <h4 class="media-heading"></h4>
+<form id="all_card" name="all_card" method="post" action="../pay/payment?card_num=<%=allCard.get(i).get("CARD_NUM") %>">
 <table style="width:300px">
 	<tr>
 	 <td rowspan="3"> <input type="image"  img src="/images/<%=allCard.get(i).get("BIN_COMPANY") %>.png" style="width: 150px; height: 100px" value="<%=allCard.get(i).get("CARD_NUM") %>">
@@ -211,6 +215,7 @@ v_allcard.style.display = 'none';
 		<td colspan="2">&nbsp;&nbsp;<%=allCard.get(i).get("CARD_NUM") %></td>
  	</tr> 
 </table>
+</form>
 </div> 
 </div>
 
@@ -250,20 +255,37 @@ v_allcard.style.display = 'none';
             <div class="col-md-3">
                 <input type="text" class="form-control focusedInput" id="cardnum1" size="4" maxlength="4" onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum2'));">
             </div>
-                <div class="col-md-3">
-                    <input type="text"  class="form-control" id="cardnum2" size="4" maxlength="4" onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum3'));">
-                </div>
-                <div class="col-md-3">
-                    <input type="text"  class="form-control" id="cardnum3" size="4" maxlength="4"  onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum4'));">
-                </div>
-                <div class="col-md-3">
-                    <input type="text"  class="form-control" id="cardnum4" size="4" maxlength="4">
-                </div>                                
+            <div class="col-md-3">
+                <input type="text"  class="form-control" id="cardnum2" size="4" maxlength="4" onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum3'));">
+            </div>
+            <div class="col-md-3">
+                <input type="text"  class="form-control" id="cardnum3" size="4" maxlength="4"  onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum4'));">
+            </div>
+            <div class="col-md-3">
+                <input type="text"  class="form-control" id="cardnum4" size="4" maxlength="4" onkeyup="javascript:keyCheck(this,this.size,document.getElementById('pwnum'));">
+            </div>
+       </div>   	  		<br>
+       
+       <div class="form-group"><label for="foo">카드비밀번호(6자리)</label></div> 
+               <div class="form-group row">
+       
+         
+	        <div class="col-md-3">
+	                    <input type="text"  class="form-control" id="pwnum" size="6" maxlength="6">
+	                </div> 
+	        <div class="col-md-3">
+	                </div> 
+	        <div class="col-md-3">
+	                </div> 
+	        <div class="col-md-3">
+	                </div> 
+	         
         </div>
-	</div>
-      <div class="modal-footer">
+         <div class="modal-footer">
          <button id="btn_cardAdd" name="btn_cardAdd" type="button" class="btn btn-primary">추가</button>
       </div>
+	</div>
+     
     </div>
   </div>
 </div>
