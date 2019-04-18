@@ -40,6 +40,7 @@ var frame; //iframe을 담아둘 변수
 	    		nextObjName.focus();
 	    		return;
     		}
+		
     	}       
 </script>   
 <style>
