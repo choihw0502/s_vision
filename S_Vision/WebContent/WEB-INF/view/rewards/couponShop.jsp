@@ -27,7 +27,6 @@
 <link rel="stylesheet" href="/css/bin.css">
 <script type="text/javascript">
 	function couponUse(coupon_no){
-		alert("coupon_no:"+coupon_no);
 		var param="coupon_num="+coupon_no+"&mem_id=<%=mem_id%>";
 		$.ajax({
 			  url: "exCoupon",
@@ -97,12 +96,12 @@
 	 &nbsp;&nbsp;<%=couponShop.get(i).get("COUPON_NAME") %></td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;&nbsp;<%=couponShop.get(i).get("COUPON_POINT")%>Point</td>
+		<td colspan="2" align=center>소모 포인트 : <%=couponShop.get(i).get("COUPON_POINT")%>Point</td>
 	</tr>
 	
 	 <tr>
 </table>
- <input type="button" id="coupon_num"<%=i %> name="coupon_num"  class="btn btn-primary" value="사용하기" onClick="couponUse('<%=couponShop.get(i).get("COUPON_NUM")%>');">사용하기
+ <input type="button" id="coupon_num"<%=i %> name="coupon_num"  class="btn btn-primary" value="사용하기" onClick="couponUse('<%=couponShop.get(i).get("COUPON_NUM")%>');">
 </div>
 </div>
 

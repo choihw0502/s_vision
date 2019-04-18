@@ -85,16 +85,16 @@ var frame; //iframe을 담아둘 변수
 <div class="media-body">
 <h4 class="media-heading"></h4>
 
-<table style="width:200px">
+<table style="width:35%">
 	
 	
 	
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;유통기한&nbsp;<%=couponInven.get(i).get("LAST_DATE")%>원</td>
+		<td align=center colspan="2" style="color:orange; font-size:120%; background-color:grey">카드 사용 기한 :&nbsp;<%=couponInven.get(i).get("LAST_DATE")%>원</td>
 	</tr>
 	
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;쿠폰이름&nbsp;<%=couponInven.get(i).get("COUPON_NAME")%>원</td>
+	    <td align=center colspan="2" style="color:black; font-size:120%; background-color:#D8D8D8">쿠폰이름 :&nbsp;<%=couponInven.get(i).get("COUPON_NAME")%>원</td>
 	</tr>
 </table>
 

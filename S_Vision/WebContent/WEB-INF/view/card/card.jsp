@@ -165,19 +165,19 @@ v_allcard.style.display = 'none';
 <div class="media-body">
 <h4 class="media-heading"></h4>
 <form id="detail_card" name="detail_card" method="post" action="detail_card?card_num=<%=cardAllList.get(i).get("CARD_NUM") %>">
-<table style="width:200px">
+<table style="width:40%">
 	 <td rowspan="3"><button type="submit" id="detail_card"  value="<%=cardAllList.get(i).get("CARD_NUM") %>"><img src="/images/<%=cardAllList.get(i).get("BIN_COMPANY") %>.png"  style="width: 150px; height: 100px; border:0; "></button>
-	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
-	         &nbsp;<%=cardAllList.get(i).get("BIN_NAME") %></td>
+	 <td align=center colspan="2" style="color:orange; font-size:120%; background-color:grey">
+	         <%=cardAllList.get(i).get("BIN_NAME") %></td>
 	</tr>
 	<tr>
-		<td style="color:orange; background-color:#D8D8D8" height="40px" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=cardAllList.get(i).get("BIN_COMPANY")%></td>
+		<td align=center style="color:orange; background-color:#D8D8D8" height="40px" colspan="2"><%=cardAllList.get(i).get("BIN_COMPANY")%></td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;<%=cardAllList.get(i).get("CARD_NUM") %></td>
+		<td colspan="2"  align=center>카드번호:&nbsp;&nbsp;<%=cardAllList.get(i).get("CARD_NUM") %></td>
  	</tr> 
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;이번달 사용금액&nbsp;<%=cardAllList.get(i).get("PH_PRICE")%>원</td>
+		<td colspan="2"  align=left>이번달 사용금액<%=cardAllList.get(i).get("PH_PRICE")%>원</td>
 	</tr>
 </table>
 </form>
@@ -201,17 +201,17 @@ v_allcard.style.display = 'none';
 <div class="media-body">
 <h4 class="media-heading"></h4>
 <form id="all_card" name="all_card" method="post" action="../pay/payment?card_num=<%=allCard.get(i).get("CARD_NUM") %>">
-<table style="width:300px">
+<table style="width:40%">
 	<tr>
 	 <td rowspan="3"> <input type="image"  img src="/images/<%=allCard.get(i).get("BIN_COMPANY") %>.png" style="width: 150px; height: 100px" value="<%=allCard.get(i).get("CARD_NUM") %>">
-	 <td colspan="2"  style="color:orange; font-size:120%; background-color:grey">
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=allCard.get(i).get("BIN_NAME") %></td>
+	 <td colspan="2" align=center style="color:orange; font-size:120%; background-color:grey">
+	 <%=allCard.get(i).get("BIN_NAME") %></td>
 	</tr>
 	<tr>
-		<td colspan="2" style="color:orange; background-color:#D8D8D8" height="40px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=allCard.get(i).get("BIN_COMPANY") %></td>
+		<td colspan="2" align=center style="color:orange; background-color:#D8D8D8" height="40px"><%=allCard.get(i).get("BIN_COMPANY") %></td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;<%=allCard.get(i).get("CARD_NUM") %></td>
+		<td colspan="2" align=center>카드번호:&nbsp;&nbsp;<%=allCard.get(i).get("CARD_NUM") %></td>
  	</tr> 
 </table>
 </form>
