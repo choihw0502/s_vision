@@ -2,6 +2,7 @@ package com.rewards;
 
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +31,24 @@ public class RewardsDao {
 		int myPoint = sqlSessionTemplate.selectOne("myPoint",mem_id);
 		
 		return myPoint;
+	}
+	public List<Map<String, Object>> couponShop(Map<String, Object> pMap) {
+		List<Map<String,Object>> couponShop = new ArrayList<Map<String,Object>>();
+		couponShop = sqlSessionTemplate.selectList("couponShop");
+		logger.info(couponShop);
+	    return couponShop;
+	}
+	public int exCoupon(Map<String, Object> pMap) {
+		sqlSessionTemplate.selectOne("exCoupon",pMap);
+		int exCoupon = (Integer)pMap.get("RESULT");
+		
+		logger.info(exCoupon);
+	    return exCoupon;
+	}
+	public List<Map<String, Object>> couponInven(Map<String, Object> pMap) {
+		List<Map<String, Object>> couponInven = new ArrayList<Map<String,Object>>();
+		couponInven = sqlSessionTemplate.selectList("couponInven",pMap);
+		return couponInven;
 	}
 
 
