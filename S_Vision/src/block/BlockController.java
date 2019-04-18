@@ -1,7 +1,9 @@
 package block;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -15,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vo.BrandVO;
 import com.vo.CreditcardVO;
@@ -62,6 +65,14 @@ public class BlockController extends Wellet{
 			, HttpServletRequest req) throws ServletException, IOException{
 		logger.info("payMent 호출 성공");
 		payList = blockLogic.payMent(tr);
+		return path;
+	}
+	@GetMapping("transaction")
+	public String transaction(@ModelAttribute Transaction tr, Model model, @RequestParam Map<String,Object> pMap
+			, HttpServletRequest req) throws ServletException, IOException{
+		logger.info("트랜잭션 호출 성공");
+		List<Map<String,Object>> transaction = new ArrayList<Map<String,Object>>();
+		transaction.add(pMap);
 		return path;
 	}
 }

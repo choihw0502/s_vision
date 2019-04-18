@@ -31,10 +31,10 @@
 		String r_mship = null;
 		if (session.getAttribute("mem_id") != null) {
 			mem_id = (String) session.getAttribute("mem_id");
-			r_card = (String) session.getAttribute("r_card");
-			r_account = (String) session.getAttribute("r_account");
-			r_point = (String) session.getAttribute("r_point");
-			r_mship = (String) session.getAttribute("r_mship");
+			r_card = (String) request.getAttribute("r_card");
+			r_account = (String) request.getAttribute("r_account");
+			r_point = (String) request.getAttribute("r_point");
+			r_mship = (String) request.getAttribute("r_mship");
 	%>
 	<script type="text/javascript">
 		$(function() {
@@ -98,7 +98,7 @@
 							<ul class="dropdown-menu">
 								<li><a href="../card/card"><img src="/images/card.png"
 										id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;카드</a></li>
-								<li><a href="../account/account?mem_id=<%=mem_id%>"><img src="/images/account.png"
+								<li><a href="../account/account"><img src="/images/account.png"
 										id="imagepreview" style="width: 30px; height: 20px">&nbsp;&nbsp;계좌</a></li>
 								<li><a href="#"><img
 										src="/images/membership.png" id="imagepreview"
@@ -163,12 +163,10 @@
 		<div class="jumbotron">
 			<p class="text-center">
 				<a><IMG SRC="/images/vision_pay.png" ID="IMAGEPREVIEW"
-					style="width: 200px; height: 40px"></a>
+					style="width: 200px; height: 70px"></a>
 			</p>
 			<p class="text-center">스마트한 당신의 지갑 경험해 보세요.</p>
 			<p class="text-center">
-				<a class="btn btn-primary btn-lg" href="" role="button"
-					style="background-color: black;">상세 소개</a>
 			</p>
 		</div>
 		<!-- 점보트론 끝 -->
@@ -201,7 +199,7 @@
 						<a class="btn btn-default btn-lg" style="border-color: white; width:20%;"
 							href="../card/card"><%=r_card%><br>카드</a> <a>|</a> <a
 							class="btn btn-default btn-lg" style="border-color: white; width:20%;"
-							href="../account/account?mem_id=<%=mem_id%>"><%=r_account%><br>계좌</a>
+							href="../account/account"><%=r_account%><br>계좌</a>
 						<a>|</a> <a class="btn btn-default btn-lg"
 							style="border-color: white; width:25%;" href="#"><%=r_mship%><br>멤버쉽</a>
 						<a>|</a> <a class="btn btn-default btn-lg"

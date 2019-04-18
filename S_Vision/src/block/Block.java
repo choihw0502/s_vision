@@ -3,7 +3,9 @@ package block;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -11,11 +13,11 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class Block {
 	String openKey;
 	String timestamp;
-	List<Transaction> tList = new ArrayList<Transaction>();
+	Map<String,Object> tList = new HashMap<String,Object>();
 	String hash;
 	int nonce;
 	
-	public Block(List<Transaction> tList, String key) { //파라미터 string 브랜드 or 회원 pk
+	public Block(Map<String,Object> tList, String key) { //파라미터 string 브랜드 or 회원 pk
 		this.openKey = key;
 		Date today = new Date();
 		SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss a");
@@ -26,7 +28,7 @@ public class Block {
 	
 	//회원or브랜드 pk , 거래되는 현재 시간 , 보내는사람(회원) , 받는사람(브랜드) , 금액 , 
 	public String calculateHash() {
-		return DigestUtils.sha256Hex(openKey+timestamp+tList+nonce);
+		return DigestUtils.sha256Hex(openKey+timestamp+tList);
 	}
 	
 	public void mineBlock(int difficulty) {
@@ -38,5 +40,6 @@ public class Block {
 		}
 		System.out.println("Block Mined!!! : " + hash);
 	}
+	
 
 }

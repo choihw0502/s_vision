@@ -25,8 +25,6 @@ public class MemberLogic {
 	String path = "";
 	
 	public Map<String, Object> login (Map<String,Object> pMap) {
-		logger.info("memberLogic 호출성공");
-		logger.info("로그인폼호출성공");
 		Map<String, Object> login = memberDao.login(pMap);
 		return login;
 	}
@@ -50,6 +48,11 @@ public class MemberLogic {
 		
 		int result = memberDao.join(pMap);
 		return result;
+	}
+
+	public Map<String, Object> refresh(Map<String, Object> pMap) {
+		Map<String, Object> refresh = memberDao.refresh(pMap);
+		return refresh;
 	}
 	
 

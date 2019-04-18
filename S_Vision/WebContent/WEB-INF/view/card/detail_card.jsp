@@ -79,8 +79,8 @@ $(document).ready(function(){
 			<br>
 			<h5>
 				<div class="navbar-header">
-					<a style="color: #ffffff; height: 25px" href="../member/index"><</a>
-					<a href="../member/index" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;카드</a>
+					<a style="color: #ffffff; height: 25px" href="../card/card"><</a>
+					<a href="../card/card" style="color: white">&nbsp;<img src="/images/VISION2.png" id="imagepreview" style="width: 80px; height: 20px;">&nbsp;카드</a>
 					<span style="margin-left: 100px;">
 						<a type="button" data-toggle="modal" data-target="#exampleModal"style="background-color: #000000; color: #ffffff; border-color: #000000">
 							<img src="/images/card.png">
@@ -160,10 +160,10 @@ $(document).ready(function(){
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">카드 추가하기</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+			&times;
         </button>
+        <h5 class="modal-title" id="exampleModalLabel">카드 추가하기</h5>
       </div>
 	<div class="modal-body">
        <div class="form-group"> <label for="foo">카드번호</label></div>

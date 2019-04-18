@@ -12,14 +12,10 @@
 						)}
 </insert>
 
-
-
 <select id="cardList" statementType="CALLABLE" parameterType="com.vo.CardVO">
 {call proc_cardList(#{p_mem_id, mode=IN }, 
 #{r_list, mode=OUT, jdbcType=CURSOR, javaType=java.sql.ResultSet, resultMap=r_list})} 
 </select>
-
-
 
 <select id="cardAllList" parameterType="com.vo.CardVO" resultType="map">
  select max(bin_company) as bin_company,max(cd.card_num) as card_num, max(bin_name) as bin_name,max(mem_id) as mem_id, sum(ph_price) as ph_price, max(pay_date) as pay_date  from pay_history2 ph, payment2 pm, creditcard cd, cardbin cb
@@ -30,8 +26,6 @@
  and mem_id = #{mem_id}
 group by bin_company
 </select>
-
-
 
 <select id="allCard" parameterType="com.vo.CardVO" resultType="map">
 select mem_id ,card_num, bin_company, bin_name 

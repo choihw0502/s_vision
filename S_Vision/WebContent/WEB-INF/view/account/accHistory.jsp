@@ -105,10 +105,10 @@ $(document).ready(function(){
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">계좌 추가하기</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          &times;
         </button>
+        <h5 class="modal-title" id="exampleModalLabel">계좌 추가하기</h5>
       </div>
       <div class="modal-body">
        <div class="group row"><div class="col-md-6 form-group"> <label for="foo">계좌이름</label> <input type="text" class="form-control" id="acc_name" name="acc_name"> </div>
@@ -210,7 +210,7 @@ v_3day.style.display = 'block';
 	<h3>
 						<p>
 							<br>
-							<button type="button" class="btn" style="width:100%"><%=accHistory.get("12").get(0).get("ACC_NUM") %>&nbsp;거래내역</button>
+							<button type="button" class="btn" style="width:325px"><h4><%=accHistory.get("12").get(0).get("ACC_NUM") %>&nbsp;거래내역</h4></button>
 							<br>
 						</p>
 					</h3>
@@ -428,8 +428,9 @@ if(accHistory.get("today").size()>0){
       	<tr>
       		<td style="text-align:right; colspan="2">잔액&nbsp;<%=accHistory.get("today").get(i).get("ACC_BALANCE") %>원</td>
       	</tr>
-<% 
+<%
 	}
+	
 }	
 %>
 		<tr>
