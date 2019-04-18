@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import = "java.util.*" %>
+<%
+	Map<String,Object> cardInfo = (Map<String,Object>)request.getAttribute("cardInfo");
+	Cookie cardinfo = new Cookie("card_name",cardInfo.get("CARD_NAME").toString());
+	cardinfo.setMaxAge(60*60*365);
+	cardinfo.setPath("/");
+	response.addCookie(cardinfo);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +20,19 @@
 <link rel="stylesheet" href="../css/bin.css">
 </head>
 <body>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#payPwMove').on('click'.function(){
+		$.ajax({
+			type:'POST',
+			url: /pay/paymentPW
+			data: {
+				"CARD_NUM" : "<%=cardInfo.get("CARD_NUM")%>",
+			}
+		})
+	})
+});
+</script>
 <!-- 네비게이션 바 시작 -->
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
@@ -32,6 +53,9 @@
 	</div>
 </nav>
 <!-- 네비게이션 바 끝 -->
+<%
+	if(cardInfo!=null){
+%>
 <!-- 결제 화면 시작 -->
 <div class="container">
 	<div class="row">
@@ -41,11 +65,11 @@
 				<h3>
 					<p>
 						<img src="images/AAP1266.png" style="width: 250px; height: 150px; margin-right: 30px" align="left"> 
-						<br>삼성카드 
+						<br><%=cardInfo.get("CARD_NAME") %> 
 						<br><p>
-				        <a href="/block/payPw">
-							<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="background-color: white; color: black; border-color: white;">
-							비밀번호 > 
+				        <a href="/pay/paymentPW">
+							<button id="payPwMove" name="payPwMove" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" style="background-color: white; color: black; border-color: white;">
+							비밀번호  
 							</button>
 						</a>
 					</p>
@@ -56,5 +80,8 @@
 	<hr>
 </div>
 <!-- 결제 화면 끝 -->
+<%
+	}
+%>
 </body>
 </html>

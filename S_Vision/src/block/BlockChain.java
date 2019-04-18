@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping("/blockchain")
+//@RestController
+//@RequestMapping("/blockchain")
 public class BlockChain {
 	public static List<Block> chain;
 	public static int difficulty = 3;
@@ -22,10 +22,8 @@ public class BlockChain {
 	public BlockChain() {
 		chain = new ArrayList<Block>();						//블럭정보 List
 		pendingTransactions = new ArrayList<Transaction>();	//트랜잭션 List
-		System.out.println("key Block 생성");		
 		Block block = createGenesisBlock(key);				//블럭생성
 		chain.add(block);									//List에 블럭 연결
-		minePendingTransactions("Master");
 		minePendingTransactions("Master");
 	}
 
@@ -54,8 +52,9 @@ public class BlockChain {
 	@RequestMapping(value = "/createTransaction", method = RequestMethod.POST)
 	public List<Transaction> createTransaction(@RequestParam Map<String, Object> pMap) {
 		System.out.println(pMap);
-		Transaction transaction = new Transaction((String) pMap.get("from"), (String) pMap.get("to"),
-				Integer.parseInt((String) pMap.get("amount")));
+		Transaction transaction = new Transaction((String) pMap.get("from"),
+												  (String) pMap.get("to"),
+								 Integer.parseInt((String) pMap.get("amount")));
 		if (getBalance((String) pMap.get("from")) < Integer.parseInt((String) pMap.get("amount"))) {
 			System.out.println("적당한 금액을 입력해주세요");
 			return null;
@@ -68,7 +67,6 @@ public class BlockChain {
 	// 거래내역을 넣고나서 체이닝
 	public void minePendingTransactions(String miningRewardAddress) {//파라미터 받는사람의 주소
 		Block newBlock = new Block(pendingTransactions, chain.get(chain.size() - 1).hash);
-		newBlock.mineBlock(difficulty);
 		chain.add(newBlock);
 		pendingTransactions = new ArrayList<Transaction>();
 		Transaction newTran = new Transaction("CoinManager", miningRewardAddress, miningReward);
@@ -82,12 +80,12 @@ public class BlockChain {
 		for (Block block : chain) {
 			for (Transaction trans : block.tList) {
 				// If the given address is the sender -> reduce the balance
-				if (trans.from.equals(address)) {
-					balance -= trans.amount;
+				if (trans.info.get("from").equals(address)) {
+					balance -= Integer.getInteger((String) trans.info.get("amount"));
 				}
 				// If the given address is the receiver -> increase the balance
-				if (trans.to.equals(address)) {
-					balance += trans.amount;
+				if (trans.info.get("to").equals(address)) {
+					balance += Integer.getInteger((String) trans.info.get("amount"));
 				}
 			}
 		}
@@ -117,20 +115,20 @@ public class BlockChain {
 			for (Transaction trans : block.tList) {//block에 담긴 트랜잭션의 정보를 담는다.
 				Map<String,Object> inputCoin = new HashMap<String,Object>(); //나에게서 나가는돈 
 				Map<String,Object> outputCoin = new HashMap<String,Object>(); //너에게 들어가는 돈
-				if (trans.from.equals(address)) {//나에게서 나가는돈 
-					balance -= trans.amount;
-					inputCoin.put("from", trans.from);
-					inputCoin.put("to", trans.to);
-					inputCoin.put("amount", trans.amount);
+				if (trans.info.get("from").equals(address)) {//나에게서 나가는돈 
+					balance -= Integer.getInteger((String) trans.info.get("amount"));
+					inputCoin.put("from", trans.info.get("from"));
+					inputCoin.put("to", trans.info.get("to"));
+					inputCoin.put("amount", trans.info.get("amount"));
 					inputCoin.put("date", block.timestamp);
 					inputCoin.put("balance", balance);
 					list.add(inputCoin);
 				}
-				if (trans.to.equals(address)) {//너에게 들어가는 돈
-					balance += trans.amount;
-					outputCoin.put("from", trans.from);
-					outputCoin.put("to", trans.to);
-					outputCoin.put("amount", trans.amount);
+				if (trans.info.get("to").equals(address)) {//너에게 들어가는 돈
+					balance += Integer.getInteger((String) trans.info.get("amount"));
+					outputCoin.put("from", trans.info.get("from"));
+					outputCoin.put("to", trans.info.get("to"));
+					outputCoin.put("amount", trans.info.get("amount"));
 					outputCoin.put("date", block.timestamp);
 					outputCoin.put("balance", balance);
 					list.add(outputCoin);

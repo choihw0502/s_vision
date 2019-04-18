@@ -20,12 +20,12 @@ public class BlockLogic {
 		return payMap;
 	}
 	public Map<String,Object> storeList(Map<String,Object> pMap){
-		Map<String, Object> storeMap = null;
-		pMap.put("store_name", wellet.storeName());
-		logger.info("store_name"+pMap.get("store_name"));
-		storeMap = blockDao.storeList(pMap);
-		logger.info(Wellet.payList.get(0).get("store_name"));
-		return storeMap;
+//		Map<String, Object> storeMap = null;
+//		pMap.put("store_name", wellet.storeName());
+//		logger.info("store_name"+pMap.get("store_name"));
+//		storeMap = blockDao.storeList(pMap);
+//		logger.info(Wellet.payList.get(0).get("store_name"));
+		return null;
 	}
 
 }
