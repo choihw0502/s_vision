@@ -26,23 +26,21 @@ public class AccountDao {
 		logger.info("accountDao accountList 호출성공");
 		List<Map<String,Object>> accountList = new ArrayList<Map<String,Object>>();
 		accountList = sqlSessionTemplate.selectList("accountList2",pMap);
+		logger.info(accountList);
 		// TODO Auto-generated method stub
 		return accountList;
 	}
-	public int accountAdd(AccountVO accountVO) {
+	public int accountAdd(Map<String, Object> pMap) {
 		logger.info("accountDao accountAdd 호출성공");
-		Map<String, Object> pMap = new HashMap<String,Object>();
-		pMap.put("P_MEM_ID", accountVO.getMem_id());
-		pMap.put("P_ACC_NUM", accountVO.getAcc_num());
-		pMap.put("P_ACC_BANK", accountVO.getAcc_bank());
-		pMap.put("P_ACC_NAME", accountVO.getAcc_name());
-		logger.info(pMap.get("P_MEM_ID"));
-		int accountAdd = sqlSessionTemplate.insert("proc_accountAdd",pMap);
+		sqlSessionTemplate.selectOne("proc_accountAdd",pMap);
+		int accountAdd = (Integer) pMap.get("result");
+		logger.info(accountAdd);
 		// TODO Auto-generated method stub
 		return accountAdd;
 	}
 	public Map<String, List<Map<String, Object>>> accHistory(Map<String, Object> pMap) {
 		logger.info("Account-accHistory 호출성공");
+		logger.info(pMap);
 		Map<String, List<Map<String, Object>>> accHistory = new HashMap<String,List<Map<String,Object>>>();
 		List<Map<String,Object>> acchistoryToday = new ArrayList<Map<String,Object>>();
 		List<Map<String,Object>> acchistory1 = new ArrayList<Map<String,Object>>();
@@ -62,20 +60,19 @@ public class AccountDao {
 		accHistory.put("6", acchistory6);
 		accHistory.put("12", acchistory12);
 		accHistory.put("3day", acchistory3day);
+		logger.info(accHistory);
 		return accHistory;
 	}
 	public int accTransfer(Map<String, Object> pMap) {
 		logger.info("이체 sql호출직전");
-		sqlSessionTemplate.selectOne("accTransfer2",pMap);
+		sqlSessionTemplate.selectOne("accTransfer",pMap);
 		int accTransfer = (Integer)pMap.get("result");
 		logger.info(accTransfer);
 		return accTransfer;
 	}
+	public void schedule(String hash) {
+		sqlSessionTemplate.selectOne("accTransfer",hash);
+	}
 
-	/*
-	 * public List<Map<String, Object>> accountAdd() { List<Map<String,Object>>
-	 * accountAdd = new ArrayList<Map<String,Object>>(); // TODO Auto-generated
-	 * method stub return accountAdd; }
-	 */
-
+	
 }

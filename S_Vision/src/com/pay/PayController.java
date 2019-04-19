@@ -21,7 +21,6 @@ public class PayController {
 	String path = "";
 	@RequestMapping(value = "payment", method = {RequestMethod.GET, RequestMethod.POST})
 	public String payment(Model model, HttpServletRequest req, @RequestParam Map<String,Object> pMap) throws ServletException, IOException {
-		
 		path = "pay/payment";
 		return path;
 	}

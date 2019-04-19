@@ -27,6 +27,7 @@ public class MemberDao {
 		logger.info("다오호출성공");
 		Map<String, Object> login = new HashMap<String,Object>();
 		login = sqlSessionTemplate.selectOne("login",pMap);
+		logger.info(login);
 		return login;
 	}
 	public int check_id(String id) {
@@ -37,6 +38,11 @@ public class MemberDao {
 		sqlSessionTemplate.insert("proc_register",pMap);
 		int result = (Integer)pMap.get("R_RESULT");
 		return result;
+	}
+	public Map<String, Object> refresh(Map<String, Object> pMap) {
+		Map<String, Object> refresh = new HashMap<String,Object>();
+		refresh = sqlSessionTemplate.selectOne("refresh",pMap);
+		return refresh;
 	}
 
 }

@@ -118,7 +118,7 @@ $(document).ready(function(){
     $('#btn_login').on('click', function(){
         $.ajax({
             type: 'POST',
-            url: 'main',
+            url: 'com',
             data: {
                 "mem_id" : $('#mem_id').val(),
                 "mem_pw" : $('#mem_pw').val(),

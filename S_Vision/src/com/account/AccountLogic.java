@@ -17,8 +17,8 @@ public class AccountLogic {
 		accountList = accountDao.accountList(pMap);
 		return accountList;
 	}
-	public int accountAdd(AccountVO accountVO) {
-		int accountAdd = accountDao.accountAdd(accountVO);
+	public int accountAdd(Map<String, Object> pMap) {
+		int accountAdd = accountDao.accountAdd(pMap);
 		return accountAdd;
 	}
 	public Map<String, List<Map<String, Object>>> accHistory(Map<String, Object> pMap) {
@@ -30,6 +30,8 @@ public class AccountLogic {
 		 int accTransfer = accountDao.accTransfer(pMap);
 		return accTransfer;
 	}
+
+
 	
 
 }

@@ -44,7 +44,8 @@ html {
 }
 
 html, body {
-	height: 100%;
+	height: 80%;
+	width: 90%;
 }
 
 .medium-small {
@@ -54,7 +55,7 @@ html, body {
 }
 
 .login-form {
-	width: 300px;
+	width: 100%;
 }
 
 .login-form-text {
@@ -179,7 +180,7 @@ $(document).ready(function(){
 					</div>
 					<div class="input-field col s4">
 						<span class="input-group-btn">
-							<button id="uid" name="uid" type="button" class="btn btn-success">중복검사</button>
+							<button id="uid" name="uid" type="button" class="btn btn-success" style="width: 80%;" >중복검사</button>
 							<input type="hidden" id="uid" value="no" />
 						</span>
 					</div>
@@ -196,8 +197,7 @@ $(document).ready(function(){
 					<div class="input-field col s1">
 						<i class="material-icons prefix">stay_primary_portrait</i> 
 					</div>
-				
-					<div class="col s3" >
+					<div class="col s4">
 						<br>
 						<select class="form-control" name="phon1" id="phon1">
 							<option value="010">010</option>
@@ -208,17 +208,10 @@ $(document).ready(function(){
 							<option value="019">019</option>
 						</select>
 					</div>
-					<div class="input-field col s1">
-						-
-					</div>
 					<div class="input-field col s3">
 						<input id="phon2" name="phon2" type="text" maxlength="4"/> 
 						<label for="phon2" data-error="경고" class="center-align" data-success="성공">&nbsp;&nbsp;&nbsp;앞자리</label>
 					</div>
-					<div class="input-field col s1">
-						-
-					</div>
-					
 					<div class="input-field col s3">
 						<input id="phon3" name="phon3" type="text" maxlength="4"/> 
 						<label for="phon3" data-error="경고" class="center-align" data-success="성공">&nbsp;&nbsp;&nbsp;뒷자리</label>

@@ -21,29 +21,43 @@ List<Map<String,Object>> accountList = (List<Map<String,Object>>)request.getAttr
 <!-- 네비게이션 바 시작 -->
 <script type="text/javascript">
 $(document).ready(function(){
+	var acc_from;
 
     $('#btn_accountAdd').on('click', function(){
         $.ajax({
             type: 'POST',
             url: 'accountAdd',
             data: {
-                "mem_id" : "<%=mem_id%>",
-                "acc_num" : document.getElementById("acc_num").value,
-                "acc_bank" : document.getElementById("acc_bank").value,
-                "acc_name" : document.getElementById("acc_name").value,
+                "p_mem_id" : "<%=mem_id%>",
+                "p_acc_num" : document.getElementById("acc_num").value,
+                "p_acc_bank" : document.getElementById("acc_bank").value,
+                "p_acc_name" : document.getElementById("acc_name").value,
             },
             success: function(data){
-                if(data == 0){
-                   alert("계좌 추가 실패");
+                if(data == 1){
+                   alert("계좌 추가 완료");
                 }
-                else{
-                   alert("계좌 추가 성공");
-                   location.href="account?mem_id=<%=mem_id%>";
-                }
+                else if(data == 2){
+                    alert("계좌번호를 다시 확인해주세요");
+                 }
+                else if(data == 3){
+                    alert("은행을 다시 확인해주세요");
+                 }
+                else if(data == 4){
+                    alert("본인명의 계좌만 추가할 수 있습니다");
+                 }
+                else if(data == 5){
+                    alert("이미 사용중인 계좌입니다");
+                 }
+                location.href="../account/account";
             }
         });     
     });
    
+    $("[id^=btnn]").on('click', function(event){
+         var id = $(this).attr("id");
+          acc_from = id.replace("btnn", ""); //test 
+          });
 
     $("#m_accountAdd").on('shown.bs.modal', function(){
         $(this).find('#acc_name').focus();
@@ -53,10 +67,10 @@ $(document).ready(function(){
     	        type: 'POST',
     	        url: 'accTransfer',
     	        data: {
-    	            "p_acc_from" : document.getElementById("btn_sendMoney").value,
-    	            "p_acc_to" : document.getElementById("p_acc_to").value,
-    	            "p_acc_price" : document.getElementById("p_acc_price").value,
-    	            "p_acc_bank" : document.getElementById("p_acc_bank").value,
+    	            "acc_from" : acc_from,
+    	            "acc_to" : document.getElementById("p_acc_to").value,
+    	            "acc_price" : document.getElementById("p_acc_price").value,
+    	            "acc_bank" : document.getElementById("p_acc_bank").value,
     	        },
     	        success: function(data){
     	            if(data == 1){
@@ -74,7 +88,10 @@ $(document).ready(function(){
     	            else if(data == 4){
     	               alert("계좌번호를 다시 확인해주세요");
     	            }
-    	            location.href="account?mem_id=<%=mem_id%>";
+    	            else if(data == 5){
+    	               alert("해시 에러");
+    	            }
+    	            location.href="../account/account";
     	        }
     	 });   
     });
@@ -100,10 +117,10 @@ $(document).ready(function(){
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">계좌 추가하기</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          &times;
         </button>
+        <h5 class="modal-title" id="exampleModalLabel">계좌 추가하기</h5>
       </div>
       <div class="modal-body">
        <div class="group row"><div class="col-md-6 form-group"> <label for="foo">계좌이름</label> <input type="text" class="form-control" id="acc_name" name="acc_name"> </div>
@@ -188,7 +205,7 @@ $(document).ready(function(){
 							<h3>
 						<p>
 							<br>
-							<button type="button" class="btn" style="width:100%">계좌리스트</button>
+							<button type="button" class="btn" style="width:325px">계좌리스트</button>
 						</p>
 					</h3>
 					
@@ -204,10 +221,10 @@ $(document).ready(function(){
 </div>
 <div class="media-body">
 <h4 class="media-heading"></h4>
-<form id="accList" name="accList" method="post" action="accHistory?mem_id=<%=mem_id%>&acc_num=<%=accountList.get(i).get("ACC_NUM") %>">
+<form id="accList" name="accList" method="post" action="accHistory?&acc_num=<%=accountList.get(i).get("ACC_NUM") %>">
 	<table>
 	<tr>
-		<td colspan="2" style="color:orange; font-size:120%; background-color:#D8D8D8"><%=accountList.get(i).get("ACC_NUM") %></td>
+		<td id="p_acc_from" colspan="2" style="color:orange; font-size:120%; background-color:#D8D8D8"><%=accountList.get(i).get("ACC_NUM") %></td>
 	</tr>
 	<tr>
 		<td colspan="2">&nbsp;&nbsp;<%=accountList.get(i).get("ACC_BANK") %></td>
@@ -224,8 +241,8 @@ $(document).ready(function(){
 		<td style="text-align:right; color:blue;"><%=accountList.get(i).get("ACC_BALANCE") %><s2>원</s2></td>
 	</tr>
 	<tr>
-		<td><button id="btn_acc_history" name="btn_acc_history" type="submit" class="btn" ">거래내역</button></td>
-		<td><button id="btn_sendMoney" name="btn_sendMoney" type="button" class="btn"  data-toggle="modal" data-target="#m_accounTransfer" value="<%=accountList.get(i).get("ACC_NUM") %>">&nbsp;이체&nbsp;</button></td>
+		<td><button id="btn_acc_history" name="btn_acc_history" type="submit" class="btn" >거래내역</button></td>
+		<td><button id="btnn<%=accountList.get(i).get("ACC_NUM") %>" name="btn_sendMoney" type="button" class="btn" data-toggle="modal" data-target="#m_accounTransfer" value="<%=accountList.get(i).get("ACC_NUM") %>">&nbsp;이체&nbsp;</button></td>
 	<tr>	
 	</table>
 </form>

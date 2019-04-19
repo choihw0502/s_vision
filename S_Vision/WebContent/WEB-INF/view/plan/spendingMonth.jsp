@@ -44,7 +44,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <mata name="viewport" content="width=device-width" , inital-scale="1"></mata>
 <script type="text/javascript" src="../canvasjs/jquery.canvasjs.min.js"></script>
 <script type="text/javascript" src="../canvasjs/canvasjs.min.js"></script>
