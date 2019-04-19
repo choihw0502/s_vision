@@ -111,6 +111,6 @@
 </script>
 </head>
 <body>
-	<div id="month_drop" align="center" style="height: 100%; width: 100%;"></div>
+	<div id="month_drop" align="center" style=" width: 100%;"></div>
 </body>
 </html>

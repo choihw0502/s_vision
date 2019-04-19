@@ -80,7 +80,7 @@ $(document).ready(function(){
     
 
       var chart1 = new CanvasJS.Chart("week_sum", {
-         width: $(window).width()*0.85,
+     	 width:"425",
          height: "250",
          animationEnabled : true,
          theme : "light3", // "light1", "light2", "dark1", "dark2"
@@ -101,9 +101,10 @@ $(document).ready(function(){
          } ]
    });
    var chart2 = new CanvasJS.Chart("week_cnt", { 
-      width: $(window).width()*0.85,
+		width:"425",
       height: "250",
       animationEnabled: true,
+     
       theme: "light3", // "light1", "light2", "dark1", "dark2"
       title:{
          text: "요일기준"
@@ -131,7 +132,7 @@ $(document).ready(function(){
 </style>
 </head>
 <body>
-<div id="total_Week" class="span12" >
+<div id="total_Week" class="span12"  >
    <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
        <ul id="myTab" class="nav nav-tabs" role="tablist" >
          <li role="presentation" class="active" style="width: 50%; text-align: center;">
@@ -139,7 +140,7 @@ $(document).ready(function(){
                합계순
              </a>
           </li>
-         <li role="presentation" style="width: 50%; text-align: center">
+         <li role="presentation" style="width: 50%; text-align: center;">
             <a href="#week_cnt_pane" role="tab" id="week_cnt-tab" data-toggle="tab" aria-controls="profile">
                건수 순
             </a>
@@ -148,12 +149,12 @@ $(document).ready(function(){
        <div id="myTabContent" align="center" class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="week_sum_pane" aria-labelledBy="week_sum-tab">
                <div class="container-fluid" >
-                     <div id="week_sum" style="width: 100%; height:100%;"></div>
+                     <div id="week_sum" style="width: 100%; "></div>
                </div>
             </div>
          <div role="tabpanel" class="tab-pane fade" id="week_cnt_pane" aria-labelledBy="week_cnt-tab">
                  <div class="container-fluid" >
-                      <div id="week_cnt" style="width: 100%; height:100%;"></div>
+                      <div id="week_cnt" style="width: 100%;"></div>
                </div>
          </div>
          
