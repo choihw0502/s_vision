@@ -1,6 +1,8 @@
 package com.recommend;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vo.RecommendVO;
 
@@ -94,14 +96,14 @@ public class RecommendController {
 		return path;
 	}
 	@GetMapping("myRecommendCard")
-	public String myRecommendCard(@ModelAttribute RecommendVO recommendVO, Model model, HttpServletRequest req) throws ServletException, IOException {
-		//insert here
-		//메소드이름으로 알맞게 타입정하고		
-		//메소드이름=로직.같은이름메소드(VO);
+	public String myRecommendCard(/* @RequestParam String mem_id, Model model, HttpServletRequest req */) throws ServletException, IOException {
+		//카드 추천
+		logger.info("myRecommendCard");
+	//	mem_id = "elesex";
+		List<Map<String, Object>> recardList = null;
+		//recardList = RecommendLogic.myRecommendCard(mem_id);
 		
-		
-		//mav.addObject("allCards", allCards);
-		return path;
+		return "card/recommendCard";
 	}
 
 }

@@ -106,7 +106,7 @@
 								<li><a href="../plan/planList"><img
 										src="/images/planner.png" id="imagepreview"
 										style="width: 30px; height: 20px">&nbsp;&nbsp;플래너</a></li>
-								<li><a href="#"><img
+								<li><a href="../card/recommendCard"><img
 										src="/images/cardRecommend.png" id="imagepreview"
 										style="width: 30px; height: 20px">&nbsp;&nbsp;카드 추천</a></li>
 								<li><a href="#"><img src="/images/reward.png"

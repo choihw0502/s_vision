@@ -25,7 +25,7 @@ public class PlanController {
 	@Autowired
 	PlanLogic planLogic = null;
 
-	@GetMapping("planList")
+	@PostMapping("planList")
 	public String planList(@ModelAttribute PlanVO planVO, HttpServletRequest req) throws ServletException, IOException {
 		logger.info("planList 호출 성공");
 		HttpSession session = req.getSession();

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
 	<select id="login" parameterType="map" resultType="map">
-		select mem_id, mem_name, mem_gen, mem_pay_pw, 
+		select mem_id, mem_name, mem_gen, 
 		(select count(rownum) from account where mem_id = #{mem_id}) as r_account,
 		((select count(rownum) from creditcard where mem_id = #{mem_id})+
 		(select count(rownum) from visioncard where acc_num in (select acc_num from account where mem_id = #{mem_id}))) as r_card, 

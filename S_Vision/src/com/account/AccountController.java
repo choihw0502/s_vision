@@ -53,6 +53,18 @@ public class AccountController {
 		return path;
 		//return path;
 	}
+	@PostMapping("accountList3")
+	@ResponseBody
+	public List<Map<String,Object>> accountList3(HttpServletRequest req) throws ServletException, IOException {
+		logger.info("accountList3 호출 성공");
+		HttpSession session = req.getSession();
+		String mem_id = (String) session.getAttribute("mem_id");
+		List<Map<String,Object>> accountList = null;
+		logger.info("mem_id:"+mem_id);
+		accountList = accountLogic.accountList3(mem_id);
+		logger.info(accountList.size());
+		return accountList;
+	}
 	@RequestMapping(value = "accHistory", method = RequestMethod.POST)
 	public String accHistory(@ModelAttribute AccountVO accountVO, Model model, HttpServletRequest req, @RequestParam Map<String,Object> pMap) throws ServletException, IOException {
 		logger.info("accHistory 호출 성공");

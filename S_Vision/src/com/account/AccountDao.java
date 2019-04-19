@@ -71,6 +71,12 @@ public class AccountDao {
 		logger.info(accTransfer);
 		return accTransfer;
 	}
+	public List<Map<String, Object>> accountList3(String mem_id) {
+		logger.info("accountList3 호출 성공");
+		List<Map<String,Object>> accountList = new ArrayList<Map<String,Object>>();
+		accountList = sqlSessionTemplate.selectList("accountList3",mem_id);
+		return accountList;
+	}
 
 	/*
 	 * public List<Map<String, Object>> accountAdd() { List<Map<String,Object>>
