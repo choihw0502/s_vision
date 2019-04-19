@@ -44,14 +44,18 @@ var frame; //iframe을 담아둘 변수
 $(document).ready(function(){
 	$(this).find('#acc_name').focus();
     $('#btn_cardAdd').on('click', function(){
+		var cardnum = $("#cardnum1").val()
+		             +""+$("#cardnum2").val()
+		             +""+$("#cardnum3").val()
+		             +""+$("#cardnum4").val();
+        var pwnum = $("#pwnum").val();
+        var param = "mem_id=<%=mem_id%>";
+            param+= "&cardnum="+cardnum+"&pwnum="+pwnum;
+            
         $.ajax({
             type: 'POST',
             url: '../card/cardAdd',
-            data: {
-            	"mem_id" : "<%=mem_id%>",
-                "cardnum" : document.getElementById("cardnum1").value+document.getElementById("cardnum2").value+
-                document.getElementById("cardnum3").value+document.getElementById("cardnum4").value
-            },
+            data:param,
             success: function(data){
                 if(data == 0){
                    alert("카드 추가 실패");
@@ -60,17 +64,17 @@ $(document).ready(function(){
                    alert("카드 추가 성공");
                    location.href="card?mem_id=<%=mem_id%>";
                 }
-            }
+            },
+            
+       
         });      
     });   
 
     $("#exampleModal").on('shown.bs.modal', function(){
         $(this).find('#cardnum1').focus();
     });
-        
-});
 
-  
+});
 </script>
 
 

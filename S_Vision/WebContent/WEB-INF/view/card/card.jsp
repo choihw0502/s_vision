@@ -40,6 +40,7 @@ var frame; //iframe을 담아둘 변수
 	    		nextObjName.focus();
 	    		return;
     		}
+		
     	}       
 </script>   
 <style>
@@ -60,8 +61,10 @@ $(document).ready(function(){
 		             +""+$("#cardnum2").val()
 		             +""+$("#cardnum3").val()
 		             +""+$("#cardnum4").val();
+        var pwnum = $("#pwnum").val();
         var param = "mem_id=<%=mem_id%>";
-            param+= "&cardnum="+cardnum;
+            param+= "&cardnum="+cardnum+"&pwnum="+pwnum;
+            
         $.ajax({
             type: 'POST',
             url: '../card/cardAdd',
@@ -72,7 +75,7 @@ $(document).ready(function(){
                 }
                 else{
                    alert("카드 추가 성공");
-                   location.href="card?mem_id=<%=mem_id%>";
+                   location.href="../card/card?mem_id=<%=mem_id%>";
                 }
             },
             
@@ -163,19 +166,19 @@ v_allcard.style.display = 'none';
 <div class="media-body">
 <h4 class="media-heading"></h4>
 <form id="detail_card" name="detail_card" method="post" action="detail_card?card_num=<%=cardAllList.get(i).get("CARD_NUM") %>">
-<table style="width:200px">
+<table style="width:40%">
 	 <td rowspan="3"><button type="submit" id="detail_card"  value="<%=cardAllList.get(i).get("CARD_NUM") %>"><img src="/images/<%=cardAllList.get(i).get("BIN_COMPANY") %>.png"  style="width: 150px; height: 100px; border:0; "></button>
-	 <td colspan="2" style="color:orange; font-size:120%; background-color:grey">
-	         &nbsp;<%=cardAllList.get(i).get("BIN_NAME") %></td>
+	 <td align=center colspan="2" style="color:orange; font-size:120%; background-color:grey">
+	         <%=cardAllList.get(i).get("BIN_NAME") %></td>
 	</tr>
 	<tr>
-		<td style="color:orange; background-color:#D8D8D8" height="40px" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=cardAllList.get(i).get("BIN_COMPANY")%></td>
+		<td align=center style="color:orange; background-color:#D8D8D8" height="40px" colspan="2"><%=cardAllList.get(i).get("BIN_COMPANY")%></td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;<%=cardAllList.get(i).get("CARD_NUM") %></td>
+		<td colspan="2"  align=center>카드번호:&nbsp;&nbsp;<%=cardAllList.get(i).get("CARD_NUM") %></td>
  	</tr> 
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;이번달 사용금액&nbsp;<%=cardAllList.get(i).get("PH_PRICE")%>원</td>
+		<td colspan="2"  align=left>이번달 사용금액<%=cardAllList.get(i).get("PH_PRICE")%>원</td>
 	</tr>
 </table>
 </form>
@@ -198,19 +201,21 @@ v_allcard.style.display = 'none';
 </div>
 <div class="media-body">
 <h4 class="media-heading"></h4>
-<table style="width:300px">
+<form id="all_card" name="all_card" method="post" action="../pay/payment?card_num=<%=allCard.get(i).get("CARD_NUM") %>">
+<table style="width:40%">
 	<tr>
 	 <td rowspan="3"> <input type="image"  img src="/images/<%=allCard.get(i).get("BIN_COMPANY") %>.png" style="width: 150px; height: 100px" value="<%=allCard.get(i).get("CARD_NUM") %>">
-	 <td colspan="2"  style="color:orange; font-size:120%; background-color:grey">
-	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=allCard.get(i).get("BIN_NAME") %></td>
+	 <td colspan="2" align=center style="color:orange; font-size:120%; background-color:grey">
+	 <%=allCard.get(i).get("BIN_NAME") %></td>
 	</tr>
 	<tr>
-		<td colspan="2" style="color:orange; background-color:#D8D8D8" height="40px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%=allCard.get(i).get("BIN_COMPANY") %></td>
+		<td colspan="2" align=center style="color:orange; background-color:#D8D8D8" height="40px"><%=allCard.get(i).get("BIN_COMPANY") %></td>
 	</tr>
 	<tr>
-		<td colspan="2">&nbsp;&nbsp;<%=allCard.get(i).get("CARD_NUM") %></td>
+		<td colspan="2" align=center>카드번호:&nbsp;&nbsp;<%=allCard.get(i).get("CARD_NUM") %></td>
  	</tr> 
 </table>
+</form>
 </div> 
 </div>
 
@@ -250,20 +255,37 @@ v_allcard.style.display = 'none';
             <div class="col-md-3">
                 <input type="text" class="form-control focusedInput" id="cardnum1" size="4" maxlength="4" onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum2'));">
             </div>
-                <div class="col-md-3">
-                    <input type="text"  class="form-control" id="cardnum2" size="4" maxlength="4" onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum3'));">
-                </div>
-                <div class="col-md-3">
-                    <input type="text"  class="form-control" id="cardnum3" size="4" maxlength="4"  onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum4'));">
-                </div>
-                <div class="col-md-3">
-                    <input type="text"  class="form-control" id="cardnum4" size="4" maxlength="4">
-                </div>                                
+            <div class="col-md-3">
+                <input type="text"  class="form-control" id="cardnum2" size="4" maxlength="4" onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum3'));">
+            </div>
+            <div class="col-md-3">
+                <input type="text"  class="form-control" id="cardnum3" size="4" maxlength="4"  onkeyup="javascript:keyCheck(this,this.size,document.getElementById('cardnum4'));">
+            </div>
+            <div class="col-md-3">
+                <input type="text"  class="form-control" id="cardnum4" size="4" maxlength="4" onkeyup="javascript:keyCheck(this,this.size,document.getElementById('pwnum'));">
+            </div>
+       </div>   	  		<br>
+       
+       <div class="form-group"><label for="foo">카드비밀번호(6자리)</label></div> 
+               <div class="form-group row">
+       
+         
+	        <div class="col-md-3">
+	                    <input type="text"  class="form-control" id="pwnum" size="6" maxlength="6">
+	                </div> 
+	        <div class="col-md-3">
+	                </div> 
+	        <div class="col-md-3">
+	                </div> 
+	        <div class="col-md-3">
+	                </div> 
+	         
         </div>
-	</div>
-      <div class="modal-footer">
+         <div class="modal-footer">
          <button id="btn_cardAdd" name="btn_cardAdd" type="button" class="btn btn-primary">추가</button>
       </div>
+	</div>
+     
     </div>
   </div>
 </div>

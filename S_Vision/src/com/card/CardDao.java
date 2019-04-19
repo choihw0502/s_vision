@@ -36,7 +36,8 @@ public class CardDao {
 		  return cardList;
 	}
 	public int cardAdd(Map<String, Object> pMap) {
-		int result=sqlSessionTemplate.insert("cardAdd",pMap);
+		sqlSessionTemplate.selectOne("cardAdd",pMap);
+		int result = (Integer) pMap.get("RESULT");
 		return result;
 	}
 	public List<Map<String, Object>> cardAllList(CardVO cardVO) {

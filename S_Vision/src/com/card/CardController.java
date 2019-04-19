@@ -41,7 +41,6 @@ public class CardController {
 		List<Map<String,Object>> allCard = cardLogic.allCard(cardVO);
 		logger.info(allCard);
 		//String mem_id = req.getParameter("mem_id");
-		cardVO.setMem_id(mem_id);
 		model.addAttribute("cardAllList", cardAllList);
 		logger.info(cardAllList);
 		model.addAttribute("allCard", allCard);
@@ -102,6 +101,7 @@ public class CardController {
       Map<String,Object>pMap = new HashMap<String,Object>();
       pMap.put("P_MEM_ID",req.getParameter("mem_id"));
       pMap.put("P_CARD_NUM",req.getParameter("cardnum"));
+      pMap.put("P_CARD_PAY_PW",req.getParameter("pwnum"));
       logger.info(req.getParameter("mem_id"));
    
       int result = cardLogic.cardAdd(pMap);

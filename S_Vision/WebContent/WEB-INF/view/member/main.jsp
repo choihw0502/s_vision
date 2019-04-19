@@ -264,8 +264,8 @@ img#plax-sphere-3 {
 					<p>
 					<h1><%=r_point%>point
 					</h1>
-					<br> <a class="btn btn-default btn-lg" href="#">사용하기</a> <a>|</a>
-					<a class="btn btn-default btn-lg" href="#">적립하기</a>
+					<br> <a class="btn btn-default btn-lg" href="../rewards/couponShop">사용하기</a>
+					<a>|</a> <a class="btn btn-default btn-lg" href="../rewards/couponInven">쿠폰함</a>
 					</p>
 				</div>
 

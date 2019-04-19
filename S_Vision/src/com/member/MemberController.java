@@ -27,7 +27,7 @@ import com.vo.MemberVO;
 import net.nurigo.java_sdk.Coolsms;
 
 @Controller
-@RequestMapping(value="/member/" , method = {RequestMethod.GET, RequestMethod.POST})
+@RequestMapping("/member/")
 public class MemberController {
 	Logger logger = Logger.getLogger(MemberController.class);
 	@Autowired
@@ -61,7 +61,7 @@ public class MemberController {
 		
 	}
 	
-	@RequestMapping(value = "login", method = RequestMethod.POST)
+	@RequestMapping(value = "login", method = {RequestMethod.GET, RequestMethod.POST})
 	public String login(@RequestParam Map<String,Object> pMap, HttpServletRequest req,	Model model) {
 		path = "member/login";
 		return path;
@@ -84,7 +84,7 @@ public class MemberController {
 		logger.info(result);
 		return result;
 	}
-	@GetMapping("register")
+	@RequestMapping(value = "register", method = {RequestMethod.GET, RequestMethod.POST})
 	public String register(@ModelAttribute MemberVO memberVO,
 							HttpServletRequest req,
 							Model model) {

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -18,17 +19,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(value="/pay/")
 public class PayController {
 	String path = "";
-	@GetMapping("payment")
-	public String accountList(Model model, HttpServletRequest req, @RequestParam Map<String,Object> pMap) throws ServletException, IOException {
+	@RequestMapping(value = "payment", method = {RequestMethod.GET, RequestMethod.POST})
+	public String payment(Model model, HttpServletRequest req, @RequestParam Map<String,Object> pMap) throws ServletException, IOException {
+		
 		path = "pay/payment";
 		return path;
 	}
-	@GetMapping("paymentPW")
+	@RequestMapping(value = "paymentPW", method = {RequestMethod.GET, RequestMethod.POST})
 	public String paymentPW(Model model, HttpServletRequest req, @RequestParam Map<String,Object> pMap) throws ServletException, IOException {
 		path = "pay/paymentPW";
 		return path;
 	}
-	@GetMapping("paris")
+	@RequestMapping(value = "paris", method = {RequestMethod.GET, RequestMethod.POST})
 	public String paris(Model model, HttpServletRequest req, @RequestParam Map<String,Object> pMap) throws ServletException, IOException {
 		path = "pay/PARIS";
 		return path;

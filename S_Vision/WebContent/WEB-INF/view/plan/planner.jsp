@@ -36,15 +36,20 @@ var mem_id ="<%=mem_id%>"
 					$("#dropdownMenu1").html($(this).text() + '<span class="caret"></span>');
 					
 					var month = $(this).attr('value');
-					//alert(month);
 					var date;
 					switch(month){
-					case 1 : date="<%=p_date.get(0).toString()%>"; break;
-					case 2 : date="<%=p_date.get(1).toString()%>"; break;
-					case 3 : date="<%=p_date.get(2).toString()%>"; break;
-					case 4 : date="<%=p_date.get(3).toString()%>"; break;
-					case 5 : date="<%=p_date.get(4).toString()%>"; break;
-					case 6 : date="<%=p_date.get(5).toString()%>"; break;
+					case "1" : date="<%=p_date.get(0).toString()%>"; 
+							break;
+					case "2" : date="<%=p_date.get(1).toString()%>"; 
+							break;
+					case "3" : date="<%=p_date.get(2).toString()%>"; 
+							break;
+					case "4" : date="<%=p_date.get(3).toString()%>"; 
+							break;
+					case "5" : date="<%=p_date.get(4).toString()%>"; 
+							break;
+					case "6" : date="<%=p_date.get(5).toString()%>"; 
+							break;
 					};
 					$.ajax({
 					    type: "POST",
